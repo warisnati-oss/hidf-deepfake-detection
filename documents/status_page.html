@@ -177,9 +177,9 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
     <h1>คอมพิวเตอร์จับ deepfake ที่คนดูไม่ออกได้ไหม?</h1>
     <p class="lede">หน้านี้สรุปงานของโปรเจกต์ทั้งหมด พร้อมคำศัพท์และเหตุผลของแต่ละขั้น เราใช้ dataset ชื่อ <b>HiDF</b> (ปี 2025) ซึ่งเป็นรูป face swap ที่คนตรวจแยกไม่ออกว่าจริงหรือปลอม เราสร้างโมเดลหลายแบบที่ดูรูปแล้วตอบว่า <b>"real" หรือ "fake"</b> แล้วตรวจอย่างละเอียดว่าผลลัพธ์เชื่อถือได้จริง ตอนนี้ Phase 1–5 เสร็จแล้ว เหลือทำสไลด์ (Phase 6)</p>
     <nav class="toc" aria-label="สารบัญ">
-      <a href="#glossary">คำศัพท์</a><a href="#progress">ความคืบหน้า + เกณฑ์</a><a href="#literature">Literature review</a><a href="#data">ข้อมูล</a><a href="#preprocessing">Preprocessing</a><a href="#features">Feature ที่ออกแบบเอง</a>
+      <a href="#glossary">คำศัพท์</a><a href="#progress">ความคืบหน้า + เกณฑ์</a><a href="#data">ข้อมูล</a><a href="#preprocessing">Preprocessing</a><a href="#features">Feature ที่ออกแบบเอง</a>
       <a href="#models">โมเดล</a><a href="#results">ผลลัพธ์</a><a href="#robustness">Robustness</a><a href="#explain">โมเดลดูตรงไหน</a>
-      <a href="#fairness">Fairness</a><a href="#leakage">ตรวจ leakage</a><a href="#limits">ข้อจำกัด</a><a href="#files">ไฟล์</a>
+      <a href="#fairness">Fairness</a><a href="#leakage">ตรวจ leakage</a><a href="#limits">ข้อจำกัด</a><a href="#files">ไฟล์</a><a href="#literature">Literature review</a>
     </nav>
   </header>
 
@@ -252,72 +252,6 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
     </div>
   </section>
 
-  <section id="literature" aria-labelledby="lit-h">
-    <div class="sec-head">
-      <span class="eyebrow">Literature review</span>
-      <h2 id="lit-h">งานวิจัยที่เกี่ยวข้อง (5 papers)</h2>
-      <p class="muted">เลือก 5 papers ที่แต่ละเรื่องเป็นที่มาของส่วนหนึ่งใน pipeline ของเรา ฉบับเต็มอยู่ที่ <code>LITERATURE_REVIEW.md</code></p>
-    </div>
-    <div class="req">
-      <div class="req-head"><span class="crit">เกณฑ์ข้อ 2</span><h3>Review prior methods closely related to our work</h3><span class="pill done">ครบ</span></div>
-      <div class="req-body">
-        <div><span class="lbl">วิชาต้องการ</span><p>ทีม 4 คนต้องมี <b>5 papers</b> สรุปว่าแต่ละวิธีทำอะไร จุดแข็ง ข้อจำกัด พร้อม references ได้ 5 คะแนนเมื่อ<b>ระบุ gap ชัดเจนและเชื่อมกับวิธีของเรา</b> (ถ้าแค่สรุปทั่วไปได้ 3)</p></div>
-        <div><span class="lbl">เราทำอย่างไร</span><ul><li>5 papers แต่ละอันคือที่มาของ dataset, วิธีประเมินผล, โมเดล classical, M2 และ M3</li><li>แต่ละ paper มีจุดแข็ง ข้อจำกัด และวิธีที่เรานำมาใช้ (การ์ดด้านล่าง)</li><li>สรุป gap 3 ข้อ และบอกว่างานเราเติม gap นั้นอย่างไร (การ์ดสุดท้าย)</li></ul></div>
-      </div>
-    </div>
-    <div class="papers">
-      <article class="paper">
-        <span class="tag">1 · Dataset</span><h3>HiDF: A Human-Indistinguishable Deepfake Dataset</h3><span class="venue">Kang et al., KDD 2025</span>
-        <dl><dt>ทำอะไร</dt><dd>สร้าง dataset รูป face swap คุณภาพสูง (~62K รูป + 8K วิดีโอ) ที่ผ่านการทดสอบกับคนจริงว่าแยกไม่ออก โมเดลเดิม ๆ ได้ AUC แค่ ~0.70</dd>
-        <dt>จุดแข็ง</dt><dd>fake สมจริงกว่า dataset เก่า (FF++, Celeb-DF) ซึ่งคนดูออกง่าย</dd>
-        <dt>ข้อจำกัด</dt><dd>โมเดลที่ทดสอบไม่ได้ train บน HiDF เอง ไฟล์ real กับ fake บันทึกต่างกัน (ขนาดไฟล์อย่างเดียวได้ AUC 0.99) และคนเดิมซ้ำหลายรูป ถ้าแบ่งแบบสุ่มจะรั่ว</dd>
-        <dt>เราใช้อย่างไร</dt><dd>เป็น dataset หลัก แก้ทางลัดด้วย P1 และ split ตามตัวคน</dd></dl>
-      </article>
-      <article class="paper">
-        <span class="tag">2 · การประเมินผล + M1</span><h3>FaceForensics++</h3><span class="venue">Rössler et al., ICCV 2019</span>
-        <dl><dt>ทำอะไร</dt><dd>benchmark วิดีโอ 1,000 คลิป ปลอมด้วย 4 วิธี และ 3 ระดับการบีบอัด เทียบ feature ที่ออกแบบเองกับ CNN</dd>
-        <dt>จุดแข็ง</dt><dd>แสดงว่า CNN ชนะ feature ที่ออกแบบเองและชนะคน และการ train ที่บริเวณหน้าดีกว่ารูปเต็ม</dd>
-        <dt>ข้อจำกัด</dt><dd>fake รุ่นเก่า คนดูออกง่าย และทุกโมเดลแย่ลงมากเมื่อบีบอัดแรง</dd>
-        <dt>เราใช้อย่างไร</dt><dd>ทดสอบทุกโมเดลกับรูปเสียหาย 9 แบบ, adjustment แบบ face crop, และแนวทาง CNN ของ M1</dd></dl>
-      </article>
-      <article class="paper">
-        <span class="tag">3 · Classical</span><h3>Unmasking DeepFakes with simple Features</h3><span class="venue">Durall et al., 2020</span>
-        <dl><dt>ทำอะไร</dt><dd>แปลงรูปด้วย FFT เฉลี่ยเป็น spectrum 1 มิติ แล้วใช้ classifier ง่าย ๆ ได้ 100 % บนหน้า high-res โดยใช้ตัวอย่าง train แค่ 20 รูป</dd>
-        <dt>จุดแข็ง</dt><dd>ง่าย เร็ว ใช้ข้อมูลน้อย อธิบายได้</dd>
-        <dt>ข้อจำกัด</dt><dd>เบาะแสความถี่สูงหายไปเมื่อรูปถูกบีบอัด เบลอ หรือย่อ</dd>
-        <dt>เราใช้อย่างไร</dt><dd>เป็นฐานของโมเดล classical (P4) เราเพิ่ม noise, LBP, สี, รอยต่อ รวม 247 feature ได้ AUC 0.998 แต่เบลอ σ2 แล้วเหลือ 0.55 ตรงกับข้อจำกัดนี้</dd></dl>
-      </article>
-      <article class="paper">
-        <span class="tag">4 · M2</span><h3>GenD: Deepfake Detection that Generalizes Across Benchmarks</h3><span class="venue">Yermakov et al., WACV 2026</span>
-        <dl><dt>ทำอะไร</dt><dd>ใช้ foundation model (CLIP, DINOv2/v3) แล้ว train แค่ LayerNorm + linear head (~0.03 % ของ weights) พร้อม loss ที่จัดรูป feature บนทรงกลม</dd>
-        <dt>จุดแข็ง</dt><dd>ถูกมาก และได้ AUROC ข้าม dataset เฉลี่ยดีที่สุดใน 14 datasets</dd>
-        <dt>ข้อจำกัด</dt><dd>ความทนต่อรูปเสียหายขึ้นกับ augmentation เกือบทั้งหมด (ของเรา: ปิด augmentation แล้ว JPEG q30 ตกจาก 96.6 % เป็น 80.5 %)</dd>
-        <dt>เราใช้อย่างไร</dt><dd>เป็น M2 บน DINOv3 ได้ AUC 0.9998 โดย train แค่ 101K weights</dd></dl>
-      </article>
-      <article class="paper">
-        <span class="tag">5 · M3</span><h3>Robust Deepfake Detection, NTIRE 2026 Challenge Report (DINO-MAC)</h3><span class="venue">Hopf et al., 2026</span>
-        <dl><dt>ทำอะไร</dt><dd>รายงานการแข่งขันตรวจ deepfake ในรูปที่เสียหาย ผู้ชนะ (DINO-MAC) ใช้ DINOv3-L + LoRA, head ที่รวมหลาย token และ train ด้วยขนาดรูปสุ่ม</dd>
-        <dt>จุดแข็ง</dt><dd>ทนต่อ noise, blur, การบีบอัดดีที่สุดในการแข่งขัน</dd>
-        <dt>ข้อจำกัด</dt><dd>ใช้ทรัพยากรมาก paper train ที่ 384–1152 px เราต้องลดเหลือ 224–320 px และยังช้าที่สุด (~139 นาทีต่อ epoch)</dd>
-        <dt>เราใช้อย่างไร</dt><dd>เป็น M3 ทนทานที่สุดในโมเดลเรา (face crop: AUC ≥ 0.997 ในทุกความเสียหาย)</dd></dl>
-      </article>
-      <article class="paper gap">
-        <span class="tag">Gap</span><h3>ช่องว่างที่งานเราเติม</h3>
-        <ol>
-          <li><b>HiDF ถูกอ้างว่ายาก แต่ยังไม่มีใคร train บนมันโดยคุมทางลัด</b> เราเจอและแก้ 2 ทางลัด (การบีบอัด, คนซ้ำ) หลังแก้แล้วทุกโมเดลที่ train ได้ AUC ≥ 0.998 แปลว่า "คนแยกไม่ออก" แต่เครื่องแยกออก</li>
-          <li><b>ความต่างจริงระหว่างวิธีคือ robustness</b> (ตาม [2], [5]) รูปปกติ classical ≈ DL แต่รูปเสียหาย classical พัง DL ยังดี ถ้า train ด้วย augmentation</li>
-          <li><b>วิธี foundation model ใหม่ [4], [5] ยังไม่เคยทดสอบบน HiDF</b> เราเทียบกับ CNN (M1) ภายใต้เงื่อนไขเดียวกันทั้งหมด</li>
-        </ol>
-      </article>
-    </div>
-    <ol class="refs">
-      <li>Kang et al. HiDF. KDD 2025. <a href="https://github.com/DSAIL-SKKU/HiDF">github.com/DSAIL-SKKU/HiDF</a></li>
-      <li>Rössler et al. FaceForensics++. ICCV 2019. <a href="https://arxiv.org/abs/1901.08971">arxiv.org/abs/1901.08971</a></li>
-      <li>Durall et al. Unmasking DeepFakes with simple Features. 2020. <a href="https://arxiv.org/abs/1911.00686">arxiv.org/abs/1911.00686</a></li>
-      <li>Yermakov et al. GenD. WACV 2026. <a href="https://arxiv.org/abs/2508.06248">arxiv.org/abs/2508.06248</a></li>
-      <li>Hopf et al. NTIRE 2026 Robust Deepfake Detection Challenge Report. <a href="https://arxiv.org/abs/2604.24163">arxiv.org/abs/2604.24163</a></li>
-    </ol>
-  </section>
 
   <section id="data" aria-labelledby="data-h">
     <div class="sec-head">
@@ -812,5 +746,72 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
       <div><code>EXPERIMENT_LOG.md</code><span>ทุกการทดลอง bug และการตัดสินใจ เรียงตามเวลา</span></div>
       <div><code>figures/</code><span>กราฟและรูปตัวอย่างทั้งหมด แยกตาม phase</span></div>
     </div>
+  </section>
+
+  <section id="literature" aria-labelledby="lit-h">
+    <div class="sec-head">
+      <span class="eyebrow">Literature review</span>
+      <h2 id="lit-h">งานวิจัยที่เกี่ยวข้อง (5 papers)</h2>
+      <p class="muted">เลือก 5 papers ที่แต่ละเรื่องเป็นที่มาของส่วนหนึ่งใน pipeline ของเรา ฉบับเต็มอยู่ที่ <code>LITERATURE_REVIEW.md</code></p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 2</span><h3>Review prior methods closely related to our work</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ทีม 4 คนต้องมี <b>5 papers</b> สรุปว่าแต่ละวิธีทำอะไร จุดแข็ง ข้อจำกัด พร้อม references ได้ 5 คะแนนเมื่อ<b>ระบุ gap ชัดเจนและเชื่อมกับวิธีของเรา</b> (ถ้าแค่สรุปทั่วไปได้ 3)</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>5 papers แต่ละอันคือที่มาของ dataset, วิธีประเมินผล, โมเดล classical, M2 และ M3</li><li>แต่ละ paper มีจุดแข็ง ข้อจำกัด และวิธีที่เรานำมาใช้ (การ์ดด้านล่าง)</li><li>สรุป gap 3 ข้อ และบอกว่างานเราเติม gap นั้นอย่างไร (การ์ดสุดท้าย)</li></ul></div>
+      </div>
+    </div>
+    <div class="papers">
+      <article class="paper">
+        <span class="tag">1 · Dataset</span><h3>HiDF: A Human-Indistinguishable Deepfake Dataset</h3><span class="venue">Kang et al., KDD 2025</span>
+        <dl><dt>ทำอะไร</dt><dd>สร้าง dataset รูป face swap คุณภาพสูง (~62K รูป + 8K วิดีโอ) ที่ผ่านการทดสอบกับคนจริงว่าแยกไม่ออก โมเดลเดิม ๆ ได้ AUC แค่ ~0.70</dd>
+        <dt>จุดแข็ง</dt><dd>fake สมจริงกว่า dataset เก่า (FF++, Celeb-DF) ซึ่งคนดูออกง่าย</dd>
+        <dt>ข้อจำกัด</dt><dd>โมเดลที่ทดสอบไม่ได้ train บน HiDF เอง ไฟล์ real กับ fake บันทึกต่างกัน (ขนาดไฟล์อย่างเดียวได้ AUC 0.99) และคนเดิมซ้ำหลายรูป ถ้าแบ่งแบบสุ่มจะรั่ว</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น dataset หลัก แก้ทางลัดด้วย P1 และ split ตามตัวคน</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">2 · การประเมินผล + M1</span><h3>FaceForensics++</h3><span class="venue">Rössler et al., ICCV 2019</span>
+        <dl><dt>ทำอะไร</dt><dd>benchmark วิดีโอ 1,000 คลิป ปลอมด้วย 4 วิธี และ 3 ระดับการบีบอัด เทียบ feature ที่ออกแบบเองกับ CNN</dd>
+        <dt>จุดแข็ง</dt><dd>แสดงว่า CNN ชนะ feature ที่ออกแบบเองและชนะคน และการ train ที่บริเวณหน้าดีกว่ารูปเต็ม</dd>
+        <dt>ข้อจำกัด</dt><dd>fake รุ่นเก่า คนดูออกง่าย และทุกโมเดลแย่ลงมากเมื่อบีบอัดแรง</dd>
+        <dt>เราใช้อย่างไร</dt><dd>ทดสอบทุกโมเดลกับรูปเสียหาย 9 แบบ, adjustment แบบ face crop, และแนวทาง CNN ของ M1</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">3 · Classical</span><h3>Unmasking DeepFakes with simple Features</h3><span class="venue">Durall et al., 2020</span>
+        <dl><dt>ทำอะไร</dt><dd>แปลงรูปด้วย FFT เฉลี่ยเป็น spectrum 1 มิติ แล้วใช้ classifier ง่าย ๆ ได้ 100 % บนหน้า high-res โดยใช้ตัวอย่าง train แค่ 20 รูป</dd>
+        <dt>จุดแข็ง</dt><dd>ง่าย เร็ว ใช้ข้อมูลน้อย อธิบายได้</dd>
+        <dt>ข้อจำกัด</dt><dd>เบาะแสความถี่สูงหายไปเมื่อรูปถูกบีบอัด เบลอ หรือย่อ</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็นฐานของโมเดล classical (P4) เราเพิ่ม noise, LBP, สี, รอยต่อ รวม 247 feature ได้ AUC 0.998 แต่เบลอ σ2 แล้วเหลือ 0.55 ตรงกับข้อจำกัดนี้</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">4 · M2</span><h3>GenD: Deepfake Detection that Generalizes Across Benchmarks</h3><span class="venue">Yermakov et al., WACV 2026</span>
+        <dl><dt>ทำอะไร</dt><dd>ใช้ foundation model (CLIP, DINOv2/v3) แล้ว train แค่ LayerNorm + linear head (~0.03 % ของ weights) พร้อม loss ที่จัดรูป feature บนทรงกลม</dd>
+        <dt>จุดแข็ง</dt><dd>ถูกมาก และได้ AUROC ข้าม dataset เฉลี่ยดีที่สุดใน 14 datasets</dd>
+        <dt>ข้อจำกัด</dt><dd>ความทนต่อรูปเสียหายขึ้นกับ augmentation เกือบทั้งหมด (ของเรา: ปิด augmentation แล้ว JPEG q30 ตกจาก 96.6 % เป็น 80.5 %)</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น M2 บน DINOv3 ได้ AUC 0.9998 โดย train แค่ 101K weights</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">5 · M3</span><h3>Robust Deepfake Detection, NTIRE 2026 Challenge Report (DINO-MAC)</h3><span class="venue">Hopf et al., 2026</span>
+        <dl><dt>ทำอะไร</dt><dd>รายงานการแข่งขันตรวจ deepfake ในรูปที่เสียหาย ผู้ชนะ (DINO-MAC) ใช้ DINOv3-L + LoRA, head ที่รวมหลาย token และ train ด้วยขนาดรูปสุ่ม</dd>
+        <dt>จุดแข็ง</dt><dd>ทนต่อ noise, blur, การบีบอัดดีที่สุดในการแข่งขัน</dd>
+        <dt>ข้อจำกัด</dt><dd>ใช้ทรัพยากรมาก paper train ที่ 384–1152 px เราต้องลดเหลือ 224–320 px และยังช้าที่สุด (~139 นาทีต่อ epoch)</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น M3 ทนทานที่สุดในโมเดลเรา (face crop: AUC ≥ 0.997 ในทุกความเสียหาย)</dd></dl>
+      </article>
+      <article class="paper gap">
+        <span class="tag">Gap</span><h3>ช่องว่างที่งานเราเติม</h3>
+        <ol>
+          <li><b>HiDF ถูกอ้างว่ายาก แต่ยังไม่มีใคร train บนมันโดยคุมทางลัด</b> เราเจอและแก้ 2 ทางลัด (การบีบอัด, คนซ้ำ) หลังแก้แล้วทุกโมเดลที่ train ได้ AUC ≥ 0.998 แปลว่า "คนแยกไม่ออก" แต่เครื่องแยกออก</li>
+          <li><b>ความต่างจริงระหว่างวิธีคือ robustness</b> (ตาม [2], [5]) รูปปกติ classical ≈ DL แต่รูปเสียหาย classical พัง DL ยังดี ถ้า train ด้วย augmentation</li>
+          <li><b>วิธี foundation model ใหม่ [4], [5] ยังไม่เคยทดสอบบน HiDF</b> เราเทียบกับ CNN (M1) ภายใต้เงื่อนไขเดียวกันทั้งหมด</li>
+        </ol>
+      </article>
+    </div>
+    <ol class="refs">
+      <li>Kang et al. HiDF. KDD 2025. <a href="https://github.com/DSAIL-SKKU/HiDF">github.com/DSAIL-SKKU/HiDF</a></li>
+      <li>Rössler et al. FaceForensics++. ICCV 2019. <a href="https://arxiv.org/abs/1901.08971">arxiv.org/abs/1901.08971</a></li>
+      <li>Durall et al. Unmasking DeepFakes with simple Features. 2020. <a href="https://arxiv.org/abs/1911.00686">arxiv.org/abs/1911.00686</a></li>
+      <li>Yermakov et al. GenD. WACV 2026. <a href="https://arxiv.org/abs/2508.06248">arxiv.org/abs/2508.06248</a></li>
+      <li>Hopf et al. NTIRE 2026 Robust Deepfake Detection Challenge Report. <a href="https://arxiv.org/abs/2604.24163">arxiv.org/abs/2604.24163</a></li>
+    </ol>
   </section>
 </div>
