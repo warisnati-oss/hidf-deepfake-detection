@@ -83,6 +83,70 @@ The NTIRE 2026 Robust Deepfake Detection winner (Hopf et al., team ShallowReal).
 went NaN (log 4.15), and after a fix it still produced scattered non-finite steps in the bf16
 forward pass (4.18). Training M3 in fp32 solved it: no non-finite step in any of its 4 runs.
 
+## Architecture diagrams
+
+Tensor shapes are for a 224 px input (channels × height × width, or tokens × dim). Green = trained,
+grey dashed = frozen pre-trained weights, white = no weights. Shapes for M1 were checked with
+`timm` (`tf_efficientnet_b4`); the DINOv3 numbers come from its Hugging Face config
+(hidden 1024, 24 layers, 16 heads, MLP 4096, patch 16, 4 register tokens).
+
+### M1 — EfficientNet-B4 (all 17.6 M weights trained)
+
+```mermaid
+flowchart LR
+  IN["Input<br/>3×224×224"] --> STEM["Stem conv 3×3, s2<br/>48×112×112"]
+  STEM --> S1["Stage 1: MBConv ×2<br/>24×112×112"]
+  S1 --> S2["Stage 2: MBConv ×4<br/>32×56×56"]
+  S2 --> S3["Stage 3: MBConv ×4<br/>56×28×28"]
+  S3 --> S4["Stage 4: MBConv ×6<br/>112×14×14"]
+  S4 --> S5["Stage 5: MBConv ×6<br/>160×14×14"]
+  S5 --> S6["Stage 6: MBConv ×8<br/>272×7×7"]
+  S6 --> S7["Stage 7: MBConv ×2<br/>448×7×7"]
+  S7 --> HEAD["Conv 1×1<br/>1792×7×7"]
+  HEAD --> POOL["Global avg pool<br/>1792"]
+  POOL --> FC["Dropout 0.3 + Linear<br/>1792 → 1"]
+  FC --> OUT["score (BCE)"]
+  classDef tr fill:#e3f1e2,stroke:#2f8a4f,stroke-width:2px;
+  class STEM,S1,S2,S3,S4,S5,S6,S7,HEAD,FC tr;
+```
+
+MBConv = 1×1 expand → depthwise conv (3×3 or 5×5) → squeeze-and-excitation → 1×1 project, SiLU
+activation, residual when shapes match. Early stages see edges and texture at high resolution;
+late stages see larger patterns at 7×7.
+
+### M2 and M3 — the same DINOv3 ViT-L/16 backbone, different trained parts
+
+```mermaid
+flowchart LR
+  IN["Input<br/>3×224×224"] --> PE["Patch embed<br/>conv 16×16, s16<br/>196×1024"]
+  PE --> TOK["+ CLS + 4 register<br/>201×1024"]
+  TOK --> L
+  subgraph L["Transformer layer ×24 (201×1024 in and out)"]
+    direction TB
+    LN1["LayerNorm<br/>(trained in M2)"] --> ATT["Self-attention, 16 heads<br/>q k v o (+ LoRA r32 in M3)"]
+    ATT --> LN2["LayerNorm<br/>(trained in M2)"]
+    LN2 --> MLP["MLP 1024 → 4096 → 1024"]
+  end
+  L -->|"CLS 1024"| M2N["M2: L2 normalise"]
+  M2N --> M2H["M2: Linear 1024 → 1"]
+  L -->|"CLS + 4 reg + mean of 196 patch"| CAT["M3: concat 6144"]
+  CAT --> M3H["M3: MLP 6144 → 1024 → ReLU → 1"]
+  L -.->|"layers 21–24, training only"| AUX["M3: aux heads ×4<br/>LayerNorm + Dropout 0.2 + Linear 6144 → 1"]
+  classDef tr fill:#e3f1e2,stroke:#2f8a4f,stroke-width:2px;
+  classDef fz fill:#eeeeee,stroke:#888888,stroke-dasharray:5 3;
+  class LN1,LN2,ATT,M2H,M3H,AUX tr;
+  class PE,MLP fz;
+```
+
+| | M2 GenD | M3 DINO-MAC |
+|---|---|---|
+| Trained inside the backbone | every LayerNorm (incl. the final one) | LoRA r 32, α 64 on q/k/v/o of all 24 layers |
+| Frozen | everything else | everything else, LayerNorms included |
+| Head input | CLS token, L2-normalised (1024) | CLS + 4 registers + mean patch token (6144) |
+| Head | Linear 1024 → 1 | Linear 6144 → 1024, ReLU, Linear 1024 → 1 |
+| Extra in training | alignment + uniformity loss | 4 aux heads (deep supervision) + supervised contrastive loss |
+| Trainable weights | 101 K | 12.7 M |
+
 ---
 
 ## Adjustments (each changes one thing from the baseline)

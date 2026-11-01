@@ -86,6 +86,25 @@ fake 4,106 correct / 128 called real.
 ![Classical ROC](figures/phase3/e03_roc.png)
 ![Classical confusion matrix](figures/phase3/e03_confusion.png)
 
+### Architecture (pipeline)
+
+Only the classifier is learned; every step before it is a fixed, hand-designed formula (P3 + P4).
+
+```mermaid
+flowchart LR
+  IN["Image<br/>512×512×3 (P1 cache)"] --> MASK["P3 face mask<br/>inner face · seam band ·<br/>skin ring · outside"]
+  MASK --> FIL["High-pass / transforms<br/>Laplacian, SRM ×3,<br/>FFT, LBP, Sobel, YCbCr/HSV"]
+  FIL --> STAT["Statistics per region<br/>std, mean-abs, skew, kurt,<br/>histograms, ratios"]
+  STAT --> VEC["Feature vector<br/>247"]
+  VEC --> HGB["HistGradientBoosting<br/>lr 0.05, 31 leaves"]
+  HGB --> OUT["score 0–1<br/>≥ 0.766 → fake"]
+  classDef tr fill:#e3f1e2,stroke:#2f8a4f,stroke-width:2px;
+  class HGB tr;
+```
+
+Feature groups (details in `PREPROCESSING.md`, P4): FFT spectrum 128 · whole-image noise 16 ·
+face vs outside noise 36 · LBP texture 28 · colour 30 · seam 8 · face area 1.
+
 ### What the classical model uses
 
 | Variant (HGB, retrained) | Features | Test AUC |

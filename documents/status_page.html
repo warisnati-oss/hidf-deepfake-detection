@@ -1,47 +1,40 @@
 <title>HiDF Deepfake Detection</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;600&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: one reading column for teammates new to ML. Summary first, then a glossary, then the work in project order
-   (data → preprocessing → models → results → checks), each section = plain explanation + evidence (table or figure). */
+/* Layout: one reading column for the team. Summary first, then a glossary, then the work in project order
+   (data → preprocessing → models → results → checks), each section = plain explanation + evidence (table or figure).
+   Single light cream theme on purpose (same look in the viewer's light and dark mode).
+   Thai text: Latin glyphs from Archivo / Source Sans 3, Thai glyphs fall back to Anuphan / IBM Plex Sans Thai. */
 :root {
-  --bg: #f4f6f8; --surface: #ffffff; --ink: #14202b; --muted: #5a6875; --line: #d5dde4;
-  --accent: #0f7c86; --accent-soft: #dcf0f1;
-  --done: #2f8a4f; --done-soft: #e0f1e5; --run: #b8740d; --run-soft: #fbefd9; --next: #6b7682; --next-soft: #e9edf0;
-  --bad: #c24b33; --bad-soft: #f8e3dd; --fig: #ffffff;
-  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --bg: #fdfaf3; --surface: #fffefb; --ink: #2e2820; --muted: #786d5f; --line: #efe6d6;
+  --accent: #8a5a1c; --accent-soft: #f7ecdb;
+  --done: #4d7a3a; --done-soft: #eef3e3; --run: #a8701c; --run-soft: #fbf0dc; --next: #847a6c; --next-soft: #f4eee3;
+  --bad: #b04a32; --bad-soft: #f8e6dd; --fig: #ffffff;
+  --f-display: "Archivo", "Anuphan", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Sans 3", "IBM Plex Sans Thai", "Segoe UI", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0f161c; --surface: #17212a; --ink: #e6edf2; --muted: #9aa8b4; --line: #2a3742;
-  --accent: #4fc1c9; --accent-soft: #143338;
-  --done: #5cc07c; --done-soft: #16301f; --run: #e6a640; --run-soft: #34270f; --next: #8e9aa6; --next-soft: #222d36;
-  --bad: #ef7a5f; --bad-soft: #3a1c15; --fig: #f2f4f6; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #0f161c; --surface: #17212a; --ink: #e6edf2; --muted: #9aa8b4; --line: #2a3742;
-  --accent: #4fc1c9; --accent-soft: #143338;
-  --done: #5cc07c; --done-soft: #16301f; --run: #e6a640; --run-soft: #34270f; --next: #8e9aa6; --next-soft: #222d36;
-  --bad: #ef7a5f; --bad-soft: #3a1c15; --fig: #f2f4f6; color-scheme: dark }
 
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body); }
+body { background: var(--bg); color: var(--ink); font: 16px/1.75 var(--f-body); }
 .wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 56px; }
 .wrap > * { min-width: 0; }
-h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
-h1 { font-size: clamp(2rem, 4vw + 1rem, 3rem); font-weight: 800; line-height: 1.06; }
-h2 { font-size: 1.5rem; font-weight: 700; }
-h3 { font-size: 1.04rem; font-weight: 700; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.005em; }
+h1 { font-size: clamp(1.9rem, 4vw + 1rem, 2.9rem); font-weight: 800; line-height: 1.25; }
+h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.35; }
+h3 { font-size: 1.04rem; font-weight: 700; line-height: 1.45; }
 p { margin: 0; }
 ul, ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 a { color: var(--accent); }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 code, .mono { font-family: var(--f-mono); font-size: 0.86em; font-variant-numeric: tabular-nums; }
-.eyebrow { font: 600 0.74rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.eyebrow { font: 600 0.74rem/1.3 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 .muted { color: var(--muted); }
 section { display: grid; gap: 20px; scroll-margin-top: 16px; }
 section > * { min-width: 0; }
@@ -50,19 +43,30 @@ section > * { min-width: 0; }
 
 /* header */
 header { display: grid; gap: 16px; }
-.lede { max-width: 68ch; font-size: 1.1rem; color: var(--muted); }
+.lede { max-width: 68ch; font-size: 1.08rem; color: var(--muted); }
 .lede b { color: var(--ink); font-weight: 600; }
 .toc { display: flex; flex-wrap: wrap; gap: 8px; }
-.toc a { text-decoration: none; font-size: 0.88rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+.toc a { text-decoration: none; font-size: 0.88rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; }
 .toc a:hover { border-color: var(--accent); color: var(--accent); }
 
 /* takeaway tiles */
 .takeaways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .take { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
-.take .big { font: 800 2rem/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.take .big { font: 800 2rem/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
 .take p { font-size: 0.94rem; color: var(--muted); }
 
-/* glossary */
+/* glossary (dropdown) */
+.drop { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.drop > summary { cursor: pointer; list-style: none; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.drop > summary::-webkit-details-marker { display: none; }
+.drop > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 12px; }
+.drop > summary h2 { font-size: 1.3rem; }
+.drop > summary .hint { font-size: 0.9rem; color: var(--muted); }
+.drop > summary .chev { flex: none; width: 28px; height: 28px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; transition: transform 0.2s; }
+.drop > summary .chev svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+.drop[open] > summary .chev { transform: rotate(180deg); }
+.drop .gloss { padding: 0 18px 8px; }
+@media (prefers-reduced-motion: reduce) { .drop > summary .chev { transition: none; } }
 .gloss { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 0; }
 .gloss div { padding: 12px 0; border-top: 1px solid var(--line); display: grid; gap: 3px; }
 .gloss dt { font-weight: 600; }
@@ -73,10 +77,9 @@ header { display: grid; gap: 16px; }
 .phase { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 14px; display: grid; gap: 6px; align-content: start; }
 .phase .n { font: 600 0.72rem/1 var(--f-mono); color: var(--muted); }
 .phase h3 { font-size: 0.95rem; }
-.phase p { font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
+.phase p { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
 .pill { justify-self: start; font: 600 0.68rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
 .pill.done { color: var(--done); background: var(--done-soft); }
-.pill.warn { color: var(--run); background: var(--run-soft); }
 .pill.next { color: var(--next); background: var(--next-soft); }
 
 /* generic panels */
@@ -101,7 +104,7 @@ figure.narrow { max-width: 640px; }
 /* tables */
 .table-scroll { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-th { text-align: left; font: 600 0.72rem/1.2 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: bottom; }
+th { text-align: left; font: 600 0.72rem/1.3 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: bottom; }
 td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 tr.lead td { font-weight: 600; }
@@ -111,8 +114,49 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
 .note { font-size: 0.88rem; color: var(--muted); max-width: 80ch; }
 
 /* pipeline steps */
-.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: step; }
-.flow .card { position: relative; }
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+
+/* course requirement box (one per section) */
+.req { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.req-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.req-head .crit { font: 600 0.74rem/1 var(--f-mono); letter-spacing: 0.06em; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 6px 8px; }
+.req-head h3 { flex: 1 1 260px; }
+.req-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 18px; }
+.req-body > div { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.req-body .lbl { font: 600 0.7rem/1.3 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.req-body p, .req-body li { font-size: 0.92rem; }
+.pill.warn { color: var(--run); background: var(--run-soft); }
+
+/* architecture diagrams (inline SVG styled from the page tokens) */
+.diagram { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.diagram svg { display: block; width: 100%; min-width: 780px; height: auto; }
+.dg-h { font: 700 13px var(--f-display); fill: var(--ink); }
+.dg-t { font: 600 12px var(--f-body); fill: var(--ink); }
+.dg-s { font: 11px var(--f-mono); fill: var(--muted); }
+.dg-tag { font: 600 10.5px var(--f-body); fill: var(--accent); }
+.dg-n { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; }
+.dg-tr { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+.dg-trd { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 5 3; }
+.dg-fz { fill: var(--next-soft); stroke: var(--next); stroke-width: 1.2; stroke-dasharray: 5 3; }
+.dg-ar { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.dg-head { fill: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.88rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 22px; height: 14px; border-radius: 3px; display: inline-block; }
+.legend .l-tr { background: var(--accent-soft); border: 1.6px solid var(--accent); }
+.legend .l-fz { background: var(--next-soft); border: 1.2px dashed var(--next); }
+.legend .l-n { background: var(--surface); border: 1.2px solid var(--muted); }
+
+/* literature */
+.papers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.paper { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.paper .venue { font: 600 0.74rem/1.3 var(--f-mono); color: var(--muted); }
+.paper dl { margin: 0; display: grid; gap: 6px; }
+.paper dt { font: 600 0.72rem/1.3 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.paper dd { margin: 0; font-size: 0.92rem; }
+.paper.gap { background: var(--accent-soft); border-color: transparent; }
+.refs { font-size: 0.85rem; color: var(--muted); display: grid; gap: 4px; padding-left: 20px; }
+.refs a { word-break: break-all; }
 
 /* files */
 .files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
@@ -122,259 +166,636 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
 @media (max-width: 860px) {
   .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .takeaways, .cols, .cols3, .flow { grid-template-columns: 1fr; }
-  .gloss, .files { grid-template-columns: 1fr; }
+  .gloss, .files, .req-body, .papers { grid-template-columns: 1fr; }
 }
 @media (max-width: 420px) { .phases { grid-template-columns: 1fr; } }
 </style>
 
-<div class="wrap">
+<div class="wrap" lang="th">
   <header>
-    <span class="eyebrow">2110651 Digital Image Processing · team project · updated 1 Nov 2026</span>
-    <h1>Can a computer catch deepfakes that people can't?</h1>
-    <p class="lede">This page explains the project work so far for teammates who are new to machine learning (ML). We use <b>HiDF</b>, a 2025 dataset of face-swap photos that human reviewers could not tell apart from real photos. We built several detectors that look at a photo and answer <b>"real" or "fake"</b>, then checked carefully that the results are trustworthy. Phases 1–5 are done. The slide deck (Phase 6) is next.</p>
-    <nav class="toc" aria-label="Sections">
-      <a href="#glossary">Key terms</a><a href="#progress">Progress</a><a href="#data">Data</a><a href="#preprocessing">Preprocessing</a>
-      <a href="#models">Models</a><a href="#results">Results</a><a href="#robustness">Robustness</a><a href="#explain">Where models look</a>
-      <a href="#fairness">Fairness</a><a href="#leakage">Leakage checks</a><a href="#limits">Limits &amp; next</a><a href="#files">Files</a>
+    <span class="eyebrow">2110651 Digital Image Processing · team project · อัปเดต 1 พ.ย. 2026</span>
+    <h1>คอมพิวเตอร์จับ deepfake ที่คนดูไม่ออกได้ไหม?</h1>
+    <p class="lede">หน้านี้สรุปงานของโปรเจกต์ทั้งหมด พร้อมคำศัพท์และเหตุผลของแต่ละขั้น เราใช้ dataset ชื่อ <b>HiDF</b> (ปี 2025) ซึ่งเป็นรูป face swap ที่คนตรวจแยกไม่ออกว่าจริงหรือปลอม เราสร้างโมเดลหลายแบบที่ดูรูปแล้วตอบว่า <b>"real" หรือ "fake"</b> แล้วตรวจอย่างละเอียดว่าผลลัพธ์เชื่อถือได้จริง ตอนนี้ Phase 1–5 เสร็จแล้ว เหลือทำสไลด์ (Phase 6)</p>
+    <nav class="toc" aria-label="สารบัญ">
+      <a href="#glossary">คำศัพท์</a><a href="#progress">ความคืบหน้า + เกณฑ์</a><a href="#literature">Literature review</a><a href="#data">ข้อมูล</a><a href="#preprocessing">Preprocessing</a><a href="#features">Feature ที่ออกแบบเอง</a>
+      <a href="#models">โมเดล</a><a href="#results">ผลลัพธ์</a><a href="#robustness">Robustness</a><a href="#explain">โมเดลดูตรงไหน</a>
+      <a href="#fairness">Fairness</a><a href="#leakage">ตรวจ leakage</a><a href="#limits">ข้อจำกัด</a><a href="#files">ไฟล์</a>
     </nav>
   </header>
 
   <section aria-labelledby="short">
-    <h2 id="short">The short version</h2>
+    <h2 id="short">สรุปสั้น ๆ</h2>
     <div class="takeaways">
-      <div class="take"><span class="eyebrow">Best model</span><span class="big">99.8 %</span><p>M3 (DINOv3 + LoRA) labels 99.76 % of 9,600 unseen test photos correctly. Out of 5,366 real photos it wrongly calls only 2 fake.</p></div>
-      <div class="take"><span class="eyebrow">Deep learning wins on hard photos</span><span class="big" style="color: var(--bad)">0.55</span><p>The classical model (hand-made features) is 98 % accurate on clean photos, but a light blur drops it to coin-flip level. The deep models stay above 98.6 % in all damage tests (M3).</p></div>
-      <div class="take"><span class="eyebrow">We checked for cheating</span><span class="big">16 checks</span><p>Scores this high can mean the test "leaked" answers to the model. We listed 16 possible leaks and checked each one. No leak explains the results.</p></div>
+      <div class="take"><span class="eyebrow">โมเดลที่ดีที่สุด</span><span class="big">99.8 %</span><p>M3 (DINOv3 + LoRA) ตอบถูก 99.76 % จากรูป test 9,600 รูปที่ไม่เคยเห็นมาก่อน ในรูปจริง 5,366 รูป ทายผิดว่าเป็น fake แค่ 2 รูป</p></div>
+      <div class="take"><span class="eyebrow">Deep learning ชนะในรูปที่เสียหาย</span><span class="big" style="color: var(--bad)">0.55</span><p>โมเดล classical (feature ที่ออกแบบเอง) แม่น 98 % กับรูปปกติ แต่พอเบลอนิดเดียว AUC เหลือแค่ระดับเดาสุ่ม ส่วน M3 ยังแม่น ≥ 98.6 % ในทุกแบบที่ทำให้รูปเสียหาย</p></div>
+      <div class="take"><span class="eyebrow">ตรวจแล้วว่าไม่ได้โกง</span><span class="big">16 ข้อ</span><p>คะแนนสูงขนาดนี้อาจแปลว่าคำตอบ "รั่ว" ไปถึงโมเดล เราจึงลิสต์ช่องทางรั่วที่เป็นไปได้ 16 ข้อแล้วตรวจทุกข้อ ไม่พบการรั่วที่ทำให้คะแนนสูงเกินจริง</p></div>
     </div>
   </section>
 
   <section id="glossary" aria-labelledby="glossary-h">
-    <div class="sec-head">
-      <h2 id="glossary-h">Key terms (read this first)</h2>
-      <p class="muted">The words used on the rest of the page, in plain language.</p>
-    </div>
+    <details class="drop">
+    <summary>
+      <span class="sec-head"><h2 id="glossary-h">คำศัพท์ (อ่านก่อน)</h2><span class="hint">ความหมายของคำที่ใช้ในหน้านี้ · กดเพื่อเปิด/ปิด</span></span>
+      <span class="chev" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3 5l4 4 4-4"/></svg></span>
+    </summary>
     <dl class="gloss">
-      <div><dt>Model / classifier</dt><dd>A program that learns a rule from examples instead of being told the rule. Ours takes a photo and outputs a score from 0 (real) to 1 (fake).</dd></div>
-      <div><dt>Label</dt><dd>The correct answer for each example ("real" or "fake"). The model sees labels only while training.</dd></div>
-      <div><dt>Train / validation / test split</dt><dd>We divide the data into three piles. <b>Train</b> (72 %): the model learns from it. <b>Validation</b> (14 %): we use it to make choices, like when to stop training. <b>Test</b> (14 %): touched once at the very end, like a final exam the model has never seen.</dd></div>
-      <div><dt>Threshold</dt><dd>The score above which we say "fake". We pick it on validation, never on test.</dd></div>
-      <div><dt>Accuracy</dt><dd>Share of test photos labelled correctly.</dd></div>
-      <div><dt>AUC</dt><dd>How well the scores rank fakes above reals, for every possible threshold. 1.0 = perfect, 0.5 = random guessing. Useful because it does not depend on one threshold.</dd></div>
-      <div><dt>False positive / false negative</dt><dd><b>False positive</b>: a real photo called fake (a false alarm). <b>False negative</b>: a fake that slipped through. A <b>confusion matrix</b> is the 2 × 2 table that counts both.</dd></div>
-      <div><dt>Features (classical approach)</dt><dd>Numbers we design by hand from image-processing tools, such as texture, noise or frequency content. A simple model then learns which numbers matter.</dd></div>
-      <div><dt>Deep learning / neural network</dt><dd>A model with millions of adjustable numbers (weights) that learns its own features directly from pixels.</dd></div>
-      <div><dt>Pretrained backbone</dt><dd>A big network someone else already trained on millions of photos (here DINOv3 by Meta). We reuse its "visual knowledge" and adapt it to deepfakes.</dd></div>
-      <div><dt>Fine-tuning, LoRA</dt><dd>Fine-tuning = continuing training on our data. <b>LoRA</b> trains only small add-on pieces instead of the whole network, which is cheaper and harder to overfit.</dd></div>
-      <div><dt>Zero-shot</dt><dd>Using a model with no training on our data at all, just asking it.</dd></div>
-      <div><dt>Augmentation</dt><dd>Randomly blurring, compressing, cropping or flipping training photos so the model learns to cope with messy images.</dd></div>
-      <div><dt>Overfitting</dt><dd>When a model memorises the training examples instead of learning a general rule. It then does badly on new photos.</dd></div>
-      <div><dt>Leakage</dt><dd>When the model can get the answer through a back door (for example the same photo in train and test, or a file-format clue), so the score looks better than the model really is.</dd></div>
-      <div><dt>Confidence interval (CI)</dt><dd>A range that shows how much a score could change with a different test set. If two models' ranges overlap, we can't call one better.</dd></div>
-      <div><dt>Grad-CAM</dt><dd>A heat map that shows which part of the photo pushed the model toward its answer.</dd></div>
-      <div><dt>Epoch</dt><dd>One full pass of the model over the training data.</dd></div>
-      <div><dt>GPU</dt><dd>The graphics chip that makes training fast. One full training run took between about 3 and 12 hours here.</dd></div>
+      <div><dt>Model / classifier</dt><dd>โปรแกรมที่เรียนรู้กฎจากตัวอย่างแทนที่จะมีคนเขียนกฎให้ โมเดลของเรารับรูปแล้วให้ score ตั้งแต่ 0 (real) ถึง 1 (fake)</dd></div>
+      <div><dt>Label</dt><dd>คำตอบที่ถูกต้องของแต่ละรูป ("real" หรือ "fake") โมเดลเห็น label เฉพาะตอน train เท่านั้น</dd></div>
+      <div><dt>Train / validation / test split</dt><dd>แบ่งข้อมูลเป็นสามกอง <b>Train</b> (72 %) ให้โมเดลเรียน <b>Validation</b> (14 %) ใช้ตัดสินใจ เช่น จะหยุด train เมื่อไหร่ <b>Test</b> (14 %) ใช้ครั้งเดียวตอนท้าย เหมือนข้อสอบไฟนอลที่โมเดลไม่เคยเห็น</dd></div>
+      <div><dt>Threshold</dt><dd>ค่า score ที่ถ้าเกินแล้วเราจะตอบว่า "fake" เลือกจาก validation เท่านั้น ห้ามเลือกจาก test</dd></div>
+      <div><dt>Accuracy</dt><dd>สัดส่วนรูป test ที่ตอบถูก</dd></div>
+      <div><dt>AUC</dt><dd>วัดว่า score เรียง fake ไว้สูงกว่า real ได้ดีแค่ไหน โดยดูทุก threshold พร้อมกัน 1.0 = สมบูรณ์แบบ 0.5 = เดาสุ่ม มีประโยชน์เพราะไม่ขึ้นกับ threshold ตัวใดตัวหนึ่ง</dd></div>
+      <div><dt>False positive / false negative</dt><dd><b>False positive</b> คือรูปจริงที่ถูกทายว่า fake (แจ้งเตือนผิด) <b>False negative</b> คือรูป fake ที่หลุดรอดไป ตาราง 2 × 2 ที่นับทั้งสองแบบเรียกว่า <b>confusion matrix</b></dd></div>
+      <div><dt>Feature (แนว classical)</dt><dd>ตัวเลขที่เราออกแบบเองด้วยเครื่องมือ image processing เช่น texture, noise, ความถี่ของภาพ แล้วให้โมเดลง่าย ๆ เรียนว่าตัวเลขไหนสำคัญ</dd></div>
+      <div><dt>Deep learning / neural network</dt><dd>โมเดลที่มีตัวเลขปรับได้ (weights) หลายล้านตัว และเรียน feature เองจาก pixel โดยตรง</dd></div>
+      <div><dt>Pretrained backbone</dt><dd>network ขนาดใหญ่ที่คนอื่น train ไว้แล้วด้วยรูปหลายล้านรูป (ในงานนี้คือ DINOv3 ของ Meta) เรายืม "ความรู้เรื่องภาพ" ของมันมาปรับใช้กับ deepfake</dd></div>
+      <div><dt>Fine-tuning, LoRA</dt><dd>Fine-tuning คือ train ต่อด้วยข้อมูลของเรา <b>LoRA</b> คือ train เฉพาะชิ้นส่วนเล็ก ๆ ที่เพิ่มเข้าไป แทนที่จะ train ทั้ง network ถูกกว่าและ overfit ยากกว่า</dd></div>
+      <div><dt>Zero-shot</dt><dd>ใช้โมเดลโดยไม่ train กับข้อมูลเราเลย แค่ถามมันตรง ๆ</dd></div>
+      <div><dt>Augmentation</dt><dd>สุ่มเบลอ บีบอัด crop หรือกลับด้านรูปตอน train เพื่อให้โมเดลรับมือกับรูปคุณภาพไม่ดีได้</dd></div>
+      <div><dt>Overfitting</dt><dd>โมเดลจำตัวอย่างใน train แทนที่จะเรียนกฎทั่วไป ผลคือทำได้แย่กับรูปใหม่</dd></div>
+      <div><dt>Leakage</dt><dd>โมเดลได้คำตอบผ่าน "ทางลัด" เช่น รูปเดียวกันอยู่ทั้งใน train และ test หรือดูจากชนิดไฟล์ ทำให้คะแนนดูดีกว่าความสามารถจริง</dd></div>
+      <div><dt>Confidence interval (CI)</dt><dd>ช่วงที่บอกว่าคะแนนอาจเปลี่ยนได้แค่ไหนถ้าใช้ test set ชุดอื่น ถ้าช่วงของสองโมเดลซ้อนกัน แปลว่ายังสรุปไม่ได้ว่าตัวไหนดีกว่า</dd></div>
+      <div><dt>Grad-CAM</dt><dd>heat map ที่บอกว่าส่วนไหนของรูปทำให้โมเดลตอบแบบนั้น</dd></div>
+      <div><dt>Epoch</dt><dd>การให้โมเดลดูข้อมูล train ครบหนึ่งรอบ</dd></div>
+      <div><dt>GPU</dt><dd>ชิปกราฟิกที่ทำให้ train เร็วขึ้น ในงานนี้ train หนึ่งรอบเต็มใช้เวลาประมาณ 3–12 ชั่วโมง</dd></div>
     </dl>
+    </details>
   </section>
 
   <section id="progress" aria-labelledby="progress-h">
-    <h2 id="progress-h">Progress</h2>
+    <h2 id="progress-h">ความคืบหน้า</h2>
     <div class="phases">
-      <div class="phase"><span class="n">Phase 1</span><h3>Data</h3><p>Clean the data, split it fairly</p><span class="pill done">Done</span></div>
-      <div class="phase"><span class="n">Phase 2</span><h3>Preprocessing</h3><p>Prepare images, remove a shortcut</p><span class="pill done">Done</span></div>
-      <div class="phase"><span class="n">Phase 3</span><h3>Simple models</h3><p>Zero-shot and classical</p><span class="pill done">Done</span></div>
-      <div class="phase"><span class="n">Phase 4</span><h3>Deep learning</h3><p>3 models × 4 settings = 12 runs</p><span class="pill done">Done</span></div>
-      <div class="phase"><span class="n">Phase 5</span><h3>Evaluation</h3><p>Compare, explain, check for leaks</p><span class="pill done">Done</span></div>
-      <div class="phase"><span class="n">Phase 6</span><h3>Slides</h3><p>Literature review done; deck to do</p><span class="pill next">Next</span></div>
+      <div class="phase"><span class="n">Phase 1</span><h3>Data</h3><p>ทำความสะอาดข้อมูล แบ่ง split อย่างยุติธรรม</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 2</span><h3>Preprocessing</h3><p>เตรียมรูป และตัดทางลัดออก</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 3</span><h3>โมเดลพื้นฐาน</h3><p>Zero-shot และ classical</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 4</span><h3>Deep learning</h3><p>3 โมเดล × 4 แบบ = 12 runs</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 5</span><h3>Evaluation</h3><p>เปรียบเทียบ อธิบาย ตรวจ leakage</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 6</span><h3>สไลด์</h3><p>Literature review เสร็จแล้ว เหลือทำ deck</p><span class="pill next">Next</span></div>
     </div>
+    <div class="panel">
+      <h3>เกณฑ์ให้คะแนนของวิชา (7 ข้อ ข้อละ 5 คะแนน) และสถานะของเรา</h3>
+      <p class="note">จาก <code>2110651_Project_Template.pdf</code> ทีมเรามี 4 คน จึงต้องทำตามจำนวนของทีม 4 คน แต่ละหัวข้อด้านล่างมีกล่อง "เกณฑ์ข้อ X" บอกว่าวิชาต้องการอะไร และเราทำครบอย่างไร</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>เกณฑ์</th><th>ทีม 4 คนต้องมี</th><th>สถานะ</th><th>อ่านที่หัวข้อ</th></tr></thead>
+          <tbody>
+            <tr><td>1. Dataset + การเตรียมข้อมูล</td><td>public dataset, ภาพรวม, รูปตัวอย่าง, กราฟการกระจายของ class</td><td><span class="pill done">ครบ</span></td><td><a href="#data">ข้อมูล</a></td></tr>
+            <tr><td>2. Literature review</td><td><b>5 papers</b> พร้อม gap ที่เชื่อมกับวิธีของเรา</td><td><span class="pill done">ครบ</span></td><td><a href="#literature">Literature review</a></td></tr>
+            <tr><td>3. Preprocessing</td><td><b>อย่างน้อย 3 วิธี</b> ที่เหมาะกับปัญหาของข้อมูล</td><td><span class="pill done">ครบ (4 วิธี)</span></td><td><a href="#preprocessing">Preprocessing</a></td></tr>
+            <tr><td>4. Model understanding</td><td>pipeline + architecture + design choices</td><td><span class="pill done">ครบ</span></td><td><a href="#models">โมเดล</a></td></tr>
+            <tr><td>5. Experimentation</td><td><b>baseline + 3 adjustments</b>, Acc/Prec/Rec/F1/AUC, confusion matrix</td><td><span class="pill done">ครบ</span></td><td><a href="#results">ผลลัพธ์</a></td></tr>
+            <tr><td>6. Analysis</td><td>ตัวอย่างสำเร็จ 3 + ล้มเหลว 3 เทียบ classical vs DL</td><td><span class="pill done">ครบ</span></td><td><a href="#explain">โมเดลดูตรงไหน</a></td></tr>
+            <tr><td>7. Peer review + Q&amp;A</td><td>ตอบคำถามวันนำเสนอ</td><td><span class="pill next">วันนำเสนอ</span></td><td><a href="#limits">ข้อจำกัด</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="literature" aria-labelledby="lit-h">
+    <div class="sec-head">
+      <span class="eyebrow">Literature review</span>
+      <h2 id="lit-h">งานวิจัยที่เกี่ยวข้อง (5 papers)</h2>
+      <p class="muted">เลือก 5 papers ที่แต่ละเรื่องเป็นที่มาของส่วนหนึ่งใน pipeline ของเรา ฉบับเต็มอยู่ที่ <code>LITERATURE_REVIEW.md</code></p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 2</span><h3>Review prior methods closely related to our work</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ทีม 4 คนต้องมี <b>5 papers</b> สรุปว่าแต่ละวิธีทำอะไร จุดแข็ง ข้อจำกัด พร้อม references ได้ 5 คะแนนเมื่อ<b>ระบุ gap ชัดเจนและเชื่อมกับวิธีของเรา</b> (ถ้าแค่สรุปทั่วไปได้ 3)</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>5 papers แต่ละอันคือที่มาของ dataset, วิธีประเมินผล, โมเดล classical, M2 และ M3</li><li>แต่ละ paper มีจุดแข็ง ข้อจำกัด และวิธีที่เรานำมาใช้ (การ์ดด้านล่าง)</li><li>สรุป gap 3 ข้อ และบอกว่างานเราเติม gap นั้นอย่างไร (การ์ดสุดท้าย)</li></ul></div>
+      </div>
+    </div>
+    <div class="papers">
+      <article class="paper">
+        <span class="tag">1 · Dataset</span><h3>HiDF: A Human-Indistinguishable Deepfake Dataset</h3><span class="venue">Kang et al., KDD 2025</span>
+        <dl><dt>ทำอะไร</dt><dd>สร้าง dataset รูป face swap คุณภาพสูง (~62K รูป + 8K วิดีโอ) ที่ผ่านการทดสอบกับคนจริงว่าแยกไม่ออก โมเดลเดิม ๆ ได้ AUC แค่ ~0.70</dd>
+        <dt>จุดแข็ง</dt><dd>fake สมจริงกว่า dataset เก่า (FF++, Celeb-DF) ซึ่งคนดูออกง่าย</dd>
+        <dt>ข้อจำกัด</dt><dd>โมเดลที่ทดสอบไม่ได้ train บน HiDF เอง ไฟล์ real กับ fake บันทึกต่างกัน (ขนาดไฟล์อย่างเดียวได้ AUC 0.99) และคนเดิมซ้ำหลายรูป ถ้าแบ่งแบบสุ่มจะรั่ว</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น dataset หลัก แก้ทางลัดด้วย P1 และ split ตามตัวคน</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">2 · การประเมินผล + M1</span><h3>FaceForensics++</h3><span class="venue">Rössler et al., ICCV 2019</span>
+        <dl><dt>ทำอะไร</dt><dd>benchmark วิดีโอ 1,000 คลิป ปลอมด้วย 4 วิธี และ 3 ระดับการบีบอัด เทียบ feature ที่ออกแบบเองกับ CNN</dd>
+        <dt>จุดแข็ง</dt><dd>แสดงว่า CNN ชนะ feature ที่ออกแบบเองและชนะคน และการ train ที่บริเวณหน้าดีกว่ารูปเต็ม</dd>
+        <dt>ข้อจำกัด</dt><dd>fake รุ่นเก่า คนดูออกง่าย และทุกโมเดลแย่ลงมากเมื่อบีบอัดแรง</dd>
+        <dt>เราใช้อย่างไร</dt><dd>ทดสอบทุกโมเดลกับรูปเสียหาย 9 แบบ, adjustment แบบ face crop, และแนวทาง CNN ของ M1</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">3 · Classical</span><h3>Unmasking DeepFakes with simple Features</h3><span class="venue">Durall et al., 2020</span>
+        <dl><dt>ทำอะไร</dt><dd>แปลงรูปด้วย FFT เฉลี่ยเป็น spectrum 1 มิติ แล้วใช้ classifier ง่าย ๆ ได้ 100 % บนหน้า high-res โดยใช้ตัวอย่าง train แค่ 20 รูป</dd>
+        <dt>จุดแข็ง</dt><dd>ง่าย เร็ว ใช้ข้อมูลน้อย อธิบายได้</dd>
+        <dt>ข้อจำกัด</dt><dd>เบาะแสความถี่สูงหายไปเมื่อรูปถูกบีบอัด เบลอ หรือย่อ</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็นฐานของโมเดล classical (P4) เราเพิ่ม noise, LBP, สี, รอยต่อ รวม 247 feature ได้ AUC 0.998 แต่เบลอ σ2 แล้วเหลือ 0.55 ตรงกับข้อจำกัดนี้</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">4 · M2</span><h3>GenD: Deepfake Detection that Generalizes Across Benchmarks</h3><span class="venue">Yermakov et al., WACV 2026</span>
+        <dl><dt>ทำอะไร</dt><dd>ใช้ foundation model (CLIP, DINOv2/v3) แล้ว train แค่ LayerNorm + linear head (~0.03 % ของ weights) พร้อม loss ที่จัดรูป feature บนทรงกลม</dd>
+        <dt>จุดแข็ง</dt><dd>ถูกมาก และได้ AUROC ข้าม dataset เฉลี่ยดีที่สุดใน 14 datasets</dd>
+        <dt>ข้อจำกัด</dt><dd>ความทนต่อรูปเสียหายขึ้นกับ augmentation เกือบทั้งหมด (ของเรา: ปิด augmentation แล้ว JPEG q30 ตกจาก 96.6 % เป็น 80.5 %)</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น M2 บน DINOv3 ได้ AUC 0.9998 โดย train แค่ 101K weights</dd></dl>
+      </article>
+      <article class="paper">
+        <span class="tag">5 · M3</span><h3>Robust Deepfake Detection, NTIRE 2026 Challenge Report (DINO-MAC)</h3><span class="venue">Hopf et al., 2026</span>
+        <dl><dt>ทำอะไร</dt><dd>รายงานการแข่งขันตรวจ deepfake ในรูปที่เสียหาย ผู้ชนะ (DINO-MAC) ใช้ DINOv3-L + LoRA, head ที่รวมหลาย token และ train ด้วยขนาดรูปสุ่ม</dd>
+        <dt>จุดแข็ง</dt><dd>ทนต่อ noise, blur, การบีบอัดดีที่สุดในการแข่งขัน</dd>
+        <dt>ข้อจำกัด</dt><dd>ใช้ทรัพยากรมาก paper train ที่ 384–1152 px เราต้องลดเหลือ 224–320 px และยังช้าที่สุด (~139 นาทีต่อ epoch)</dd>
+        <dt>เราใช้อย่างไร</dt><dd>เป็น M3 ทนทานที่สุดในโมเดลเรา (face crop: AUC ≥ 0.997 ในทุกความเสียหาย)</dd></dl>
+      </article>
+      <article class="paper gap">
+        <span class="tag">Gap</span><h3>ช่องว่างที่งานเราเติม</h3>
+        <ol>
+          <li><b>HiDF ถูกอ้างว่ายาก แต่ยังไม่มีใคร train บนมันโดยคุมทางลัด</b> เราเจอและแก้ 2 ทางลัด (การบีบอัด, คนซ้ำ) หลังแก้แล้วทุกโมเดลที่ train ได้ AUC ≥ 0.998 แปลว่า "คนแยกไม่ออก" แต่เครื่องแยกออก</li>
+          <li><b>ความต่างจริงระหว่างวิธีคือ robustness</b> (ตาม [2], [5]) รูปปกติ classical ≈ DL แต่รูปเสียหาย classical พัง DL ยังดี ถ้า train ด้วย augmentation</li>
+          <li><b>วิธี foundation model ใหม่ [4], [5] ยังไม่เคยทดสอบบน HiDF</b> เราเทียบกับ CNN (M1) ภายใต้เงื่อนไขเดียวกันทั้งหมด</li>
+        </ol>
+      </article>
+    </div>
+    <ol class="refs">
+      <li>Kang et al. HiDF. KDD 2025. <a href="https://github.com/DSAIL-SKKU/HiDF">github.com/DSAIL-SKKU/HiDF</a></li>
+      <li>Rössler et al. FaceForensics++. ICCV 2019. <a href="https://arxiv.org/abs/1901.08971">arxiv.org/abs/1901.08971</a></li>
+      <li>Durall et al. Unmasking DeepFakes with simple Features. 2020. <a href="https://arxiv.org/abs/1911.00686">arxiv.org/abs/1911.00686</a></li>
+      <li>Yermakov et al. GenD. WACV 2026. <a href="https://arxiv.org/abs/2508.06248">arxiv.org/abs/2508.06248</a></li>
+      <li>Hopf et al. NTIRE 2026 Robust Deepfake Detection Challenge Report. <a href="https://arxiv.org/abs/2604.24163">arxiv.org/abs/2604.24163</a></li>
+    </ol>
   </section>
 
   <section id="data" aria-labelledby="data-h">
     <div class="sec-head">
       <span class="eyebrow">Phase 1</span>
-      <h2 id="data-h">The data: how a HiDF fake is made</h2>
+      <h2 id="data-h">ข้อมูล: รูป fake ใน HiDF ทำมาอย่างไร</h2>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 1</span><h3>Dataset + Preparation (Train / Val / Test)</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ใช้ public dataset และ visualise ทุกด้าน: ภาพรวม (จำนวน class, label, ขนาด, แหล่งที่มา, การแบ่ง train/val/test), รูปตัวอย่าง input/output, กราฟหรือสถิติการกระจายของ class</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>HiDF (public, KDD 2025) 2 class: real / fake, 69,476 รูปหลังทำความสะอาด, 1024 px</li><li>แบ่ง 72 / 14 / 14 ตามตัวคน (กราฟด้านล่าง)</li><li>รูปตัวอย่าง base + donor → fake พร้อมภาพความต่าง</li><li>กราฟจำนวน real/fake ต่อ split และการกระจายตามเชื้อชาติ เพศ อายุ</li></ul></div>
+      </div>
     </div>
     <div class="prose">
-      <p>Every fake starts from two real photos. The <b>base</b> photo gives the scene, hair and body. The <b>donor</b> gives a face. A face-swap tool pastes the donor's inner face onto the base. Only about 11 % of the pixels change, so the background is identical to a real photo.</p>
+      <p>รูป fake ทุกรูปเริ่มจากรูปจริงสองรูป รูป <b>base</b> ให้ฉาก ผม และลำตัว ส่วนรูป <b>donor</b> ให้ใบหน้า โปรแกรม face swap จะเอาหน้าด้านในของ donor ไปแปะบน base pixel ที่เปลี่ยนมีแค่ประมาณ 11 % พื้นหลังจึงเหมือนรูปจริงทุกประการ</p>
     </div>
     <figure>
-      <div class="img"><img src="figures/triplets.png" alt="Four rows. Each row shows a real base photo, a real donor photo, the resulting fake with the donor's face on the base photo, and a dark difference map that lights up only on the face."></div>
-      <figcaption>Each row: base (real) + donor (real) → fake. The right column shows where the fake differs from its base: only the inner face. We later use this difference as a free "answer key" for where the swap is.</figcaption>
+      <div class="img"><img src="figures/triplets.png" alt="สี่แถว แต่ละแถวมีรูป base จริง รูป donor จริง รูป fake ที่มีหน้าของ donor บนรูป base และภาพความต่างสีเข้มที่สว่างเฉพาะบริเวณใบหน้า"></div>
+      <figcaption>แต่ละแถว: base (real) + donor (real) → fake คอลัมน์ขวาสุดแสดงจุดที่ fake ต่างจาก base ซึ่งมีแค่หน้าด้านใน ภายหลังเราใช้ภาพความต่างนี้เป็น "เฉลย" ฟรีว่าบริเวณที่ถูก swap อยู่ตรงไหน</figcaption>
     </figure>
     <div class="cols3">
-      <div class="card"><span class="tag">Size</span><p><b>69,831 images</b> at 1024 × 1024 px: 38.6K real, 31.2K fake. After cleaning, 69,476 kept.</p></div>
-      <div class="card"><span class="tag">Cleaning</span><p>We removed 235 "real" files that were byte-for-byte copies of fakes and 50 fakes where the swap had failed, and fixed 458 wrong file names.</p><p class="why">Why: a wrong label teaches the model the wrong thing.</p></div>
-      <div class="card"><span class="tag">Split by person</span><p>A fake, its base and its donor always land in the same pile. No person appears in both train and test.</p><p class="why">Why: if the model saw a person in training, it could recognise the person instead of the swap. That would be cheating.</p></div>
+      <div class="card"><span class="tag">ขนาด</span><p>มี <b>69,831 รูป</b> ขนาด 1024 × 1024 px เป็น real 38.6K และ fake 31.2K หลังทำความสะอาดเหลือ 69,476 รูป</p></div>
+      <div class="card"><span class="tag">Cleaning</span><p>ลบไฟล์ "real" 235 ไฟล์ที่จริง ๆ แล้วเป็นสำเนาของ fake ลบ fake 50 รูปที่ swap ไม่สำเร็จ และแก้ชื่อไฟล์ผิด 458 ไฟล์</p><p class="why">เหตุผล: label ผิดจะสอนโมเดลผิด ๆ</p></div>
+      <div class="card"><span class="tag">Split ตามตัวคน</span><p>fake, base และ donor ของมันอยู่กองเดียวกันเสมอ ไม่มีคนไหนอยู่ทั้งใน train และ test</p><p class="why">เหตุผล: ถ้าโมเดลเคยเห็นคนนั้นตอน train มันอาจจำหน้าคนแทนที่จะดูร่องรอยการ swap ซึ่งเท่ากับโกง</p></div>
+    </div>
+    <div class="cols">
+      <figure>
+        <div class="img"><img src="figures/class_by_split.png" alt="กราฟแท่งจำนวนรูป real และ fake ในแต่ละ split: train 27,556 real และ 22,723 fake, val 5,340 และ 4,230, test 5,385 และ 4,242"></div>
+        <figcaption>จำนวนรูปต่อ split: train 50,279 (72 %), val 9,570 (14 %), test 9,627 (14 %) สัดส่วน real : fake ใกล้เคียงกันทุก split (ตอนประเมินผลตัดรูปซ้ำ 27 รูปออกจาก test เหลือ 9,600)</figcaption>
+      </figure>
+      <figure>
+        <div class="img"><img src="figures/demographics.png" alt="กราฟแท่งสัดส่วนเชื้อชาติ เพศ และอายุ ของรูป real และ fake ซึ่งเกือบเท่ากัน: White 75 %, Asian 9 %, Latino 8 %, Black 6 %, Indian 2 %"></div>
+        <figcaption>สัดส่วนเชื้อชาติ เพศ อายุ ของ real กับ fake เกือบเท่ากัน (fake นับตามคนในรูป base) ส่วนใหญ่เป็นคนผิวขาว (75 %) ผู้หญิง (60 %) และผู้ใหญ่ (83 %)</figcaption>
+      </figure>
     </div>
   </section>
 
   <section id="preprocessing" aria-labelledby="pre-h">
     <div class="sec-head">
       <span class="eyebrow">Phase 2</span>
-      <h2 id="pre-h">Preprocessing: getting images ready</h2>
-      <p class="muted">Four steps, named P1–P4 in the documents.</p>
+      <h2 id="pre-h">Preprocessing: เตรียมรูปก่อนใช้งาน</h2>
+      <p class="muted">มี 4 ขั้น ในเอกสารเรียกว่า P1–P4</p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 3</span><h3>Preprocessing / Augmentation / Noise addition / Filtering</h3><span class="pill done">ครบ (4 วิธี)</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ทีม 4 คนต้องมี<b>อย่างน้อย 3 วิธี</b> ที่เหมาะกับปัญหาของข้อมูลพร้อมเหตุผล, เหตุผลของ augmentation, pipeline diagram ทีละขั้น และตัวอย่าง before / after ได้ 5 คะแนนเมื่อ<b>วิธีเหมาะกับปัญหาของข้อมูล</b> (ถ้าเป็นวิธีทั่วไปได้ 3)</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>4 วิธี แต่ละวิธีแก้ปัญหาที่เจอใน HiDF จริง: P1 แก้ทางลัดเรื่องการบีบอัด, P2 ให้ทนรูปเสียหาย, P3 เพราะ swap เปลี่ยนแค่ 11 % ของรูป, P4 เพราะร่องรอยอยู่ในความถี่สูง</li><li>วัดผลว่าแก้ได้จริง: P1 ทำให้พื้นหลังเหลือ AUC 0.51, P3 ครอบคลุม swap 96 %, P2 ทดสอบด้วยการเปิด/ปิด</li><li>Pipeline diagram และ before/after อยู่ใน <code>documents/figures/phase2/</code> (ดูตัวอย่าง P4 ในหัวข้อถัดไป)</li></ul></div>
+      </div>
     </div>
     <div class="flow">
-      <div class="card"><span class="tag">P1</span><h3>Same compression for all</h3><p>Every image is saved the same way (JPEG, then resized to 512 px).</p><p class="why">Real and fake files were saved differently. File size alone could separate them (AUC 0.99) without looking at any face. P1 removes that clue.</p></div>
-      <div class="card"><span class="tag">P2</span><h3>Augmentation</h3><p>Random crop, flip, colour change, blur, JPEG and noise, on training images only.</p><p class="why">Makes the deep models cope with damaged photos.</p></div>
-      <div class="card"><span class="tag">P3</span><h3>Find the face</h3><p>MediaPipe draws the face outline. It covers 96 % of the swapped area.</p><p class="why">Used for face crops and for the classical features.</p></div>
-      <div class="card"><span class="tag">P4</span><h3>Hand-made features</h3><p>247 numbers per image: frequency (FFT), noise, skin texture (LBP), colour, and the seam at the face edge.</p><p class="why">Input to the classical model.</p></div>
+      <div class="card"><span class="tag">P1</span><h3>บีบอัดทุกรูปแบบเดียวกัน</h3><p>บันทึกทุกรูปด้วยวิธีเดียวกัน (JPEG แล้วย่อเป็น 512 px)</p><p class="why">ไฟล์ real กับ fake ถูกบันทึกมาต่างกัน แค่ดูขนาดไฟล์ก็แยกได้ (AUC 0.99) โดยไม่ต้องดูหน้าเลย P1 ลบเบาะแสนี้ออก</p></div>
+      <div class="card"><span class="tag">P2</span><h3>Augmentation</h3><p>สุ่ม crop, flip, เปลี่ยนสี, blur, JPEG, noise เฉพาะรูป train</p><p class="why">ให้โมเดล deep learning รับมือกับรูปที่เสียหายได้</p></div>
+      <div class="card"><span class="tag">P3</span><h3>หาตำแหน่งใบหน้า</h3><p>ใช้ MediaPipe วาดขอบใบหน้า ครอบคลุม 96 % ของบริเวณที่ถูก swap</p><p class="why">ใช้ crop หน้า และใช้คำนวณ feature แบบ classical</p></div>
+      <div class="card"><span class="tag">P4</span><h3>Feature ที่ออกแบบเอง</h3><p>ตัวเลข 247 ตัวต่อรูป: ความถี่ (FFT), noise, texture ผิว (LBP), สี และรอยต่อที่ขอบหน้า</p><p class="why">เป็น input ของโมเดล classical</p></div>
     </div>
     <div class="callout warn">
-      <p><b>First leak found and fixed.</b> Before P1, a model that saw only the background (face blanked out) could still tell real from fake. After P1 it scores 0.51, which is guessing. This is why we became careful about leakage early.</p>
+      <p><b>เจอ leakage ครั้งแรกและแก้แล้ว</b> ก่อนทำ P1 โมเดลที่เห็นแค่พื้นหลัง (ปิดหน้าไว้) ยังแยก real กับ fake ได้ หลังทำ P1 คะแนนเหลือ 0.51 ซึ่งเท่ากับเดา เพราะเรื่องนี้เราจึงระวังเรื่อง leakage มาตั้งแต่ต้น</p>
+    </div>
+  </section>
+
+  <section id="features" aria-labelledby="feat-h">
+    <div class="sec-head">
+      <span class="eyebrow">P4 อย่างละเอียด</span>
+      <h2 id="feat-h">Feature ที่ออกแบบเองทำอย่างไร</h2>
+      <p class="muted">โมเดล classical ไม่ได้ดู pixel โดยตรง เราแปลงแต่ละรูปเป็นตัวเลข 247 ตัวที่วัดสิ่งที่คาดว่ารูป fake จะต่างจากรูปจริง แล้วค่อยให้โมเดลเรียนจากตัวเลขเหล่านี้ โค้ดอยู่ที่ <code>src/features.py</code> ใช้เวลาประมาณ 73 ms ต่อรูป</p>
+    </div>
+    <div class="prose">
+      <p><b>แนวคิดหลัก:</b> หน้าที่ถูก swap เป็น pixel ที่โปรแกรมสร้างขึ้นใหม่ ผิวจึง<b>เรียบกว่า</b>และมี <b>noise น้อยกว่า</b>ผิวจากกล้องจริง แต่ความต่างนี้เล็กมาก มองด้วยตาไม่เห็น เพราะถูกกลบด้วยเนื้อหาของรูป (รูปร่างหน้า สี แสงเงา) เราจึงต้องใช้ filter ลอกเนื้อหาออกก่อน ให้เหลือแต่รายละเอียดเล็ก ๆ</p>
+    </div>
+    <div class="flow">
+      <div class="card"><span class="tag">ขั้น 1</span><h3>แบ่งบริเวณด้วย P3</h3><p>ใช้ขอบหน้าจาก MediaPipe แบ่งรูปเป็น 4 ส่วน: <b>หน้าด้านใน</b>, <b>แถบรอยต่อ</b> (seam) ตามขอบหน้า, <b>วงผิว</b>รอบ ๆ หน้า และ<b>ด้านนอก</b></p><p class="why">จะได้เทียบหน้ากับส่วนอื่นของรูปเดียวกันได้</p></div>
+      <div class="card"><span class="tag">ขั้น 2</span><h3>High-pass filter</h3><p>ใช้ filter <b>Laplacian</b> และ <b>SRM</b> (filter มาตรฐานในงาน image forensics) ลบส่วนที่เปลี่ยนช้า ๆ ออก เหลือ <b>residual</b> คือ noise และรายละเอียดเล็ก ๆ</p><p class="why">เป็นเทคนิค image processing ที่เรียนในวิชา</p></div>
+      <div class="card"><span class="tag">ขั้น 3</span><h3>สรุปเป็นตัวเลข</h3><p>คำนวณสถิติของแต่ละบริเวณ: ค่าเบี่ยงเบน (std), ค่าเฉลี่ยขนาด, skewness, kurtosis รวมถึง FFT, LBP, สี และความคมของขอบ (ดูตารางด้านล่าง)</p><p class="why">ได้ตัวเลข 247 ตัวต่อรูป</p></div>
+      <div class="card"><span class="tag">ขั้น 4</span><h3>ให้โมเดลเรียน</h3><p>ลองโมเดล 4 แบบกับตัวเลขเหล่านี้: gradient boosting, logistic regression, SVM, random forest เลือกตัวที่ดีที่สุดจาก validation</p><p class="why">Gradient boosting ชนะ (AUC 0.998)</p></div>
+    </div>
+    <figure>
+      <div class="img"><img src="figures/p4_filters.png" alt="รูปจริงและรูป fake ของคนเดียวกัน พร้อมผลจาก Laplacian filter, SRM filter และ FFT ใน residual ของรูป fake บริเวณหน้าจะมืดกว่า แปลว่ามี noise น้อยกว่า"></div>
+      <figcaption>แถวบน: รูปจริง แถวล่าง: รูป fake ที่สร้างจากรูปนั้น ภาพ residual (คอลัมน์ 2–3) ลบเนื้อหาออกจนเหลือแต่รายละเอียดเล็ก ๆ สังเกตว่าในรูป fake <b>บริเวณหน้ามืดกว่า</b> (noise น้อยกว่า) ขณะที่ผมและพื้นหลังยังเหมือนเดิม คอลัมน์ขวาคือ FFT ซึ่งแสดงว่ารูปมีรายละเอียดในแต่ละความถี่มากแค่ไหน</figcaption>
+    </figure>
+    <div class="panel">
+      <h3>Feature 247 ตัว แบ่งเป็น 7 กลุ่ม</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>กลุ่ม</th><th class="num">จำนวน</th><th>วัดอะไร</th><th>ทำไมช่วยจับ fake</th></tr></thead>
+          <tbody>
+            <tr><td><b>FFT spectrum</b></td><td class="num">128</td><td>แปลงรูปเป็นความถี่ด้วย FFT แล้ววัดพลังงานในแต่ละระดับความถี่ (ต่ำ = ส่วนเรียบ ๆ สูง = รายละเอียดละเอียด)</td><td>รูป fake มีพลังงานความถี่สูงน้อยกว่า เพราะหน้าที่สร้างใหม่เรียบกว่า</td></tr>
+            <tr><td><b>Noise ทั้งรูป</b></td><td class="num">16</td><td>สถิติ 4 ตัวของ residual จาก 4 filter (Laplacian + SRM 3 แบบ) ทั้งรูป</td><td>วัดปริมาณและลักษณะของ noise โดยรวม</td></tr>
+            <tr><td><b>Noise หน้า vs นอกหน้า</b></td><td class="num">36</td><td>สถิติเดียวกัน แต่แยกคำนวณในหน้าและนอกหน้า แล้วหาอัตราส่วน</td><td>รูปจริงมี noise จากกล้องเท่า ๆ กันทั้งรูป รูป fake มีหน้าที่ noise น้อยกว่าส่วนอื่น</td></tr>
+            <tr><td><b>LBP texture</b></td><td class="num">28</td><td>Local Binary Pattern: เทียบแต่ละ pixel กับเพื่อนบ้านรอบ ๆ ว่าสว่างกว่าหรือมืดกว่า แล้วนับว่าเจอลวดลายแต่ละแบบบ่อยแค่ไหน (เฉพาะในหน้า)</td><td>บอกว่าผิวมีลวดลายเล็ก ๆ (รูขุมขน ริ้วรอย) ยุ่งเหยิงแค่ไหน ผิว fake เรียบและเป็นระเบียบกว่า</td></tr>
+            <tr><td><b>สี</b></td><td class="num">30</td><td>ค่าเฉลี่ยและการกระจายของสี (YCbCr, HSV) ในหน้า เทียบกับวงผิวรอบ ๆ</td><td>หน้า donor อาจมีสีผิวไม่ตรงกับคอหรือหน้าผากของ base</td></tr>
+            <tr><td><b>รอยต่อ (seam)</b></td><td class="num">8</td><td>ความแรงของขอบ (Sobel gradient) บนแถบรอยต่อ เทียบกับในหน้าและนอกหน้า</td><td>ตรงที่แปะหน้าใหม่อาจมีรอยต่อหรือขอบที่ถูกเบลอ</td></tr>
+            <tr><td><b>ขนาดหน้า</b></td><td class="num">1</td><td>ขนาดของบริเวณหน้า</td><td>ใช้ช่วยปรับเทียบ feature อื่น</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="card"><h3>สุดท้ายโมเดลใช้ feature ไหนจริง</h3><p>เราวัดด้วย <b>permutation importance</b>: สุ่มสลับค่าของ feature กลุ่มหนึ่งแล้วดูว่า AUC ตกลงเท่าไร ถ้าตกมาก แปลว่ากลุ่มนั้นสำคัญ</p><ul>
+        <li><b>LBP texture</b> สำคัญที่สุด (AUC ตก 0.336) feature เดี่ยวที่สำคัญที่สุดคือสัดส่วนลวดลายผิวที่ "ไม่เป็นระเบียบ" ในหน้า</li>
+        <li><b>Noise หน้า vs นอกหน้า</b> รองลงมา (ตก 0.056)</li>
+        <li>กลุ่มอื่นตกไม่ถึง 0.001 เพราะวัดสิ่งที่ซ้อนกับสองกลุ่มแรก</li>
+      </ul></div>
+      <div class="card"><h3>ทำไมต้องรู้ตำแหน่งหน้า (P3)</h3><p>ถ้าใช้แต่ feature ทั้งรูป (FFT + noise ทั้งรูป ไม่ใช้ขอบหน้า) ได้ AUC แค่ <b>0.816</b> พอเพิ่ม feature ที่แยกหน้ากับส่วนอื่น AUC ขึ้นเป็น <b>0.998</b></p><p class="why">สรุป: เบาะแสอยู่ที่ <b>texture และ noise ของผิวหน้า</b> นี่คือเหตุผลที่โมเดลนี้พังเมื่อรูปถูกเบลอหรือใส่ noise เพราะสองอย่างนี้ทำลายเบาะแสที่มันพึ่งพาโดยตรง (ดูหัวข้อ Robustness)</p></div>
     </div>
   </section>
 
   <section id="models" aria-labelledby="models-h">
     <div class="sec-head">
-      <span class="eyebrow">Phases 3 and 4</span>
-      <h2 id="models-h">The models we compared</h2>
-      <p class="muted">From the simplest (no training) to the most advanced. The course asks for both classical and deep-learning methods.</p>
+      <span class="eyebrow">Phase 3 และ 4</span>
+      <h2 id="models-h">โมเดลที่เราเปรียบเทียบ</h2>
+      <p class="muted">เรียงจากง่ายสุด (ไม่ต้อง train) ไปถึงล้ำสุด วิชานี้ให้เทียบทั้งวิธี classical และ deep learning</p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 4</span><h3>Model understanding: pipeline + architecture + design choices</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>Pipeline diagram (input → preprocessing → feature extraction → classifier → output), architecture diagram พร้อมขนาดของ tensor, อธิบายแต่ละ layer (type, size, activation, purpose) และ design choices พร้อมเหตุผล (จำนวน layer, optimizer, loss, hyperparameters)</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>คำอธิบายว่าแต่ละโมเดลทำงานอย่างไรและทำไมเลือก (การ์ดด้านล่าง)</li><li>Pipeline และตาราง design choices (loss, optimizer, lr, batch, epochs)</li><li><a href="#architecture">Architecture diagrams</a> ของ classical, M1, M2/M3 พร้อมขนาด tensor ทุก layer และบอกว่าส่วนไหนถูก train</li></ul></div>
+      </div>
     </div>
     <div class="cols">
-      <div class="card"><span class="tag">Zero-shot</span><h3>Ask a big model, no training</h3><p>CLIP compares the face with the text "a real photo" vs "a face-swapped photo". We also tried SigLIP 2, PE and Qwen2.5-VL (a chat model asked yes/no).</p><p class="why">Shows how far you get without any training. Best: 90.6 % accuracy.</p></div>
-      <div class="card"><span class="tag">Classical</span><h3>Hand-made features + gradient boosting</h3><p>The 247 P4 numbers go into gradient boosting (many small decision trees voting).</p><p class="why">The image-processing approach from the course. Found that swapped skin is smoother and less noisy than real skin.</p></div>
-      <div class="card"><span class="tag">M1</span><h3>EfficientNet-B4</h3><p>A classic image network. We train all 17.6 million weights. This is the model the HiDF paper used.</p><p class="why">The standard baseline, so we can compare with the paper.</p></div>
-      <div class="card"><span class="tag">M2</span><h3>GenD on DINOv3</h3><p>Uses the big pretrained DINOv3 network almost frozen. Only 101 thousand weights are trained (0.03 %).</p><p class="why">Tests whether a strong pretrained model needs almost no training.</p></div>
-      <div class="card"><span class="tag">M3</span><h3>DINOv3 + LoRA</h3><p>Same DINOv3, adapted with LoRA: 12.7 million trained weights (about 4 %). In the style of the NTIRE 2026 challenge winner.</p><p class="why">The current state-of-the-art recipe.</p></div>
-      <div class="card"><span class="tag">12 runs</span><h3>Each deep model in 4 settings</h3><p>Baseline (full image, 224 px, augmentation on), then change one thing at a time: <b>face crop</b> only, <b>augmentation off</b>, <b>higher resolution</b>.</p><p class="why">Changing one thing at a time shows what each choice really does.</p></div>
+      <div class="card"><span class="tag">Zero-shot</span><h3>ถามโมเดลใหญ่ ไม่ต้อง train</h3><p>CLIP เทียบใบหน้ากับข้อความ "a real photo" กับ "a face-swapped photo" เราลอง SigLIP 2, PE และ Qwen2.5-VL (chat model ที่ถามให้ตอบ yes/no) ด้วย</p><p class="why">ดูว่าไม่ train เลยจะได้แค่ไหน ดีสุดได้ accuracy 90.6 %</p></div>
+      <div class="card"><span class="tag">Classical</span><h3>Feature ที่ออกแบบเอง + gradient boosting</h3><p>เอาตัวเลข 247 ตัวจาก P4 เข้า gradient boosting (decision tree เล็ก ๆ หลายต้นช่วยกันโหวต)</p><p class="why">เป็นแนวทาง image processing ตามที่เรียนในวิชา พบว่าผิวที่ถูก swap เรียบกว่าและมี noise น้อยกว่าผิวจริง</p></div>
+      <div class="card"><span class="tag">M1</span><h3>EfficientNet-B4</h3><p>network สำหรับรูปภาพแบบคลาสสิก train ทั้ง 17.6 ล้าน weights เป็นโมเดลเดียวกับที่ paper HiDF ใช้</p><p class="why">baseline มาตรฐาน เอาไว้เทียบกับ paper</p></div>
+      <div class="card"><span class="tag">M2</span><h3>GenD บน DINOv3</h3><p>ใช้ DINOv3 ที่ pretrain มาแล้วแทบไม่แก้เลย train แค่ 101,000 weights (0.03 %)</p><p class="why">ทดสอบว่าโมเดล pretrained ที่เก่งมาก ๆ ต้อง train เพิ่มแทบไม่ได้เลยหรือเปล่า</p></div>
+      <div class="card"><span class="tag">M3</span><h3>DINOv3 + LoRA</h3><p>DINOv3 ตัวเดียวกัน แต่ปรับด้วย LoRA: train 12.7 ล้าน weights (ประมาณ 4 %) ตามแนวของผู้ชนะ NTIRE 2026 challenge</p><p class="why">สูตร state-of-the-art ในปัจจุบัน</p></div>
+      <div class="card"><span class="tag">12 runs</span><h3>แต่ละโมเดล deep learning × 4 แบบ</h3><p>Baseline (รูปเต็ม, 224 px, เปิด augmentation) แล้วเปลี่ยนทีละอย่าง: <b>crop เฉพาะหน้า</b>, <b>ปิด augmentation</b>, <b>เพิ่ม resolution</b></p><p class="why">เปลี่ยนทีละอย่างจะเห็นชัดว่าแต่ละตัวเลือกมีผลอย่างไร</p></div>
     </div>
+    <div class="panel">
+      <h3>Pipeline ของโมเดล deep learning</h3>
+      <p class="mono" style="font-size: 0.86rem; line-height: 1.9;">รูป HiDF → P1 (บีบอัดแบบเดียวกัน, 512 px) → [P3 crop หน้า: เฉพาะ adjustment] → [P2 augmentation: เฉพาะตอน train] → ย่อเป็น 224 px + normalise → model → score "fake" → เทียบ threshold (จาก val) → real / fake</p>
+      <h3>Design choices</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th></th><th>Classical</th><th>M1 EfficientNet-B4</th><th>M2 GenD</th><th>M3 DINOv3 + LoRA</th></tr></thead>
+          <tbody>
+            <tr><td><b>Input</b></td><td>feature 247 ตัว (P4)</td><td>รูป 224 px</td><td>รูป 224 px</td><td>รูปขนาดสุ่ม 224–320 px</td></tr>
+            <tr><td><b>Architecture</b></td><td>HistGradientBoosting (lr 0.05, 31 leaves) เลือกจาก 4 classifier</td><td>CNN EfficientNet-B4 (pretrained Noisy Student) + linear head</td><td>DINOv3 ViT-L/16 แช่แข็ง train เฉพาะ LayerNorm + linear head บน CLS token ที่ normalise แล้ว</td><td>DINOv3 ViT-L/16 + LoRA (r 32, α 64) ที่ q/k/v/o, MAC head: CLS + 4 register + mean patch = 6144 มิติ → MLP 2 ชั้น</td></tr>
+            <tr><td><b>Weights ที่ train</b></td><td>trees</td><td>17.6 M (ทั้งหมด)</td><td>101 K (0.03 %)</td><td>12.7 M (4 %)</td></tr>
+            <tr><td><b>Loss</b></td><td>log loss</td><td>BCE</td><td>BCE + 0.1·alignment + 0.5·uniformity</td><td>BCE + 0.5·aux BCE (4 layer สุดท้าย) + 0.1·supervised contrastive</td></tr>
+            <tr><td><b>Optimizer</b></td><td>–</td><td>AdamW, lr 2e-4, wd 0.01</td><td>AdamW, lr 3e-4</td><td>AdamW, lr 1e-4, wd 0.01</td></tr>
+            <tr><td><b>Batch / epochs</b></td><td>–</td><td>32 / 8</td><td>32 / 5</td><td>16 / 5 (fp32)</td></tr>
+            <tr><td><b>เวลาต่อ epoch</b></td><td>สกัด feature ทั้งหมด ~22 นาที</td><td>~24 นาที</td><td>~51 นาที</td><td>~139 นาที</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">ทุกโมเดล deep learning ใช้ trainer เดียวกัน (<code>src/train.py</code>): warm-up แล้ว cosine decay, หยุดเมื่อ val AUC ไม่ดีขึ้น 2 epochs, เลือก epoch ที่ val AUC ดีที่สุด M3 ต้อง train แบบ fp32 เพราะ bf16 ทำให้ loss เป็น NaN</p>
+    </div>
+
+    <div class="sec-head" id="architecture">
+      <h3 style="font-size: 1.25rem;">Architecture diagrams</h3>
+      <p class="muted">ขนาด tensor ทั้งหมดเป็นของรูป input 224 px (ตัวเลขแบบ ช่อง × สูง × กว้าง) จุดที่ต่างกันระหว่างโมเดลคือ<b>ส่วนไหนถูก train</b></p>
+    </div>
+    <div class="legend" aria-label="คำอธิบายสี">
+      <span><i class="l-tr"></i>ส่วนที่ train (weights ถูกปรับ)</span>
+      <span><i class="l-fz"></i>แช่แข็ง (ใช้ weights ที่ pretrain มา ไม่แก้)</span>
+      <span><i class="l-n"></i>ไม่มี weights (คำนวณตายตัว)</span>
+    </div>
+
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 1000 136" role="img" aria-label="Pipeline โมเดล classical: รูป 512 px ผ่าน P3 face mask แบ่ง 4 บริเวณ ผ่าน high-pass filters คิดสถิติ ได้ feature 247 ตัว เข้า gradient boosting ซึ่งเป็นส่วนเดียวที่เรียนจากข้อมูล แล้วเทียบ score กับ threshold 0.766">
+          <defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0 0L10 5L0 10z"/></marker></defs>
+          <rect class="dg-n" x="8" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="71" y="54" text-anchor="middle">รูป input</text>
+          <text class="dg-s" x="71" y="76" text-anchor="middle">512×512×3</text>
+          <rect class="dg-n" x="152" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="215" y="50" text-anchor="middle">P3 face mask</text>
+          <text class="dg-s" x="215" y="72" text-anchor="middle">หน้า · รอยต่อ</text>
+          <text class="dg-s" x="215" y="90" text-anchor="middle">วงผิว · นอกหน้า</text>
+          <rect class="dg-n" x="296" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="359" y="50" text-anchor="middle">High-pass filters</text>
+          <text class="dg-s" x="359" y="72" text-anchor="middle">Laplacian, SRM×3</text>
+          <text class="dg-s" x="359" y="90" text-anchor="middle">FFT, LBP, Sobel</text>
+          <rect class="dg-n" x="440" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="503" y="50" text-anchor="middle">สถิติต่อบริเวณ</text>
+          <text class="dg-s" x="503" y="72" text-anchor="middle">std, skew, kurt</text>
+          <text class="dg-s" x="503" y="90" text-anchor="middle">histogram, สี</text>
+          <rect class="dg-n" x="584" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="647" y="54" text-anchor="middle">Feature vector</text>
+          <text class="dg-s" x="647" y="76" text-anchor="middle">247</text>
+          <rect class="dg-tr" x="728" y="20" width="126" height="96" rx="8"/>
+          <text class="dg-t" x="791" y="50" text-anchor="middle">Gradient boosting</text>
+          <text class="dg-s" x="791" y="72" text-anchor="middle">HGB, 31 leaves</text>
+          <text class="dg-tag" x="791" y="92" text-anchor="middle">เรียนจากข้อมูล</text>
+          <rect class="dg-n" x="872" y="20" width="120" height="96" rx="8"/>
+          <text class="dg-t" x="932" y="50" text-anchor="middle">Score 0–1</text>
+          <text class="dg-s" x="932" y="72" text-anchor="middle">≥ 0.766 → fake</text>
+          <text class="dg-s" x="932" y="90" text-anchor="middle">&lt; 0.766 → real</text>
+          <g class="dg-ar" marker-end="url(#ah1)">
+            <line x1="136" y1="68" x2="149" y2="68"/><line x1="280" y1="68" x2="293" y2="68"/><line x1="424" y1="68" x2="437" y2="68"/>
+            <line x1="568" y1="68" x2="581" y2="68"/><line x1="712" y1="68" x2="725" y2="68"/><line x1="856" y1="68" x2="869" y2="68"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Classical.</b> ทุกขั้นก่อน gradient boosting เป็นสูตรที่เราออกแบบเอง ไม่มีการเรียนรู้ มีแค่ตัว classifier ที่เรียนจากข้อมูล threshold 0.766 เลือกจาก validation</figcaption>
+    </figure>
+
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 1000 214" role="img" aria-label="Architecture M1 EfficientNet-B4: input 3×224×224 ผ่าน stem conv และ MBConv 7 stages รวม 32 blocks ภาพเล็กลงจาก 112 เหลือ 7 pixel ขณะที่จำนวนช่องเพิ่มจาก 24 เป็น 448 แล้ว conv 1×1 เป็น 1792 ช่อง average pool เป็นเวกเตอร์ 1792 และ linear ได้ score เดียว ทุก layer ถูก train">
+          <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0 0L10 5L0 10z"/></marker></defs>
+          <text class="dg-tag" x="449" y="14" text-anchor="middle">MBConv 32 blocks ใน 7 stages (depthwise conv + squeeze-excitation + SiLU)</text>
+          <path class="dg-ar" d="M174 28V22H724V28"/>
+          <rect class="dg-n" x="10" y="30" width="58" height="140" rx="4"/>
+          <rect class="dg-tr" x="92" y="50" width="58" height="100" rx="4"/>
+          <rect class="dg-tr" x="174" y="50" width="58" height="100" rx="4"/>
+          <rect class="dg-tr" x="256" y="68" width="58" height="64" rx="4"/>
+          <rect class="dg-tr" x="338" y="80" width="58" height="40" rx="4"/>
+          <rect class="dg-tr" x="420" y="87" width="58" height="26" rx="4"/>
+          <rect class="dg-tr" x="502" y="87" width="58" height="26" rx="4"/>
+          <rect class="dg-tr" x="584" y="92" width="58" height="16" rx="3"/>
+          <rect class="dg-tr" x="666" y="92" width="58" height="16" rx="3"/>
+          <rect class="dg-tr" x="748" y="92" width="58" height="16" rx="3"/>
+          <rect class="dg-n" x="852" y="70" width="14" height="60" rx="3"/>
+          <circle class="dg-tr" cx="941" cy="100" r="13"/>
+          <g class="dg-ar" marker-end="url(#ah2)">
+            <line x1="71" y1="100" x2="89" y2="100"/><line x1="153" y1="100" x2="171" y2="100"/><line x1="235" y1="100" x2="253" y2="100"/>
+            <line x1="317" y1="100" x2="335" y2="100"/><line x1="399" y1="100" x2="417" y2="100"/><line x1="481" y1="100" x2="499" y2="100"/>
+            <line x1="563" y1="100" x2="581" y2="100"/><line x1="645" y1="100" x2="663" y2="100"/><line x1="727" y1="100" x2="745" y2="100"/>
+            <line x1="809" y1="100" x2="849" y2="100"/><line x1="869" y1="100" x2="925" y2="100"/>
+          </g>
+          <g text-anchor="middle">
+            <text class="dg-t" x="39" y="188">Input</text><text class="dg-s" x="39" y="204">3×224×224</text>
+            <text class="dg-t" x="121" y="188">Stem conv</text><text class="dg-s" x="121" y="204">48×112×112</text>
+            <text class="dg-t" x="203" y="188">Stage 1 ×2</text><text class="dg-s" x="203" y="204">24×112×112</text>
+            <text class="dg-t" x="285" y="188">Stage 2 ×4</text><text class="dg-s" x="285" y="204">32×56×56</text>
+            <text class="dg-t" x="367" y="188">Stage 3 ×4</text><text class="dg-s" x="367" y="204">56×28×28</text>
+            <text class="dg-t" x="449" y="188">Stage 4 ×6</text><text class="dg-s" x="449" y="204">112×14×14</text>
+            <text class="dg-t" x="531" y="188">Stage 5 ×6</text><text class="dg-s" x="531" y="204">160×14×14</text>
+            <text class="dg-t" x="613" y="188">Stage 6 ×8</text><text class="dg-s" x="613" y="204">272×7×7</text>
+            <text class="dg-t" x="695" y="188">Stage 7 ×2</text><text class="dg-s" x="695" y="204">448×7×7</text>
+            <text class="dg-t" x="777" y="188">Conv 1×1</text><text class="dg-s" x="777" y="204">1792×7×7</text>
+            <text class="dg-t" x="859" y="188">Avg pool</text><text class="dg-s" x="859" y="204">1792</text>
+            <text class="dg-t" x="941" y="188">Linear</text><text class="dg-s" x="941" y="204">1 = score</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>M1 EfficientNet-B4 (CNN).</b> ความสูงของกล่องแสดงว่าภาพเล็กลงทีละ stage (ไม่ตามสเกลจริง) ยิ่งลึกภาพยิ่งเล็กแต่จำนวนช่อง (feature) ยิ่งมาก: layer ต้น ๆ จับขอบและ texture, layer ลึกจับรูปแบบที่ซับซ้อน สุดท้าย average pool รวมทุกตำแหน่งเป็นเวกเตอร์ 1792 ตัว แล้ว linear (dropout 0.3) ให้ score เดียว train ทุก layer (17.6 M weights) ด้วย BCE</figcaption>
+    </figure>
+
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 1000 300" role="img" aria-label="Architecture M2 และ M3 ซึ่งใช้ DINOv3 ViT-L/16 ตัวเดียวกัน: รูปถูกตัดเป็น patch 16×16 ได้ 196 tokens บวก CLS และ 4 register เป็น 201×1024 ผ่าน transformer 24 layers M2 train เฉพาะ LayerNorm และ head ที่ใช้ CLS token ส่วน M3 เพิ่ม LoRA ใน attention และใช้ head ที่รวม CLS, register และค่าเฉลี่ย patch เป็น 6144 มิติ">
+          <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0 0L10 5L0 10z"/></marker></defs>
+          <rect class="dg-n" x="10" y="115" width="100" height="70" rx="8"/>
+          <text class="dg-t" x="60" y="144" text-anchor="middle">Input</text>
+          <text class="dg-s" x="60" y="164" text-anchor="middle">3×224×224</text>
+          <rect class="dg-fz" x="140" y="115" width="120" height="70" rx="8"/>
+          <text class="dg-t" x="200" y="144" text-anchor="middle">Patch embed</text>
+          <text class="dg-s" x="200" y="164" text-anchor="middle">conv 16×16, s16</text>
+          <rect class="dg-n" x="290" y="105" width="140" height="90" rx="8"/>
+          <text class="dg-t" x="360" y="131" text-anchor="middle">Tokens</text>
+          <text class="dg-s" x="360" y="151" text-anchor="middle">201 × 1024</text>
+          <text class="dg-s" x="360" y="171" text-anchor="middle" style="font-size: 10px;">CLS + 4 reg + 196 patch</text>
+
+          <rect class="dg-fz" x="460" y="20" width="180" height="262" rx="10"/>
+          <text class="dg-h" x="550" y="42" text-anchor="middle">Transformer layer ×24</text>
+          <rect class="dg-tr" x="472" y="56" width="156" height="36" rx="5"/>
+          <text class="dg-t" x="482" y="79">LayerNorm</text><text class="dg-tag" x="620" y="79" text-anchor="end">train ใน M2</text>
+          <rect class="dg-tr" x="472" y="104" width="156" height="44" rx="5"/>
+          <text class="dg-t" x="482" y="122">Self-attention 16 heads</text>
+          <text class="dg-tag" x="482" y="139">q k v o + LoRA r32 (M3)</text>
+          <rect class="dg-tr" x="472" y="160" width="156" height="36" rx="5"/>
+          <text class="dg-t" x="482" y="183">LayerNorm</text><text class="dg-tag" x="620" y="183" text-anchor="end">train ใน M2</text>
+          <rect class="dg-fz" x="472" y="208" width="156" height="36" rx="5"/>
+          <text class="dg-t" x="482" y="231">MLP 1024→4096→1024</text>
+          <text class="dg-s" x="550" y="268" text-anchor="middle">+ residual รอบ attention, MLP</text>
+
+          <text class="dg-h" x="712" y="36">M2 GenD head</text>
+          <rect class="dg-n" x="712" y="48" width="92" height="44" rx="6"/>
+          <text class="dg-t" x="758" y="75" text-anchor="middle">L2 normalise</text>
+          <rect class="dg-tr" x="826" y="48" width="100" height="44" rx="6"/>
+          <text class="dg-t" x="876" y="66" text-anchor="middle">Linear</text>
+          <text class="dg-s" x="876" y="83" text-anchor="middle">1024 → 1</text>
+          <rect class="dg-n" x="948" y="52" width="46" height="36" rx="6"/>
+          <text class="dg-t" x="971" y="75" text-anchor="middle">score</text>
+
+          <text class="dg-h" x="712" y="160">M3 DINO-MAC head</text>
+          <rect class="dg-n" x="712" y="170" width="92" height="60" rx="6"/>
+          <text class="dg-s" x="758" y="190" text-anchor="middle">CLS + 4 reg</text>
+          <text class="dg-s" x="758" y="205" text-anchor="middle">+ mean patch</text>
+          <text class="dg-t" x="758" y="222" text-anchor="middle">= 6144</text>
+          <rect class="dg-tr" x="826" y="170" width="100" height="60" rx="6"/>
+          <text class="dg-t" x="876" y="190" text-anchor="middle">MLP 2 ชั้น</text>
+          <text class="dg-s" x="876" y="205" text-anchor="middle">6144→1024</text>
+          <text class="dg-s" x="876" y="220" text-anchor="middle">ReLU → 1</text>
+          <rect class="dg-n" x="948" y="182" width="46" height="36" rx="6"/>
+          <text class="dg-t" x="971" y="205" text-anchor="middle">score</text>
+          <rect class="dg-trd" x="712" y="250" width="214" height="40" rx="6"/>
+          <text class="dg-t" x="819" y="267" text-anchor="middle">aux heads ×4 (deep supervision)</text>
+          <text class="dg-s" x="819" y="282" text-anchor="middle">ใช้ตอน train เท่านั้น</text>
+
+          <g class="dg-ar" marker-end="url(#ah3)">
+            <line x1="112" y1="150" x2="137" y2="150"/><line x1="262" y1="150" x2="287" y2="150"/><line x1="432" y1="150" x2="457" y2="150"/>
+            <line x1="642" y1="70" x2="709" y2="70"/><line x1="642" y1="200" x2="709" y2="200"/><line x1="642" y1="270" x2="709" y2="270"/>
+            <line x1="806" y1="70" x2="823" y2="70"/><line x1="928" y1="70" x2="945" y2="70"/>
+            <line x1="806" y1="200" x2="823" y2="200"/><line x1="928" y1="200" x2="945" y2="200"/>
+          </g>
+          <text class="dg-s" x="676" y="62" text-anchor="middle">CLS 1024</text>
+          <text class="dg-s" x="676" y="192" text-anchor="middle">201×1024</text>
+          <text class="dg-s" x="676" y="262" text-anchor="middle">layer 21–24</text>
+        </svg>
+      </div>
+      <figcaption><b>M2 และ M3 ใช้ backbone ตัวเดียวกัน (DINOv3 ViT-L/16, 24 layers, 1024 มิติ)</b> รูปถูกตัดเป็นช่อง 16×16 px ได้ 14×14 = 196 patch แต่ละ patch กลายเป็น token 1024 ตัวเลข บวก CLS token (สรุปทั้งรูป) และ register 4 ตัว ใน attention ทุก token "ดู" token อื่นทั้งหมด จึงเทียบหน้ากับส่วนอื่นของรูปได้ ความต่างของสองโมเดล: <b>M2</b> train แค่ LayerNorm ทุก layer + linear head บน CLS (101 K weights) ส่วน <b>M3</b> ไม่แตะ LayerNorm แต่เพิ่ม LoRA ใน q/k/v/o ของ attention และใช้ head ที่ใหญ่กว่า รวม CLS, register และค่าเฉลี่ยของ patch (12.7 M weights) aux heads ช่วยให้ layer กลาง ๆ เรียนด้วย และถูกตัดทิ้งตอนใช้งาน</figcaption>
+    </figure>
   </section>
 
   <section id="results" aria-labelledby="results-h">
     <div class="sec-head">
       <span class="eyebrow">Phase 5</span>
-      <h2 id="results-h">Results on the test set</h2>
-      <p class="muted">9,600 photos (5,366 real, 4,234 fake) of 1,142 groups of people that the models never saw in training.</p>
+      <h2 id="results-h">ผลลัพธ์บน test set</h2>
+      <p class="muted">9,600 รูป (real 5,366, fake 4,234) จาก 1,142 กลุ่มคน ที่โมเดลไม่เคยเห็นตอน train</p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 5</span><h3>Experimentation (comparisons)</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ทีม 4 คนต้องมี <b>baseline + 3 adjustments</b> เปรียบเทียบเช่น classical vs DL M1 vs DL M2, DL vs zero-shot ตารางบน test ด้วย Accuracy / Precision / Recall / F1 / AUC และ confusion matrix</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>เทียบครบ: zero-shot vs classical vs DL M1 vs M2 vs M3</li><li>3 baselines × 3 adjustments (face crop, ปิด augmentation, resolution สูง) = 12 runs</li><li>ตารางด้านล่างมีครบ 5 metrics พร้อม 95 % CI และ confusion matrix ของทุกโมเดล</li><li>เพิ่มเติม: ทดสอบกับรูปเสียหาย 9 แบบ</li></ul></div>
+      </div>
     </div>
     <div class="panel">
       <div class="table-scroll">
         <table>
-          <thead><tr><th>Model</th><th class="num">Trained weights</th><th class="num">AUC</th><th class="num">Accuracy [95 % CI]</th><th class="num">Real called fake</th><th class="num">Fakes missed</th></tr></thead>
+          <thead><tr><th>Model</th><th class="num">Weights ที่ train</th><th class="num">AUC</th><th class="num">Accuracy [95 % CI]</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">Real ทายเป็น fake</th><th class="num">Fake ที่หลุด</th></tr></thead>
           <tbody>
-            <tr><td>Zero-shot CLIP (face crop)</td><td class="num">0</td><td class="num">0.953</td><td class="num">90.6 % [89.9, 91.3]</td><td class="num">250</td><td class="num">654</td></tr>
-            <tr><td>Classical (features + boosting)</td><td class="num">trees</td><td class="num">0.998</td><td class="num">98.1 % [97.7, 98.3]</td><td class="num">59</td><td class="num">128</td></tr>
-            <tr><td>M1 EfficientNet-B4</td><td class="num">17.6 M</td><td class="num">0.9999</td><td class="num">99.7 % [99.6, 99.8]</td><td class="num">3</td><td class="num">28</td></tr>
-            <tr><td>M2 GenD (DINOv3)</td><td class="num">0.1 M</td><td class="num">0.9998</td><td class="num">99.7 % [99.5, 99.8]</td><td class="num">3</td><td class="num">29</td></tr>
-            <tr class="lead"><td>M3 DINOv3 + LoRA</td><td class="num">12.7 M</td><td class="num">1.0000</td><td class="num">99.8 % [99.6, 99.9]</td><td class="num">2</td><td class="num">21</td></tr>
+            <tr><td>Zero-shot CLIP (face crop)</td><td class="num">0</td><td class="num">0.953</td><td class="num">90.6 % [89.9, 91.3]</td><td class="num">93.5 %</td><td class="num">84.6 %</td><td class="num">88.8 %</td><td class="num">250</td><td class="num">654</td></tr>
+            <tr><td>Classical (feature + boosting)</td><td class="num">trees</td><td class="num">0.998</td><td class="num">98.1 % [97.7, 98.3]</td><td class="num">98.6 %</td><td class="num">97.0 %</td><td class="num">97.8 %</td><td class="num">59</td><td class="num">128</td></tr>
+            <tr><td>M1 EfficientNet-B4</td><td class="num">17.6 M</td><td class="num">0.9999</td><td class="num">99.7 % [99.6, 99.8]</td><td class="num">99.9 %</td><td class="num">99.3 %</td><td class="num">99.6 %</td><td class="num">3</td><td class="num">28</td></tr>
+            <tr><td>M2 GenD (DINOv3)</td><td class="num">0.1 M</td><td class="num">0.9998</td><td class="num">99.7 % [99.5, 99.8]</td><td class="num">99.9 %</td><td class="num">99.3 %</td><td class="num">99.6 %</td><td class="num">3</td><td class="num">29</td></tr>
+            <tr class="lead"><td>M3 DINOv3 + LoRA</td><td class="num">12.7 M</td><td class="num">1.0000</td><td class="num">99.8 % [99.6, 99.9]</td><td class="num">99.95 %</td><td class="num">99.5 %</td><td class="num">99.7 %</td><td class="num">2</td><td class="num">21</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note">For reference, the HiDF paper reports AUC 0.70 for detectors that were <i>not</i> trained on HiDF. Training on HiDF itself is what makes the difference.</p>
+      <p class="note">Precision = ในรูปที่ทายว่า fake มีกี่ % ที่เป็น fake จริง · Recall = ในรูป fake ทั้งหมด จับได้กี่ % · F1 = ค่าเฉลี่ยของสองค่านี้ ตาราง 12 runs เต็มอยู่ใน <code>EVALUATION.md</code></p>
+      <p class="note">เทียบกับ paper HiDF ที่รายงาน AUC 0.70 สำหรับโมเดลที่<i>ไม่ได้</i> train บน HiDF สิ่งที่ทำให้ต่างกันคือการ train บน HiDF เอง</p>
     </div>
     <div class="cols">
-      <div class="card"><h3>How to read this</h3><ul>
-        <li>Zero-shot &lt; classical &lt; deep learning. These gaps are much bigger than the confidence intervals, so they are real.</li>
-        <li>The three deep models' intervals overlap. On clean photos <b>we can't say one is better</b>. All 12 deep runs land between 99.6 % and 99.8 %.</li>
-        <li>Almost every mistake is a missed fake, not a false alarm. That comes from the threshold chosen on validation.</li>
+      <div class="card"><h3>อ่านตารางนี้อย่างไร</h3><ul>
+        <li>Zero-shot &lt; classical &lt; deep learning ช่องว่างพวกนี้ใหญ่กว่า confidence interval มาก จึงเป็นความต่างจริง</li>
+        <li>CI ของ deep learning ทั้งสามตัวซ้อนกัน บนรูปปกติ <b>ยังบอกไม่ได้ว่าตัวไหนดีกว่า</b> ทั้ง 12 runs อยู่ระหว่าง 99.6 % ถึง 99.8 %</li>
+        <li>ความผิดพลาดเกือบทั้งหมดเป็น fake ที่หลุด ไม่ใช่การแจ้งเตือนผิด เป็นผลจาก threshold ที่เลือกจาก validation</li>
       </ul></div>
-      <div class="card"><h3>What the 4 settings taught us</h3><ul>
-        <li><b>Face crop</b>: about the same as the full image. The models already focus on the face.</li>
-        <li><b>Augmentation off</b>: just as good on clean photos, but much worse on damaged ones (see next section).</li>
-        <li><b>Higher resolution</b>: no clear gain, and far slower. M3 at high resolution took 13.5 h per epoch, so it ran only 2 epochs.</li>
+      <div class="card"><h3>สิ่งที่ได้เรียนรู้จาก 4 แบบ</h3><ul>
+        <li><b>Crop เฉพาะหน้า</b>: ได้ผลพอ ๆ กับรูปเต็ม เพราะโมเดลโฟกัสที่หน้าอยู่แล้ว</li>
+        <li><b>ปิด augmentation</b>: รูปปกติได้ผลดีเท่าเดิม แต่รูปที่เสียหายแย่ลงมาก (ดูหัวข้อถัดไป)</li>
+        <li><b>เพิ่ม resolution</b>: ไม่ได้ดีขึ้นชัดเจน แต่ช้ากว่ามาก M3 ที่ resolution สูงใช้ 13.5 ชั่วโมงต่อ epoch จึง train ได้แค่ 2 epochs</li>
       </ul></div>
     </div>
-    <figure class="narrow">
-      <div class="img"><img src="figures/e10_confusion.png" alt="Confusion matrices for the zero-shot, classical and three deep models, counting real and fake photos by predicted label."></div>
-      <figcaption>Confusion matrices: rows are the true label, columns the model's answer. The diagonal holds the correct answers.</figcaption>
+    <figure>
+      <div class="img"><img src="figures/e10_confusion.png" alt="Confusion matrix ของโมเดล zero-shot, classical และ deep learning ทั้งสาม นับรูป real และ fake ตามคำตอบของโมเดล"></div>
+      <figcaption>Confusion matrix: แถวคือ label จริง คอลัมน์คือคำตอบของโมเดล ช่องแนวทแยงคือที่ตอบถูก</figcaption>
     </figure>
   </section>
 
   <section id="robustness" aria-labelledby="robust-h">
     <div class="sec-head">
-      <h2 id="robust-h">Robustness: what happens to damaged photos?</h2>
-      <p class="muted">Photos on social media get compressed, resized and blurred. We damaged the test photos in 9 ways and tested again, without retraining.</p>
+      <h2 id="robust-h">Robustness: ถ้ารูปเสียหายจะเป็นอย่างไร</h2>
+      <p class="muted">รูปบน social media มักถูกบีบอัด ย่อ และเบลอ เราทำให้รูป test เสียหาย 9 แบบแล้วทดสอบใหม่ โดยไม่ train ใหม่</p>
     </div>
     <figure>
-      <div class="img"><img src="figures/e09_robustness.png" alt="Two line charts of test AUC and test accuracy across nine degradations. The classical model drops toward 0.5 for blur, noise and strong downscaling, while the deep models stay near 1.0."></div>
-      <figcaption>Left: AUC. Right: accuracy. The orange line (classical) falls to chance with blur, noise and heavy downscaling. The deep models with augmentation stay near the top. Without augmentation (yellow, pink), the deep models drop to 81–91 % on some damage.</figcaption>
+      <div class="img"><img src="figures/e09_robustness.png" alt="กราฟเส้นสองกราฟของ AUC และ accuracy บน test ภายใต้ความเสียหาย 9 แบบ โมเดล classical ตกลงใกล้ 0.5 เมื่อเบลอ ใส่ noise หรือย่อมาก ส่วนโมเดล deep learning อยู่ใกล้ 1.0"></div>
+      <figcaption>ซ้าย: AUC ขวา: accuracy เส้นสีส้ม (classical) ตกลงไปถึงระดับเดาสุ่มเมื่อเบลอ ใส่ noise หรือย่อรูปมาก ๆ โมเดล deep learning ที่ใช้ augmentation อยู่ด้านบนตลอด ถ้าไม่ใช้ augmentation (เส้นเหลือง ชมพู) จะตกไปอยู่ที่ 81–91 % ในบางแบบ</figcaption>
     </figure>
     <div class="callout">
-      <p><b>Why this matters.</b> The classical model relies on fine skin texture. Blur and noise erase that texture. The deep models were trained with augmentation (step P2), so they learned clues that survive damage: under all 9 damage types M1 stays ≥ 98.3 % accurate, M2 ≥ 96.6 %, M3 ≥ 98.6 %. This is the clearest reason to prefer deep learning here.</p>
+      <p><b>ทำไมเรื่องนี้สำคัญ</b> โมเดล classical พึ่ง texture ละเอียดของผิว ซึ่ง blur และ noise ลบทิ้งไปหมด ส่วนโมเดล deep learning train ด้วย augmentation (ขั้น P2) จึงเรียนเบาะแสที่ทนต่อความเสียหายได้ ในความเสียหายทั้ง 9 แบบ M1 ยังแม่น ≥ 98.3 % M2 ≥ 96.6 % M3 ≥ 98.6 % นี่คือเหตุผลที่ชัดที่สุดที่ควรเลือก deep learning ในงานนี้</p>
     </div>
   </section>
 
   <section id="explain" aria-labelledby="explain-h">
     <div class="sec-head">
-      <h2 id="explain-h">Where do the models look?</h2>
-      <p class="muted">A high score is only convincing if the model looks at the swapped face, not at something unrelated.</p>
+      <h2 id="explain-h">Analysis: ตัวอย่างสำเร็จ / ล้มเหลว และโมเดลดูตรงไหนของรูป</h2>
+      <p class="muted">คะแนนสูงจะน่าเชื่อก็ต่อเมื่อโมเดลดูที่หน้าที่ถูก swap ไม่ใช่ดูอย่างอื่นที่ไม่เกี่ยว</p>
+    </div>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 6</span><h3>Analysis (advantages + limitations)</h3><span class="pill done">ครบ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>เทียบผลบน test ระหว่าง classical กับ deep learning: <b>3 ตัวอย่างที่ทำได้ดี</b> (pros) และ <b>3 ตัวอย่างที่ล้มเหลว</b> (cons &amp; limitations) แต่ละตัวอย่างแสดง input + คำตอบของ classical + คำตอบของ DL</p></div>
+        <div><span class="lbl">เราทำอย่างไร</span><ul><li>เลือกตัวอย่างด้วยกฎ ไม่ได้เลือกเอง: สำเร็จ 3 = ที่ classical ผิดแต่ DL ทุกตัวถูก, ล้มเหลว 3 = ที่ทุกโมเดลผิด (รูปด้านล่าง)</li><li>อธิบายสาเหตุด้วย Grad-CAM และภาพความต่างจากรูป base</li><li>ข้อดี/ข้อจำกัดเพิ่ม: robustness (หัวข้อก่อนหน้า), fairness และข้อจำกัดท้ายหน้า</li></ul></div>
+      </div>
     </div>
     <figure>
-      <div class="img"><img src="figures/e11_gradcam.png" alt="Grid of six photos: three successes and three failures. For each, the true swap region in white and Grad-CAM heat maps for M1, M2 and M3. In successes the heat sits on the face; in failures it spreads elsewhere."></div>
-      <figcaption>Grad-CAM heat maps (red = most important). Column 2 is the real swap region from the difference with the base photo. Top three rows: correct answers, with heat on the face. Bottom three: mistakes. These are the faintest swaps in the test set, where the face barely changed.</figcaption>
+      <div class="img"><img src="figures/e10_examples.png" alt="ตัวอย่าง 6 รูปจาก test พร้อมรูปจริงที่ใช้สร้าง ภาพความต่าง และคำตอบของ classical, M1, M2, M3 สามแถวบน classical ผิดแต่ deep learning ถูก สามแถวล่างทุกโมเดลผิด"></div>
+      <figcaption><b>สามแถวบน (สำเร็จ):</b> fake 2 รูปที่ classical ปล่อยหลุด แต่ M1–M3 จับได้ทั้งหมด และรูปจริงที่ถูกรีทัช ซึ่ง classical ให้ score fake = 1.00 แต่ deep learning ตอบ real ถูก <b>สามแถวล่าง (ล้มเหลว):</b> fake ที่ทุกโมเดลตอบว่า real เป็นรูปที่ swap จางมาก ความแรงของการ swap อยู่ที่ percentile 15, 6 และ 0.2 ของ test set (ภาพความต่างมืดเกือบทั้งรูป) ตัวเลขด้านขวาคือ score ของแต่ละโมเดลเทียบกับ threshold</figcaption>
+    </figure>
+    <div class="callout">
+      <p><b>Grad-CAM คืออะไร</b> เป็นเครื่องมือที่ช่วยให้เห็นว่าโมเดลใช้ส่วนไหนของรูปในการตัดสินใจ ทำงานแบบนี้:</p>
+      <ul>
+        <li>ข้างในโมเดล รูปจะถูกแปลงเป็นตารางของ feature เล็ก ๆ หลายช่อง แต่ละช่องคือข้อมูลของพื้นที่หนึ่งในรูป (เช่น ตาซ้าย จมูก พื้นหลัง)</li>
+        <li>Grad-CAM คำนวณ <b>gradient</b> ว่าถ้า feature ในแต่ละช่องเปลี่ยนนิดหนึ่ง score "fake" จะเปลี่ยนมากแค่ไหน ช่องที่ทำให้ score เปลี่ยนมาก แปลว่าโมเดลใช้ช่องนั้นในการตัดสินใจมาก</li>
+        <li>เอาค่าความสำคัญของแต่ละช่องมาขยายให้เท่ารูปจริง แล้วระบายสีทับ: <b>แดง</b> = สำคัญมาก <b>น้ำเงิน</b> = แทบไม่สำคัญ</li>
+      </ul>
+      <p>เราเทียบ heat map นี้กับ "เฉลย" ว่าบริเวณไหนถูก swap จริง (ได้จากความต่างระหว่างรูป fake กับรูป base) ถ้าสีแดงตกบนบริเวณ swap แปลว่าโมเดลดูถูกจุด Grad-CAM บอกแค่ "ดูตรงไหน" ไม่ได้บอกว่า "เห็นอะไร" ตรงนั้น</p>
+    </div>
+    <figure>
+      <div class="img"><img src="figures/e11_gradcam.png" alt="ตารางรูปหกรูป สำเร็จสามรูปและผิดพลาดสามรูป แต่ละรูปมีบริเวณ swap จริงเป็นสีขาว และ Grad-CAM heat map ของ M1, M2, M3 ในกรณีสำเร็จความร้อนอยู่ที่ใบหน้า ในกรณีผิดพลาดกระจายไปที่อื่น"></div>
+      <figcaption>Grad-CAM heat map (สีแดง = สำคัญที่สุด) คอลัมน์ที่ 2 คือบริเวณ swap จริงที่ได้จากความต่างกับรูป base สามแถวบนคือกรณีตอบถูก ความร้อนอยู่ที่หน้า สามแถวล่างคือกรณีตอบผิด เป็นรูปที่ swap จางที่สุดใน test set ใบหน้าแทบไม่เปลี่ยนเลย</figcaption>
     </figure>
     <div class="cols3">
-      <div class="card"><span class="tag">Face blanked out</span><p>We greyed out the face and re-tested all 12 deep runs. AUC fell to <b>0.51–0.53</b> (guessing). So the models use the face, not the background.</p></div>
-      <div class="card"><span class="tag">Heat on the swap</span><p>Share of heat inside the true swap region: M1 47 %, M3 32 %, M2 24 %, which is 1.5–2.9× more than chance. The hottest point lands on the swap 82–91 % of the time.</p></div>
-      <div class="card"><span class="tag">Typical mistakes</span><p>All models miss the weakest swaps. The classical model also calls retouched real photos "fake", because smooth, edited skin looks like a swap to it.</p></div>
+      <div class="card"><span class="tag">ปิดหน้า</span><p>เราปิดบริเวณใบหน้าเป็นสีเทาแล้วทดสอบทั้ง 12 runs ใหม่ AUC ตกเหลือ <b>0.51–0.53</b> (เท่ากับเดา) แสดงว่าโมเดลดูที่หน้า ไม่ได้ดูพื้นหลัง</p></div>
+      <div class="card"><span class="tag">ความร้อนอยู่บน swap</span><p>สัดส่วนความร้อนที่ตกในบริเวณ swap จริง: M1 47 %, M3 32 %, M2 24 % คิดเป็น 1.5–2.9 เท่าของการสุ่ม จุดที่ร้อนที่สุดตกบน swap 82–91 % ของรูป</p></div>
+      <div class="card"><span class="tag">ผิดตรงไหนบ่อย</span><p>ทุกโมเดลพลาดกับรูปที่ swap จางที่สุด โมเดล classical ยังทายรูปจริงที่ถูกรีทัชว่าเป็น fake ด้วย เพราะผิวที่เรียบจากการแต่งรูปดูเหมือนรอย swap</p></div>
     </div>
   </section>
 
   <section id="fairness" aria-labelledby="fair-h">
     <div class="sec-head">
-      <h2 id="fair-h">Fairness: does it work equally for everyone?</h2>
+      <h2 id="fair-h">Fairness: ทำงานได้ดีเท่ากันกับทุกคนไหม</h2>
     </div>
     <div class="prose">
-      <p>We split the test results by race, gender and age of the person in the photo. The deep models make at most 1.9 % errors in every group. The classical model's gaps are larger (it misses 2–6 % of fakes depending on group).</p>
-      <p>One pattern holds for every model: <b>photos of Asian people get the most false alarms</b>. M2 and M3 also miss the most fakes on Asian faces, while the classical model and M1 miss the most on Black faces. Group size does not explain it: Indian faces are the smallest group (1.8 % of training) and are not the worst. We report this as a finding; we did not fix it.</p>
+      <p>เราแยกผล test ตามเชื้อชาติ เพศ และอายุของคนในรูป โมเดล deep learning ผิดไม่เกิน 1.9 % ในทุกกลุ่ม ส่วนโมเดล classical ต่างกันระหว่างกลุ่มมากกว่า (fake หลุด 2–6 % แล้วแต่กลุ่ม)</p>
+      <p>มีรูปแบบหนึ่งที่เกิดกับทุกโมเดล: <b>รูปคนเอเชียถูกแจ้งเตือนผิดมากที่สุด</b> M2 และ M3 ยังปล่อย fake หลุดมากที่สุดในหน้าคนเอเชีย ส่วน classical และ M1 ปล่อยหลุดมากที่สุดในหน้าคนผิวดำ ขนาดกลุ่มอธิบายเรื่องนี้ไม่ได้ เพราะคนอินเดียเป็นกลุ่มที่เล็กที่สุด (1.8 % ของ train) แต่ไม่ได้แย่ที่สุด เรารายงานไว้เป็นข้อค้นพบ ยังไม่ได้แก้</p>
     </div>
   </section>
 
   <section id="leakage" aria-labelledby="leak-h">
     <div class="sec-head">
-      <h2 id="leak-h">Leakage checks: are the scores too good to be true?</h2>
-      <p class="muted">99.8 % is suspicious, so we listed 16 possible leaks and checked each one. Below are the five extra tests run after Phase 5. The earlier checks (identity split, file-format fix, face blanking, thresholds set on validation only) are in <code>LEAKAGE.md</code>.</p>
+      <h2 id="leak-h">ตรวจ leakage: คะแนนดีเกินจริงหรือเปล่า</h2>
+      <p class="muted">99.8 % ดูน่าสงสัย เราจึงลิสต์ช่องทางรั่วที่เป็นไปได้ 16 ข้อแล้วตรวจทุกข้อ ด้านล่างคือ 5 การทดสอบเพิ่มเติมที่ทำหลัง Phase 5 ส่วนการตรวจก่อนหน้านี้ (split ตามตัวคน, แก้เรื่องชนิดไฟล์, ปิดหน้า, เลือก threshold จาก validation เท่านั้น) อยู่ใน <code>LEAKAGE.md</code></p>
     </div>
     <div class="panel">
       <div class="table-scroll">
         <table>
-          <thead><tr><th>Possible leak</th><th>How we tested it</th><th>Result</th></tr></thead>
+          <thead><tr><th>ช่องทางรั่วที่สงสัย</th><th>ทดสอบอย่างไร</th><th>ผล</th></tr></thead>
           <tbody>
-            <tr><td>The model detects the face's <b>compression history</b>, not the swap<small>T1</small></td><td>Took 2,000 real test photos and gave the face area a fake-like save history, with no swap. If the models flagged them, they would be reading compression.</td><td><span class="verdict">No leak.</span> Deep models flag 0–0.1 %, the same as untouched photos. (A light face blur does fool the classical model: 23 % flagged.)</td></tr>
-            <tr><td>Fakes have a different <b>face position or size</b>, or the creators picked <b>special base photos</b><small>T2</small></td><td>Trained a model on face position and size only. Compared real photos used as bases with real photos never used.</td><td><span class="verdict">No leak.</span> Position and size alone: AUC 0.54 (near guessing). Both kinds of real photo score the same.</td></tr>
-            <tr><td>The <b>same person</b> is in train and test under a different ID, so the model memorises faces<small>T3</small></td><td>Used a face-recognition model (ArcFace) to keep only test photos whose people have no look-alike in train.</td><td><span class="verdict">No leak.</span> M3 is 99.81 % accurate on these "never seen" people, the same as on the rest.</td></tr>
-            <tr><td>The <b>same photo</b> (flipped, cropped or edited) is in train and test<small>T4</small></td><td>Compared every test photo with every training photo using DINOv3 image fingerprints.</td><td><span class="verdict warn">Small leak, no effect.</span> 42 test photos (0.44 %) share a photo with train. Removing them changes accuracy by less than 0.01 points.</td></tr>
-            <tr><td>A <b>code bug</b> passes the answer to the model<small>T5</small></td><td>Trained M2 with the training labels shuffled at random. With no real signal, a bug-free pipeline must score about 0.5.</td><td><span class="verdict">No leak.</span> Test AUC 0.486.</td></tr>
+            <tr><td>โมเดลดู<b>ประวัติการบีบอัด</b>ของหน้า ไม่ได้ดูการ swap<small>T1</small></td><td>เอารูปจริงใน test 2,000 รูปมาทำให้บริเวณหน้ามีประวัติการบันทึกไฟล์แบบเดียวกับ fake โดยไม่ swap ถ้าโมเดลทายว่า fake แปลว่ามันดูจากการบีบอัด</td><td><span class="verdict">ไม่รั่ว</span> โมเดล deep learning ทายว่า fake แค่ 0–0.1 % เท่ากับรูปที่ไม่ได้แตะ (แต่การเบลอหน้าเบา ๆ หลอกโมเดล classical ได้ 23 %)</td></tr>
+            <tr><td>fake มี<b>ตำแหน่งหรือขนาดหน้า</b>ต่างจาก real หรือคนทำ dataset เลือก<b>รูป base แบบพิเศษ</b><small>T2</small></td><td>train โมเดลด้วยตำแหน่งและขนาดหน้าเท่านั้น และเทียบรูปจริงที่ถูกใช้เป็น base กับรูปจริงที่ไม่เคยถูกใช้</td><td><span class="verdict">ไม่รั่ว</span> ตำแหน่งและขนาดอย่างเดียวได้ AUC 0.54 (ใกล้เดา) รูปจริงทั้งสองแบบได้ score เท่ากัน</td></tr>
+            <tr><td><b>คนเดียวกัน</b>อยู่ทั้งใน train และ test แต่คนละ ID ทำให้โมเดลจำหน้า<small>T3</small></td><td>ใช้โมเดลจดจำใบหน้า (ArcFace) คัดเฉพาะรูป test ที่คนในรูปไม่มีหน้าคล้ายใน train เลย</td><td><span class="verdict">ไม่รั่ว</span> M3 แม่น 99.81 % กับคนที่ "ไม่เคยเห็น" เหล่านี้ เท่ากับส่วนที่เหลือ</td></tr>
+            <tr><td><b>รูปเดียวกัน</b> (กลับด้าน crop หรือแต่ง) อยู่ทั้งใน train และ test<small>T4</small></td><td>เทียบรูป test ทุกรูปกับรูป train ทุกรูป ด้วย fingerprint ของรูปจาก DINOv3</td><td><span class="verdict warn">รั่วนิดหน่อย ไม่มีผล</span> รูป test 42 รูป (0.44 %) ซ้ำกับรูปใน train ตัดออกแล้ว accuracy เปลี่ยนไม่ถึง 0.01 จุด</td></tr>
+            <tr><td><b>Bug ในโค้ด</b>ส่งคำตอบให้โมเดล<small>T5</small></td><td>train M2 โดยสุ่มสลับ label ของ train ถ้าไม่มีสัญญาณจริง pipeline ที่ไม่มี bug ต้องได้ประมาณ 0.5</td><td><span class="verdict">ไม่รั่ว</span> AUC บน test 0.486</td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="callout">
-      <p><b>Conclusion.</b> The near-perfect scores are real for this dataset. They are normal for a detector trained and tested on the same kind of fakes: other datasets show about 99 % in that setting too.</p>
+      <p><b>สรุป</b> คะแนนที่เกือบสมบูรณ์แบบเป็นของจริงสำหรับ dataset นี้ และเป็นเรื่องปกติของโมเดลที่ train และ test บน fake ชนิดเดียวกัน dataset อื่นในสถานการณ์เดียวกันก็ได้ประมาณ 99 % เหมือนกัน</p>
     </div>
   </section>
 
   <section id="limits" aria-labelledby="limits-h">
-    <h2 id="limits-h">Limits and what's next</h2>
+    <h2 id="limits-h">ข้อจำกัดและงานถัดไป</h2>
+    <div class="req">
+      <div class="req-head"><span class="crit">เกณฑ์ข้อ 7</span><h3>Peer review + Q&amp;A</h3><span class="pill next">วันนำเสนอ</span></div>
+      <div class="req-body">
+        <div><span class="lbl">วิชาต้องการ</span><p>ตอบคำถามจากอาจารย์และเพื่อนในวันนำเสนอ และ review งานของกลุ่มอื่น</p></div>
+        <div><span class="lbl">เราเตรียมอย่างไร</span><ul><li><b>"ทำไมคะแนนสูงกว่า paper HiDF (0.70) มาก?"</b> paper ไม่ได้ train บน HiDF เราทำ</li><li><b>"มี leakage หรือเปล่า?"</b> ตรวจ 16 ข้อ (หัวข้อ Leakage)</li><li><b>"ใช้กับ deepfake แบบอื่นได้ไหม?"</b> ยังไม่รู้ เป็นข้อจำกัดหลัก (ด้านล่าง)</li><li><b>"ทำไมไม่ใช้แค่ classical ที่ได้ 98 %?"</b> พังเมื่อรูปเบลอหรือมี noise (หัวข้อ Robustness)</li></ul></div>
+      </div>
+    </div>
     <div class="cols">
-      <div class="card"><h3>What we can't claim</h3><ul>
-        <li>Every HiDF fake comes from <b>one face-swap tool</b>. We don't know how the models do on deepfakes made by other tools. That would need a test on a different dataset.</li>
-        <li>DINOv3 was pretrained by Meta on a huge photo collection that might include some of the same real photos. We can't test that.</li>
-        <li>M3 at high resolution only trained for 2 epochs because it was so slow.</li>
+      <div class="card"><h3>สิ่งที่ยังสรุปไม่ได้</h3><ul>
+        <li>fake ทุกรูปใน HiDF มาจาก<b>โปรแกรม face swap ตัวเดียว</b> เราไม่รู้ว่าโมเดลจะทำได้แค่ไหนกับ deepfake จากโปรแกรมอื่น ต้องทดสอบกับ dataset อื่นถึงจะรู้</li>
+        <li>DINOv3 ถูก pretrain โดย Meta ด้วยรูปจำนวนมหาศาล ซึ่งอาจมีรูปจริงบางรูปซ้ำกับของเรา ข้อนี้ทดสอบไม่ได้</li>
+        <li>M3 ที่ resolution สูง train ได้แค่ 2 epochs เพราะช้ามาก</li>
       </ul></div>
-      <div class="card"><h3>Next: Phase 6 slides</h3><ul>
-        <li>Build the presentation deck following the course template.</li>
-        <li>The course asks for a classical vs deep-learning comparison and 3 success + 3 failure examples. Both are ready (sections above).</li>
-        <li>The literature review is already written (<code>LITERATURE_REVIEW.md</code>).</li>
+      <div class="card"><h3>ถัดไป: Phase 6 สไลด์</h3><ul>
+        <li>ทำสไลด์นำเสนอตาม template ของวิชา</li>
+        <li>วิชานี้ให้เปรียบเทียบ classical กับ deep learning และยกตัวอย่างสำเร็จ 3 + ผิดพลาด 3 รูป ทั้งสองอย่างพร้อมแล้ว (ดูหัวข้อด้านบน)</li>
+        <li>Literature review เขียนเสร็จแล้ว (<code>LITERATURE_REVIEW.md</code>)</li>
       </ul></div>
     </div>
   </section>
 
   <section id="files" aria-labelledby="files-h">
     <div class="sec-head">
-      <h2 id="files-h">Where to find the details</h2>
-      <p class="muted">All in the project's <code>documents/</code> folder. One file per phase.</p>
+      <h2 id="files-h">อ่านรายละเอียดได้ที่ไหน</h2>
+      <p class="muted">ทุกไฟล์อยู่ในโฟลเดอร์ <code>documents/</code> ของโปรเจกต์ (และใน GitHub repo) หนึ่งไฟล์ต่อหนึ่ง phase</p>
     </div>
     <div class="files">
-      <div><code>PLAN.md</code><span>The overall plan and status of each phase.</span></div>
-      <div><code>DATA_CLEANING.md</code><span>Phase 1: cleaning rules and the identity split.</span></div>
-      <div><code>PREPROCESSING.md</code><span>Phase 2: P1–P4 and the file-format shortcut.</span></div>
-      <div><code>CLASSICAL_AND_ZERO_SHOT.md</code><span>Phase 3: zero-shot and classical models.</span></div>
-      <div><code>DEEP_LEARNING.md</code><span>Phase 4: the 12 deep-learning runs and robustness.</span></div>
-      <div><code>EVALUATION.md</code><span>Phase 5: comparison, fairness, examples, Grad-CAM.</span></div>
-      <div><code>LEAKAGE.md</code><span>All 16 leakage checks and their results.</span></div>
-      <div><code>LITERATURE_REVIEW.md</code><span>Related papers and where our methods come from.</span></div>
-      <div><code>EXPERIMENT_LOG.md</code><span>Every experiment, bug and decision in time order.</span></div>
-      <div><code>figures/</code><span>All charts and example images, by phase.</span></div>
+      <div><code>PLAN.md</code><span>แผนรวมและสถานะของแต่ละ phase</span></div>
+      <div><code>DATA_CLEANING.md</code><span>Phase 1: กฎการทำความสะอาดข้อมูลและการ split ตามตัวคน</span></div>
+      <div><code>PREPROCESSING.md</code><span>Phase 2: P1–P4 และทางลัดเรื่องชนิดไฟล์</span></div>
+      <div><code>CLASSICAL_AND_ZERO_SHOT.md</code><span>Phase 3: โมเดล zero-shot และ classical</span></div>
+      <div><code>DEEP_LEARNING.md</code><span>Phase 4: deep learning ทั้ง 12 runs และ robustness</span></div>
+      <div><code>EVALUATION.md</code><span>Phase 5: เปรียบเทียบ fairness ตัวอย่าง และ Grad-CAM</span></div>
+      <div><code>LEAKAGE.md</code><span>การตรวจ leakage ทั้ง 16 ข้อและผล</span></div>
+      <div><code>LITERATURE_REVIEW.md</code><span>paper ที่เกี่ยวข้อง และที่มาของวิธีที่เราใช้</span></div>
+      <div><code>EXPERIMENT_LOG.md</code><span>ทุกการทดลอง bug และการตัดสินใจ เรียงตามเวลา</span></div>
+      <div><code>figures/</code><span>กราฟและรูปตัวอย่างทั้งหมด แยกตาม phase</span></div>
     </div>
   </section>
 </div>
