@@ -44,3 +44,16 @@ The HiDF dataset (`dataset/`), the 512 px image cache (`data/cache512/`), traine
 downloaded model files (`models/`). Put the dataset at `dataset/HiDF/` and rebuild with the
 `src/step*.py` scripts in order. Environment: Python 3.12, `pip install -r requirements.lock.txt`
 (Apple Silicon / MPS).
+
+## License
+
+- **Code and write-ups:** MIT License (see `LICENSE`).
+- **HiDF data:** the face images shown in `documents/figures/` and the file list / labels in
+  `data/index.csv` come from the HiDF dataset by Kang et al. (KDD 2025), licensed under
+  [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). They may be used for
+  non-commercial purposes only, with attribution. The dataset itself is not redistributed here;
+  download it from <https://zenodo.org/records/16140829>.
+
+If you use HiDF, cite: Chaewon Kang, Seoyoon Jeong, Jonghyun Lee, Daejin Choi, Simon S. Woo,
+Jinyoung Han. *HiDF: A Human-Indistinguishable Deepfake Dataset.* KDD 2025,
+DOI 10.1145/3711896.3737399.

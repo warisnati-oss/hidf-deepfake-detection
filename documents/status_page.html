@@ -217,7 +217,7 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
       <div><dt>Confidence interval (CI)</dt><dd>ช่วงที่บอกว่าคะแนนอาจเปลี่ยนได้แค่ไหนถ้าใช้ test set ชุดอื่น ถ้าช่วงของสองโมเดลซ้อนกัน แปลว่ายังสรุปไม่ได้ว่าตัวไหนดีกว่า</dd></div>
       <div><dt>Grad-CAM</dt><dd>heat map ที่บอกว่าส่วนไหนของรูปทำให้โมเดลตอบแบบนั้น</dd></div>
       <div><dt>Epoch</dt><dd>การให้โมเดลดูข้อมูล train ครบหนึ่งรอบ</dd></div>
-      <div><dt>GPU</dt><dd>ชิปกราฟิกที่ทำให้ train เร็วขึ้น ในงานนี้ train หนึ่งรอบเต็มใช้เวลาประมาณ 3–12 ชั่วโมง</dd></div>
+      <div><dt>GPU</dt><dd>ชิปกราฟิกที่ทำให้ train เร็วขึ้น ในงานนี้ train หนึ่ง run ใช้เวลาประมาณ 3–31 ชั่วโมง (ดู<a href="#training-time">ตารางเวลา train</a>)</dd></div>
     </dl>
     </details>
   </section>
@@ -460,7 +460,7 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
             <tr><td><b>Loss</b></td><td>log loss</td><td>BCE</td><td>BCE + 0.1·alignment + 0.5·uniformity</td><td>BCE + 0.5·aux BCE (4 layer สุดท้าย) + 0.1·supervised contrastive</td></tr>
             <tr><td><b>Optimizer</b></td><td>–</td><td>AdamW, lr 2e-4, wd 0.01</td><td>AdamW, lr 3e-4</td><td>AdamW, lr 1e-4, wd 0.01</td></tr>
             <tr><td><b>Batch / epochs</b></td><td>–</td><td>32 / 8</td><td>32 / 5</td><td>16 / 5 (fp32)</td></tr>
-            <tr><td><b>เวลาต่อ epoch</b></td><td>สกัด feature ทั้งหมด ~22 นาที</td><td>~24 นาที</td><td>~51 นาที</td><td>~139 นาที</td></tr>
+            <tr><td><b>เวลาต่อ epoch</b></td><td>สกัด feature ทั้งหมด ~22 นาที</td><td>~24 นาที</td><td>~51 นาที</td><td>~140 นาที</td></tr>
           </tbody>
         </table>
       </div>
@@ -664,8 +664,23 @@ td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight:
       <div class="card"><h3>สิ่งที่ได้เรียนรู้จาก 4 แบบ</h3><ul>
         <li><b>Crop เฉพาะหน้า</b>: ได้ผลพอ ๆ กับรูปเต็ม เพราะโมเดลโฟกัสที่หน้าอยู่แล้ว</li>
         <li><b>ปิด augmentation</b>: รูปปกติได้ผลดีเท่าเดิม แต่รูปที่เสียหายแย่ลงมาก (ดูหัวข้อถัดไป)</li>
-        <li><b>เพิ่ม resolution</b>: ไม่ได้ดีขึ้นชัดเจน แต่ช้ากว่ามาก M3 ที่ resolution สูงใช้ 13.5 ชั่วโมงต่อ epoch จึง train ได้แค่ 2 epochs</li>
+        <li><b>เพิ่ม resolution</b>: ไม่ได้ดีขึ้นชัดเจน แต่ช้ากว่ามาก M3 ที่ resolution สูงใช้ประมาณ 15 ชั่วโมงต่อ epoch จึง train ได้แค่ 2 epochs</li>
       </ul></div>
+    </div>
+    <div class="panel" id="training-time">
+      <h3>เวลาที่ใช้ train แต่ละ run</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Model</th><th class="num">Baseline</th><th class="num">Face crop</th><th class="num">ปิด augmentation</th><th class="num">Resolution สูง</th><th class="num">รวม 4 runs</th></tr></thead>
+          <tbody>
+            <tr><td>M1 EfficientNet-B4</td><td class="num">3.2 ชม. <small>8 epochs</small></td><td class="num">3.2 ชม. <small>8 epochs</small></td><td class="num">2.7 ชม. <small>6 epochs</small></td><td class="num">7.4 ชม. <small>7 epochs, 384 px</small></td><td class="num">16.6 ชม.</td></tr>
+            <tr><td>M2 GenD (DINOv3)</td><td class="num">4.3 ชม. <small>5 epochs</small></td><td class="num">3.5 ชม. <small>4 epochs</small></td><td class="num">3.4 ชม. <small>4 epochs</small></td><td class="num">17.2 ชม. <small>5 epochs, 384 px</small></td><td class="num">28.4 ชม.</td></tr>
+            <tr><td>M3 DINOv3 + LoRA</td><td class="num">14.9 ชม. <small>5 epochs</small></td><td class="num">11.8 ชม. <small>5 epochs</small></td><td class="num">9.4 ชม. <small>4 epochs</small></td><td class="num">30.7 ชม. <small>2 epochs, 320–448 px</small></td><td class="num">66.8 ชม.</td></tr>
+            <tr class="lead"><td>รวม deep learning 12 runs</td><td></td><td></td><td></td><td></td><td class="num">≈ 112 ชม. (4.7 วัน)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">เวลาจริงจาก log ของแต่ละ run (รวมการวัด validation ทุก epoch) บนเครื่อง Mac เครื่องเดียว (Apple M6, 32 GB, GPU แบบ MPS) และ train ทีละ run จำนวน epoch ต่างกันเพราะหยุดเองเมื่อ val AUC ไม่ดีขึ้น 2 epochs บาง epoch ช้ากว่าปกติเพราะ GPU ใช้ร่วมกับงานอื่น ยังไม่รวม run ที่ล้มเหลวและการทดสอบหลัง train โมเดล classical ใช้เวลาสกัด feature ประมาณ 22 นาทีสำหรับรูปทั้งหมด ส่วนการ train gradient boosting ใช้ไม่กี่นาที (ไม่ได้บันทึกเวลาไว้) Zero-shot ไม่ต้อง train</p>
     </div>
     <figure>
       <div class="img"><img src="figures/e10_confusion.png" alt="Confusion matrix ของโมเดล zero-shot, classical และ deep learning ทั้งสาม นับรูป real และ fake ตามคำตอบของโมเดล"></div>
