@@ -1,0 +1,4 @@
+exp,mode,test_auc
+df_e04_effnet_b4,original,0.9999
+df_e04_effnet_b4,face_blanked,0.5256
+df_e04_effnet_b4,background_blanked,0.9969

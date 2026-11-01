@@ -1,0 +1,380 @@
+<title>HiDF Deepfake Detection</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column for teammates new to ML. Summary first, then a glossary, then the work in project order
+   (data → preprocessing → models → results → checks), each section = plain explanation + evidence (table or figure). */
+:root {
+  --bg: #f4f6f8; --surface: #ffffff; --ink: #14202b; --muted: #5a6875; --line: #d5dde4;
+  --accent: #0f7c86; --accent-soft: #dcf0f1;
+  --done: #2f8a4f; --done-soft: #e0f1e5; --run: #b8740d; --run-soft: #fbefd9; --next: #6b7682; --next-soft: #e9edf0;
+  --bad: #c24b33; --bad-soft: #f8e3dd; --fig: #ffffff;
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f161c; --surface: #17212a; --ink: #e6edf2; --muted: #9aa8b4; --line: #2a3742;
+  --accent: #4fc1c9; --accent-soft: #143338;
+  --done: #5cc07c; --done-soft: #16301f; --run: #e6a640; --run-soft: #34270f; --next: #8e9aa6; --next-soft: #222d36;
+  --bad: #ef7a5f; --bad-soft: #3a1c15; --fig: #f2f4f6; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f161c; --surface: #17212a; --ink: #e6edf2; --muted: #9aa8b4; --line: #2a3742;
+  --accent: #4fc1c9; --accent-soft: #143338;
+  --done: #5cc07c; --done-soft: #16301f; --run: #e6a640; --run-soft: #34270f; --next: #8e9aa6; --next-soft: #222d36;
+  --bad: #ef7a5f; --bad-soft: #3a1c15; --fig: #f2f4f6; color-scheme: dark }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 56px; }
+.wrap > * { min-width: 0; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4vw + 1rem, 3rem); font-weight: 800; line-height: 1.06; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.04rem; font-weight: 700; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+code, .mono { font-family: var(--f-mono); font-size: 0.86em; font-variant-numeric: tabular-nums; }
+.eyebrow { font: 600 0.74rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+section { display: grid; gap: 20px; scroll-margin-top: 16px; }
+section > * { min-width: 0; }
+.prose { display: grid; gap: 12px; max-width: 70ch; }
+.sec-head { display: grid; gap: 8px; }
+
+/* header */
+header { display: grid; gap: 16px; }
+.lede { max-width: 68ch; font-size: 1.1rem; color: var(--muted); }
+.lede b { color: var(--ink); font-weight: 600; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { text-decoration: none; font-size: 0.88rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+.toc a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* takeaway tiles */
+.takeaways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.take { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.take .big { font: 800 2rem/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.take p { font-size: 0.94rem; color: var(--muted); }
+
+/* glossary */
+.gloss { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 0; }
+.gloss div { padding: 12px 0; border-top: 1px solid var(--line); display: grid; gap: 3px; }
+.gloss dt { font-weight: 600; }
+.gloss dd { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+/* phase strip */
+.phases { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.phase { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 14px; display: grid; gap: 6px; align-content: start; }
+.phase .n { font: 600 0.72rem/1 var(--f-mono); color: var(--muted); }
+.phase h3 { font-size: 0.95rem; }
+.phase p { font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
+.pill { justify-self: start; font: 600 0.68rem/1 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.done { color: var(--done); background: var(--done-soft); }
+.pill.warn { color: var(--run); background: var(--run-soft); }
+.pill.next { color: var(--next); background: var(--next-soft); }
+
+/* generic panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.cols3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card p, .card li { font-size: 0.93rem; }
+.card .why { color: var(--muted); }
+.tag { font: 600 0.72rem/1.6 var(--f-mono); color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 1px 6px; justify-self: start; }
+.callout { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 14px 16px; border-radius: 0 10px 10px 0; display: grid; gap: 6px; max-width: 78ch; }
+.callout.warn { border-color: var(--run); background: var(--run-soft); }
+.callout p { font-size: 0.95rem; }
+
+/* figures */
+figure { margin: 0; display: grid; gap: 8px; }
+figure .img { background: var(--fig); border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
+figure img { display: block; width: 100%; height: auto; max-width: 100%; }
+figcaption { font-size: 0.88rem; color: var(--muted); max-width: 80ch; }
+figure.narrow { max-width: 640px; }
+
+/* tables */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { text-align: left; font: 600 0.72rem/1.2 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 0 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: bottom; }
+td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.lead td { font-weight: 600; }
+td small { display: block; color: var(--muted); font-size: 0.82rem; font-weight: 400; }
+.verdict { font-weight: 600; color: var(--done); }
+.verdict.warn { color: var(--run); }
+.note { font-size: 0.88rem; color: var(--muted); max-width: 80ch; }
+
+/* pipeline steps */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: step; }
+.flow .card { position: relative; }
+
+/* files */
+.files { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+.files div { padding: 10px 0; border-top: 1px solid var(--line); display: grid; gap: 2px; }
+.files span { color: var(--muted); font-size: 0.92rem; }
+
+@media (max-width: 860px) {
+  .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .takeaways, .cols, .cols3, .flow { grid-template-columns: 1fr; }
+  .gloss, .files { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) { .phases { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">2110651 Digital Image Processing · team project · updated 1 Nov 2026</span>
+    <h1>Can a computer catch deepfakes that people can't?</h1>
+    <p class="lede">This page explains the project work so far for teammates who are new to machine learning (ML). We use <b>HiDF</b>, a 2025 dataset of face-swap photos that human reviewers could not tell apart from real photos. We built several detectors that look at a photo and answer <b>"real" or "fake"</b>, then checked carefully that the results are trustworthy. Phases 1–5 are done. The slide deck (Phase 6) is next.</p>
+    <nav class="toc" aria-label="Sections">
+      <a href="#glossary">Key terms</a><a href="#progress">Progress</a><a href="#data">Data</a><a href="#preprocessing">Preprocessing</a>
+      <a href="#models">Models</a><a href="#results">Results</a><a href="#robustness">Robustness</a><a href="#explain">Where models look</a>
+      <a href="#fairness">Fairness</a><a href="#leakage">Leakage checks</a><a href="#limits">Limits &amp; next</a><a href="#files">Files</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="short">
+    <h2 id="short">The short version</h2>
+    <div class="takeaways">
+      <div class="take"><span class="eyebrow">Best model</span><span class="big">99.8 %</span><p>M3 (DINOv3 + LoRA) labels 99.76 % of 9,600 unseen test photos correctly. Out of 5,366 real photos it wrongly calls only 2 fake.</p></div>
+      <div class="take"><span class="eyebrow">Deep learning wins on hard photos</span><span class="big" style="color: var(--bad)">0.55</span><p>The classical model (hand-made features) is 98 % accurate on clean photos, but a light blur drops it to coin-flip level. The deep models stay above 98.6 % in all damage tests (M3).</p></div>
+      <div class="take"><span class="eyebrow">We checked for cheating</span><span class="big">16 checks</span><p>Scores this high can mean the test "leaked" answers to the model. We listed 16 possible leaks and checked each one. No leak explains the results.</p></div>
+    </div>
+  </section>
+
+  <section id="glossary" aria-labelledby="glossary-h">
+    <div class="sec-head">
+      <h2 id="glossary-h">Key terms (read this first)</h2>
+      <p class="muted">The words used on the rest of the page, in plain language.</p>
+    </div>
+    <dl class="gloss">
+      <div><dt>Model / classifier</dt><dd>A program that learns a rule from examples instead of being told the rule. Ours takes a photo and outputs a score from 0 (real) to 1 (fake).</dd></div>
+      <div><dt>Label</dt><dd>The correct answer for each example ("real" or "fake"). The model sees labels only while training.</dd></div>
+      <div><dt>Train / validation / test split</dt><dd>We divide the data into three piles. <b>Train</b> (72 %): the model learns from it. <b>Validation</b> (14 %): we use it to make choices, like when to stop training. <b>Test</b> (14 %): touched once at the very end, like a final exam the model has never seen.</dd></div>
+      <div><dt>Threshold</dt><dd>The score above which we say "fake". We pick it on validation, never on test.</dd></div>
+      <div><dt>Accuracy</dt><dd>Share of test photos labelled correctly.</dd></div>
+      <div><dt>AUC</dt><dd>How well the scores rank fakes above reals, for every possible threshold. 1.0 = perfect, 0.5 = random guessing. Useful because it does not depend on one threshold.</dd></div>
+      <div><dt>False positive / false negative</dt><dd><b>False positive</b>: a real photo called fake (a false alarm). <b>False negative</b>: a fake that slipped through. A <b>confusion matrix</b> is the 2 × 2 table that counts both.</dd></div>
+      <div><dt>Features (classical approach)</dt><dd>Numbers we design by hand from image-processing tools, such as texture, noise or frequency content. A simple model then learns which numbers matter.</dd></div>
+      <div><dt>Deep learning / neural network</dt><dd>A model with millions of adjustable numbers (weights) that learns its own features directly from pixels.</dd></div>
+      <div><dt>Pretrained backbone</dt><dd>A big network someone else already trained on millions of photos (here DINOv3 by Meta). We reuse its "visual knowledge" and adapt it to deepfakes.</dd></div>
+      <div><dt>Fine-tuning, LoRA</dt><dd>Fine-tuning = continuing training on our data. <b>LoRA</b> trains only small add-on pieces instead of the whole network, which is cheaper and harder to overfit.</dd></div>
+      <div><dt>Zero-shot</dt><dd>Using a model with no training on our data at all, just asking it.</dd></div>
+      <div><dt>Augmentation</dt><dd>Randomly blurring, compressing, cropping or flipping training photos so the model learns to cope with messy images.</dd></div>
+      <div><dt>Overfitting</dt><dd>When a model memorises the training examples instead of learning a general rule. It then does badly on new photos.</dd></div>
+      <div><dt>Leakage</dt><dd>When the model can get the answer through a back door (for example the same photo in train and test, or a file-format clue), so the score looks better than the model really is.</dd></div>
+      <div><dt>Confidence interval (CI)</dt><dd>A range that shows how much a score could change with a different test set. If two models' ranges overlap, we can't call one better.</dd></div>
+      <div><dt>Grad-CAM</dt><dd>A heat map that shows which part of the photo pushed the model toward its answer.</dd></div>
+      <div><dt>Epoch</dt><dd>One full pass of the model over the training data.</dd></div>
+      <div><dt>GPU</dt><dd>The graphics chip that makes training fast. One full training run took between about 3 and 12 hours here.</dd></div>
+    </dl>
+  </section>
+
+  <section id="progress" aria-labelledby="progress-h">
+    <h2 id="progress-h">Progress</h2>
+    <div class="phases">
+      <div class="phase"><span class="n">Phase 1</span><h3>Data</h3><p>Clean the data, split it fairly</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 2</span><h3>Preprocessing</h3><p>Prepare images, remove a shortcut</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 3</span><h3>Simple models</h3><p>Zero-shot and classical</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 4</span><h3>Deep learning</h3><p>3 models × 4 settings = 12 runs</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 5</span><h3>Evaluation</h3><p>Compare, explain, check for leaks</p><span class="pill done">Done</span></div>
+      <div class="phase"><span class="n">Phase 6</span><h3>Slides</h3><p>Literature review done; deck to do</p><span class="pill next">Next</span></div>
+    </div>
+  </section>
+
+  <section id="data" aria-labelledby="data-h">
+    <div class="sec-head">
+      <span class="eyebrow">Phase 1</span>
+      <h2 id="data-h">The data: how a HiDF fake is made</h2>
+    </div>
+    <div class="prose">
+      <p>Every fake starts from two real photos. The <b>base</b> photo gives the scene, hair and body. The <b>donor</b> gives a face. A face-swap tool pastes the donor's inner face onto the base. Only about 11 % of the pixels change, so the background is identical to a real photo.</p>
+    </div>
+    <figure>
+      <div class="img"><img src="figures/triplets.png" alt="Four rows. Each row shows a real base photo, a real donor photo, the resulting fake with the donor's face on the base photo, and a dark difference map that lights up only on the face."></div>
+      <figcaption>Each row: base (real) + donor (real) → fake. The right column shows where the fake differs from its base: only the inner face. We later use this difference as a free "answer key" for where the swap is.</figcaption>
+    </figure>
+    <div class="cols3">
+      <div class="card"><span class="tag">Size</span><p><b>69,831 images</b> at 1024 × 1024 px: 38.6K real, 31.2K fake. After cleaning, 69,476 kept.</p></div>
+      <div class="card"><span class="tag">Cleaning</span><p>We removed 235 "real" files that were byte-for-byte copies of fakes and 50 fakes where the swap had failed, and fixed 458 wrong file names.</p><p class="why">Why: a wrong label teaches the model the wrong thing.</p></div>
+      <div class="card"><span class="tag">Split by person</span><p>A fake, its base and its donor always land in the same pile. No person appears in both train and test.</p><p class="why">Why: if the model saw a person in training, it could recognise the person instead of the swap. That would be cheating.</p></div>
+    </div>
+  </section>
+
+  <section id="preprocessing" aria-labelledby="pre-h">
+    <div class="sec-head">
+      <span class="eyebrow">Phase 2</span>
+      <h2 id="pre-h">Preprocessing: getting images ready</h2>
+      <p class="muted">Four steps, named P1–P4 in the documents.</p>
+    </div>
+    <div class="flow">
+      <div class="card"><span class="tag">P1</span><h3>Same compression for all</h3><p>Every image is saved the same way (JPEG, then resized to 512 px).</p><p class="why">Real and fake files were saved differently. File size alone could separate them (AUC 0.99) without looking at any face. P1 removes that clue.</p></div>
+      <div class="card"><span class="tag">P2</span><h3>Augmentation</h3><p>Random crop, flip, colour change, blur, JPEG and noise, on training images only.</p><p class="why">Makes the deep models cope with damaged photos.</p></div>
+      <div class="card"><span class="tag">P3</span><h3>Find the face</h3><p>MediaPipe draws the face outline. It covers 96 % of the swapped area.</p><p class="why">Used for face crops and for the classical features.</p></div>
+      <div class="card"><span class="tag">P4</span><h3>Hand-made features</h3><p>247 numbers per image: frequency (FFT), noise, skin texture (LBP), colour, and the seam at the face edge.</p><p class="why">Input to the classical model.</p></div>
+    </div>
+    <div class="callout warn">
+      <p><b>First leak found and fixed.</b> Before P1, a model that saw only the background (face blanked out) could still tell real from fake. After P1 it scores 0.51, which is guessing. This is why we became careful about leakage early.</p>
+    </div>
+  </section>
+
+  <section id="models" aria-labelledby="models-h">
+    <div class="sec-head">
+      <span class="eyebrow">Phases 3 and 4</span>
+      <h2 id="models-h">The models we compared</h2>
+      <p class="muted">From the simplest (no training) to the most advanced. The course asks for both classical and deep-learning methods.</p>
+    </div>
+    <div class="cols">
+      <div class="card"><span class="tag">Zero-shot</span><h3>Ask a big model, no training</h3><p>CLIP compares the face with the text "a real photo" vs "a face-swapped photo". We also tried SigLIP 2, PE and Qwen2.5-VL (a chat model asked yes/no).</p><p class="why">Shows how far you get without any training. Best: 90.6 % accuracy.</p></div>
+      <div class="card"><span class="tag">Classical</span><h3>Hand-made features + gradient boosting</h3><p>The 247 P4 numbers go into gradient boosting (many small decision trees voting).</p><p class="why">The image-processing approach from the course. Found that swapped skin is smoother and less noisy than real skin.</p></div>
+      <div class="card"><span class="tag">M1</span><h3>EfficientNet-B4</h3><p>A classic image network. We train all 17.6 million weights. This is the model the HiDF paper used.</p><p class="why">The standard baseline, so we can compare with the paper.</p></div>
+      <div class="card"><span class="tag">M2</span><h3>GenD on DINOv3</h3><p>Uses the big pretrained DINOv3 network almost frozen. Only 101 thousand weights are trained (0.03 %).</p><p class="why">Tests whether a strong pretrained model needs almost no training.</p></div>
+      <div class="card"><span class="tag">M3</span><h3>DINOv3 + LoRA</h3><p>Same DINOv3, adapted with LoRA: 12.7 million trained weights (about 4 %). In the style of the NTIRE 2026 challenge winner.</p><p class="why">The current state-of-the-art recipe.</p></div>
+      <div class="card"><span class="tag">12 runs</span><h3>Each deep model in 4 settings</h3><p>Baseline (full image, 224 px, augmentation on), then change one thing at a time: <b>face crop</b> only, <b>augmentation off</b>, <b>higher resolution</b>.</p><p class="why">Changing one thing at a time shows what each choice really does.</p></div>
+    </div>
+  </section>
+
+  <section id="results" aria-labelledby="results-h">
+    <div class="sec-head">
+      <span class="eyebrow">Phase 5</span>
+      <h2 id="results-h">Results on the test set</h2>
+      <p class="muted">9,600 photos (5,366 real, 4,234 fake) of 1,142 groups of people that the models never saw in training.</p>
+    </div>
+    <div class="panel">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Model</th><th class="num">Trained weights</th><th class="num">AUC</th><th class="num">Accuracy [95 % CI]</th><th class="num">Real called fake</th><th class="num">Fakes missed</th></tr></thead>
+          <tbody>
+            <tr><td>Zero-shot CLIP (face crop)</td><td class="num">0</td><td class="num">0.953</td><td class="num">90.6 % [89.9, 91.3]</td><td class="num">250</td><td class="num">654</td></tr>
+            <tr><td>Classical (features + boosting)</td><td class="num">trees</td><td class="num">0.998</td><td class="num">98.1 % [97.7, 98.3]</td><td class="num">59</td><td class="num">128</td></tr>
+            <tr><td>M1 EfficientNet-B4</td><td class="num">17.6 M</td><td class="num">0.9999</td><td class="num">99.7 % [99.6, 99.8]</td><td class="num">3</td><td class="num">28</td></tr>
+            <tr><td>M2 GenD (DINOv3)</td><td class="num">0.1 M</td><td class="num">0.9998</td><td class="num">99.7 % [99.5, 99.8]</td><td class="num">3</td><td class="num">29</td></tr>
+            <tr class="lead"><td>M3 DINOv3 + LoRA</td><td class="num">12.7 M</td><td class="num">1.0000</td><td class="num">99.8 % [99.6, 99.9]</td><td class="num">2</td><td class="num">21</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">For reference, the HiDF paper reports AUC 0.70 for detectors that were <i>not</i> trained on HiDF. Training on HiDF itself is what makes the difference.</p>
+    </div>
+    <div class="cols">
+      <div class="card"><h3>How to read this</h3><ul>
+        <li>Zero-shot &lt; classical &lt; deep learning. These gaps are much bigger than the confidence intervals, so they are real.</li>
+        <li>The three deep models' intervals overlap. On clean photos <b>we can't say one is better</b>. All 12 deep runs land between 99.6 % and 99.8 %.</li>
+        <li>Almost every mistake is a missed fake, not a false alarm. That comes from the threshold chosen on validation.</li>
+      </ul></div>
+      <div class="card"><h3>What the 4 settings taught us</h3><ul>
+        <li><b>Face crop</b>: about the same as the full image. The models already focus on the face.</li>
+        <li><b>Augmentation off</b>: just as good on clean photos, but much worse on damaged ones (see next section).</li>
+        <li><b>Higher resolution</b>: no clear gain, and far slower. M3 at high resolution took 13.5 h per epoch, so it ran only 2 epochs.</li>
+      </ul></div>
+    </div>
+    <figure class="narrow">
+      <div class="img"><img src="figures/e10_confusion.png" alt="Confusion matrices for the zero-shot, classical and three deep models, counting real and fake photos by predicted label."></div>
+      <figcaption>Confusion matrices: rows are the true label, columns the model's answer. The diagonal holds the correct answers.</figcaption>
+    </figure>
+  </section>
+
+  <section id="robustness" aria-labelledby="robust-h">
+    <div class="sec-head">
+      <h2 id="robust-h">Robustness: what happens to damaged photos?</h2>
+      <p class="muted">Photos on social media get compressed, resized and blurred. We damaged the test photos in 9 ways and tested again, without retraining.</p>
+    </div>
+    <figure>
+      <div class="img"><img src="figures/e09_robustness.png" alt="Two line charts of test AUC and test accuracy across nine degradations. The classical model drops toward 0.5 for blur, noise and strong downscaling, while the deep models stay near 1.0."></div>
+      <figcaption>Left: AUC. Right: accuracy. The orange line (classical) falls to chance with blur, noise and heavy downscaling. The deep models with augmentation stay near the top. Without augmentation (yellow, pink), the deep models drop to 81–91 % on some damage.</figcaption>
+    </figure>
+    <div class="callout">
+      <p><b>Why this matters.</b> The classical model relies on fine skin texture. Blur and noise erase that texture. The deep models were trained with augmentation (step P2), so they learned clues that survive damage: under all 9 damage types M1 stays ≥ 98.3 % accurate, M2 ≥ 96.6 %, M3 ≥ 98.6 %. This is the clearest reason to prefer deep learning here.</p>
+    </div>
+  </section>
+
+  <section id="explain" aria-labelledby="explain-h">
+    <div class="sec-head">
+      <h2 id="explain-h">Where do the models look?</h2>
+      <p class="muted">A high score is only convincing if the model looks at the swapped face, not at something unrelated.</p>
+    </div>
+    <figure>
+      <div class="img"><img src="figures/e11_gradcam.png" alt="Grid of six photos: three successes and three failures. For each, the true swap region in white and Grad-CAM heat maps for M1, M2 and M3. In successes the heat sits on the face; in failures it spreads elsewhere."></div>
+      <figcaption>Grad-CAM heat maps (red = most important). Column 2 is the real swap region from the difference with the base photo. Top three rows: correct answers, with heat on the face. Bottom three: mistakes. These are the faintest swaps in the test set, where the face barely changed.</figcaption>
+    </figure>
+    <div class="cols3">
+      <div class="card"><span class="tag">Face blanked out</span><p>We greyed out the face and re-tested all 12 deep runs. AUC fell to <b>0.51–0.53</b> (guessing). So the models use the face, not the background.</p></div>
+      <div class="card"><span class="tag">Heat on the swap</span><p>Share of heat inside the true swap region: M1 47 %, M3 32 %, M2 24 %, which is 1.5–2.9× more than chance. The hottest point lands on the swap 82–91 % of the time.</p></div>
+      <div class="card"><span class="tag">Typical mistakes</span><p>All models miss the weakest swaps. The classical model also calls retouched real photos "fake", because smooth, edited skin looks like a swap to it.</p></div>
+    </div>
+  </section>
+
+  <section id="fairness" aria-labelledby="fair-h">
+    <div class="sec-head">
+      <h2 id="fair-h">Fairness: does it work equally for everyone?</h2>
+    </div>
+    <div class="prose">
+      <p>We split the test results by race, gender and age of the person in the photo. The deep models make at most 1.9 % errors in every group. The classical model's gaps are larger (it misses 2–6 % of fakes depending on group).</p>
+      <p>One pattern holds for every model: <b>photos of Asian people get the most false alarms</b>. M2 and M3 also miss the most fakes on Asian faces, while the classical model and M1 miss the most on Black faces. Group size does not explain it: Indian faces are the smallest group (1.8 % of training) and are not the worst. We report this as a finding; we did not fix it.</p>
+    </div>
+  </section>
+
+  <section id="leakage" aria-labelledby="leak-h">
+    <div class="sec-head">
+      <h2 id="leak-h">Leakage checks: are the scores too good to be true?</h2>
+      <p class="muted">99.8 % is suspicious, so we listed 16 possible leaks and checked each one. Below are the five extra tests run after Phase 5. The earlier checks (identity split, file-format fix, face blanking, thresholds set on validation only) are in <code>LEAKAGE.md</code>.</p>
+    </div>
+    <div class="panel">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Possible leak</th><th>How we tested it</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>The model detects the face's <b>compression history</b>, not the swap<small>T1</small></td><td>Took 2,000 real test photos and gave the face area a fake-like save history, with no swap. If the models flagged them, they would be reading compression.</td><td><span class="verdict">No leak.</span> Deep models flag 0–0.1 %, the same as untouched photos. (A light face blur does fool the classical model: 23 % flagged.)</td></tr>
+            <tr><td>Fakes have a different <b>face position or size</b>, or the creators picked <b>special base photos</b><small>T2</small></td><td>Trained a model on face position and size only. Compared real photos used as bases with real photos never used.</td><td><span class="verdict">No leak.</span> Position and size alone: AUC 0.54 (near guessing). Both kinds of real photo score the same.</td></tr>
+            <tr><td>The <b>same person</b> is in train and test under a different ID, so the model memorises faces<small>T3</small></td><td>Used a face-recognition model (ArcFace) to keep only test photos whose people have no look-alike in train.</td><td><span class="verdict">No leak.</span> M3 is 99.81 % accurate on these "never seen" people, the same as on the rest.</td></tr>
+            <tr><td>The <b>same photo</b> (flipped, cropped or edited) is in train and test<small>T4</small></td><td>Compared every test photo with every training photo using DINOv3 image fingerprints.</td><td><span class="verdict warn">Small leak, no effect.</span> 42 test photos (0.44 %) share a photo with train. Removing them changes accuracy by less than 0.01 points.</td></tr>
+            <tr><td>A <b>code bug</b> passes the answer to the model<small>T5</small></td><td>Trained M2 with the training labels shuffled at random. With no real signal, a bug-free pipeline must score about 0.5.</td><td><span class="verdict">No leak.</span> Test AUC 0.486.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callout">
+      <p><b>Conclusion.</b> The near-perfect scores are real for this dataset. They are normal for a detector trained and tested on the same kind of fakes: other datasets show about 99 % in that setting too.</p>
+    </div>
+  </section>
+
+  <section id="limits" aria-labelledby="limits-h">
+    <h2 id="limits-h">Limits and what's next</h2>
+    <div class="cols">
+      <div class="card"><h3>What we can't claim</h3><ul>
+        <li>Every HiDF fake comes from <b>one face-swap tool</b>. We don't know how the models do on deepfakes made by other tools. That would need a test on a different dataset.</li>
+        <li>DINOv3 was pretrained by Meta on a huge photo collection that might include some of the same real photos. We can't test that.</li>
+        <li>M3 at high resolution only trained for 2 epochs because it was so slow.</li>
+      </ul></div>
+      <div class="card"><h3>Next: Phase 6 slides</h3><ul>
+        <li>Build the presentation deck following the course template.</li>
+        <li>The course asks for a classical vs deep-learning comparison and 3 success + 3 failure examples. Both are ready (sections above).</li>
+        <li>The literature review is already written (<code>LITERATURE_REVIEW.md</code>).</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="files" aria-labelledby="files-h">
+    <div class="sec-head">
+      <h2 id="files-h">Where to find the details</h2>
+      <p class="muted">All in the project's <code>documents/</code> folder. One file per phase.</p>
+    </div>
+    <div class="files">
+      <div><code>PLAN.md</code><span>The overall plan and status of each phase.</span></div>
+      <div><code>DATA_CLEANING.md</code><span>Phase 1: cleaning rules and the identity split.</span></div>
+      <div><code>PREPROCESSING.md</code><span>Phase 2: P1–P4 and the file-format shortcut.</span></div>
+      <div><code>CLASSICAL_AND_ZERO_SHOT.md</code><span>Phase 3: zero-shot and classical models.</span></div>
+      <div><code>DEEP_LEARNING.md</code><span>Phase 4: the 12 deep-learning runs and robustness.</span></div>
+      <div><code>EVALUATION.md</code><span>Phase 5: comparison, fairness, examples, Grad-CAM.</span></div>
+      <div><code>LEAKAGE.md</code><span>All 16 leakage checks and their results.</span></div>
+      <div><code>LITERATURE_REVIEW.md</code><span>Related papers and where our methods come from.</span></div>
+      <div><code>EXPERIMENT_LOG.md</code><span>Every experiment, bug and decision in time order.</span></div>
+      <div><code>figures/</code><span>All charts and example images, by phase.</span></div>
+    </div>
+  </section>
+</div>

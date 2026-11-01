@@ -1,0 +1,68 @@
+df_e06_noaug_effnet: trainable 17,550,409 / 17,550,409 params (100.00%)
+  epoch 0 step 0/1571 loss 2.1482 (4 img/s)
+  epoch 0 step 200/1571 loss 2.0918 (19 img/s)
+  epoch 0 step 400/1571 loss 1.3160 (17 img/s)
+  epoch 0 step 600/1571 loss 0.5688 (16 img/s)
+  epoch 0 step 800/1571 loss 0.2408 (15 img/s)
+  epoch 0 step 1000/1571 loss 0.1604 (17 img/s)
+  epoch 0 step 1200/1571 loss 0.1235 (19 img/s)
+  epoch 0 step 1400/1571 loss 0.0907 (20 img/s)
+epoch 0: loss 0.5953 val_auc 0.9982 (41.3 min)
+  epoch 1 step 0/1571 loss 0.0040 (33 img/s)
+  epoch 1 step 200/1571 loss 0.0570 (38 img/s)
+  epoch 1 step 400/1571 loss 0.0615 (38 img/s)
+  epoch 1 step 600/1571 loss 0.0402 (38 img/s)
+  epoch 1 step 800/1571 loss 0.0390 (38 img/s)
+  epoch 1 step 1000/1571 loss 0.0262 (38 img/s)
+  epoch 1 step 1200/1571 loss 0.0405 (38 img/s)
+  epoch 1 step 1400/1571 loss 0.0351 (38 img/s)
+epoch 1: loss 0.0404 val_auc 0.9994 (24.0 min)
+  epoch 2 step 0/1571 loss 0.0000 (34 img/s)
+  epoch 2 step 200/1571 loss 0.0180 (38 img/s)
+  epoch 2 step 400/1571 loss 0.0152 (38 img/s)
+  epoch 2 step 600/1571 loss 0.0098 (38 img/s)
+  epoch 2 step 800/1571 loss 0.0121 (38 img/s)
+  epoch 2 step 1000/1571 loss 0.0123 (38 img/s)
+  epoch 2 step 1200/1571 loss 0.0083 (38 img/s)
+  epoch 2 step 1400/1571 loss 0.0221 (38 img/s)
+epoch 2: loss 0.0137 val_auc 0.9997 (24.0 min)
+  epoch 3 step 0/1571 loss 0.0000 (33 img/s)
+  epoch 3 step 200/1571 loss 0.0035 (38 img/s)
+  epoch 3 step 400/1571 loss 0.0078 (38 img/s)
+  epoch 3 step 600/1571 loss 0.0084 (38 img/s)
+  epoch 3 step 800/1571 loss 0.0131 (38 img/s)
+  epoch 3 step 1000/1571 loss 0.0093 (38 img/s)
+  epoch 3 step 1200/1571 loss 0.0092 (37 img/s)
+  epoch 3 step 1400/1571 loss 0.0087 (37 img/s)
+epoch 3: loss 0.0087 val_auc 0.9999 (24.2 min)
+  epoch 4 step 0/1571 loss 0.0000 (32 img/s)
+  epoch 4 step 200/1571 loss 0.0028 (37 img/s)
+  epoch 4 step 400/1571 loss 0.0065 (37 img/s)
+  epoch 4 step 600/1571 loss 0.0095 (37 img/s)
+  epoch 4 step 800/1571 loss 0.0017 (37 img/s)
+  epoch 4 step 1000/1571 loss 0.0029 (37 img/s)
+  epoch 4 step 1200/1571 loss 0.0036 (37 img/s)
+  epoch 4 step 1400/1571 loss 0.0067 (37 img/s)
+epoch 4: loss 0.0048 val_auc 0.9998 (24.5 min)
+  epoch 5 step 0/1571 loss 0.0000 (32 img/s)
+  epoch 5 step 200/1571 loss 0.0011 (37 img/s)
+  epoch 5 step 400/1571 loss 0.0007 (37 img/s)
+  epoch 5 step 600/1571 loss 0.0000 (37 img/s)
+  epoch 5 step 800/1571 loss 0.0051 (37 img/s)
+  epoch 5 step 1000/1571 loss 0.0003 (37 img/s)
+  epoch 5 step 1200/1571 loss 0.0008 (37 img/s)
+  epoch 5 step 1400/1571 loss 0.0001 (37 img/s)
+epoch 5: loss 0.0010 val_auc 0.9998 (24.3 min)
+early stop: no val AUC gain for 2 epochs
+{"exp": "df_e06_noaug_effnet", "model": "effnet_b4", "view": "full", "size": 224, "augment": false, "best_epoch": 3, "val_auc": 0.9999, "threshold": -1.6297, "trainable_params": 17550409, "test_auc": 0.9996, "test_accuracy": 0.9968, "test_precision": 0.9972, "test_recall": 0.9955, "test_f1": 0.9963, "tn": 5354, "fp": 12, "fn": 19, "tp": 4215, "test_auc_c": 0.9999, "test_auc_f": 0.9994, "test_auc_person_seen": 0.9998, "test_auc_person_unseen": 0.9996}
+robustness clean: auc 0.9996 acc 0.9968
+robustness jpeg_75: auc 0.9995 acc 0.9942
+robustness jpeg_50: auc 0.9986 acc 0.9846
+robustness jpeg_30: auc 0.9949 acc 0.9421
+robustness blur_1: auc 0.9994 acc 0.9874
+robustness blur_2: auc 0.9945 acc 0.9153
+robustness resize_0.5: auc 0.9997 acc 0.9942
+robustness resize_0.25: auc 0.9967 acc 0.9452
+robustness noise_5: auc 0.9988 acc 0.9858
+robustness noise_10: auc 0.9917 acc 0.8973
+RUN COMPLETE

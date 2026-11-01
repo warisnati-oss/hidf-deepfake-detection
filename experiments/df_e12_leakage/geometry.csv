@@ -1,0 +1,11 @@
+features,test_auc,median,p95,real,fake
+position/size (6),0.5384672840824443,,,,
+position/size + oval shape (78),0.6103480318617669,,,,
+"paired |fake - base| cx (px, median / p95)",,1.096649169921875,4.4730590820312415,,
+"paired |fake - base| cy (px, median / p95)",,1.55908203125,5.176391601562498,,
+"paired |fake - base| w (px, median / p95)",,3.09130859375,10.120660400390618,,
+"paired |fake - base| h (px, median / p95)",,3.07659912109375,10.247656249999999,,
+mean cx real / fake (px),,,,258.6656799316406,258.5309143066406
+mean cy real / fake (px),,,,307.568115234375,307.6591491699219
+mean w real / fake (px),,,,280.1552734375,281.2807312011719
+mean h real / fake (px),,,,327.6114196777344,328.38134765625

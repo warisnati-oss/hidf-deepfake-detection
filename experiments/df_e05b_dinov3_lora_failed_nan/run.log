@@ -1,0 +1,14 @@
+W1026 18:59:21.872000 40862 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 15498.36it/s]
+df_e05b_dinov3_lora: trainable 12,658,693 / 315,788,293 params (4.01%)
+  epoch 0 step 0/3142 loss 1.3883 (2 img/s)
+  epoch 0 step 200/3142 loss 1.4110 (4 img/s)
+  epoch 0 step 400/3142 loss 1.4267 (6 img/s)
+  epoch 0 step 600/3142 loss 1.3992 (7 img/s)
+  epoch 0 step 800/3142 loss nan (7 img/s)
+  epoch 0 step 1000/3142 loss nan (7 img/s)
+  epoch 0 step 1200/3142 loss nan (8 img/s)
+  epoch 0 step 1400/3142 loss nan (8 img/s)
+  epoch 0 step 1600/3142 loss nan (8 img/s)
+  epoch 0 step 1800/3142 loss nan (8 img/s)
+  epoch 0 step 2000/3142 loss nan (8 img/s)

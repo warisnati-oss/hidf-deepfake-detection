@@ -1,0 +1,4 @@
+2026-10-31 11:43:57 stopping df_e08_res_dinomac (pid 96980) after epoch 1
+still alive -> SIGTERM
+2026-10-31 11:46:27 eval-only start
+2026-10-31 18:15:19 eval-only end exit=0

@@ -1,0 +1,101 @@
+W1025 23:51:25.845000 32056 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 36502.80it/s]
+  dinov3 train sigma=0.0: 0/15000
+  dinov3 train sigma=0.0: 3200/15000
+  dinov3 train sigma=0.0: 6400/15000
+  dinov3 train sigma=0.0: 9600/15000
+  dinov3 train sigma=0.0: 12800/15000
+  dinov3 val sigma=0.0: 0/9546
+  dinov3 val sigma=0.0: 3200/9546
+  dinov3 val sigma=0.0: 6400/9546
+  dinov3 test sigma=0.0: 0/9600
+  dinov3 test sigma=0.0: 3200/9600
+  dinov3 test sigma=0.0: 6400/9600
+  dinov3 val sigma=0.02: 0/9546
+  dinov3 val sigma=0.02: 3200/9546
+  dinov3 val sigma=0.02: 6400/9546
+  dinov3 test sigma=0.02: 0/9600
+  dinov3 test sigma=0.02: 3200/9600
+  dinov3 test sigma=0.02: 6400/9600
+  dinov3 val sigma=0.05: 0/9546
+  dinov3 val sigma=0.05: 3200/9546
+  dinov3 val sigma=0.05: 6400/9546
+  dinov3 test sigma=0.05: 0/9600
+  dinov3 test sigma=0.05: 3200/9600
+  dinov3 test sigma=0.05: 6400/9600
+  dinov3 val sigma=0.1: 0/9546
+  dinov3 val sigma=0.1: 3200/9546
+  dinov3 val sigma=0.1: 6400/9546
+  dinov3 test sigma=0.1: 0/9600
+  dinov3 test sigma=0.1: 3200/9600
+  dinov3 test sigma=0.1: 6400/9600
+RIGID: {'model': 'rigid_dinov3', 'sigma': 0.02, 'val_auc': np.float64(0.6009), 'threshold': 0.0048, 'test_auc': 0.6, 'test_accuracy': 0.5501, 'test_precision': 0.4939, 'test_recall': 0.8073, 'test_f1': 0.6128, 'tn': 1863, 'fp': 3503, 'fn': 816, 'tp': 3418, 'test_auc_c': 0.5754, 'test_auc_f': 0.6234, 'test_auc_person_seen': 0.5878, 'test_auc_person_unseen': 0.6139}
+/Users/schrodingercat/Developer/projects/ai-project/deepfake/.venv/lib/python3.12/site-packages/open_clip/factory.py:450: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+  clip_l14 crop train15k: 0/15000
+  clip_l14 crop train15k: 3200/15000
+  clip_l14 crop train15k: 6400/15000
+  clip_l14 crop train15k: 9600/15000
+  clip_l14 crop train15k: 12800/15000
+  siglip2_so400m crop train15k: 0/15000
+  siglip2_so400m crop train15k: 1200/15000
+  siglip2_so400m crop train15k: 2400/15000
+  siglip2_so400m crop train15k: 3600/15000
+  siglip2_so400m crop train15k: 4800/15000
+  siglip2_so400m crop train15k: 6000/15000
+  siglip2_so400m crop train15k: 7200/15000
+  siglip2_so400m crop train15k: 8400/15000
+  siglip2_so400m crop train15k: 9600/15000
+  siglip2_so400m crop train15k: 10800/15000
+  siglip2_so400m crop train15k: 12000/15000
+  siglip2_so400m crop train15k: 13200/15000
+  siglip2_so400m crop train15k: 14400/15000
+  pe_core_bigG crop train15k: 0/15000
+  pe_core_bigG crop train15k: 400/15000
+  pe_core_bigG crop train15k: 800/15000
+  pe_core_bigG crop train15k: 1200/15000
+  pe_core_bigG crop train15k: 1600/15000
+  pe_core_bigG crop train15k: 2000/15000
+  pe_core_bigG crop train15k: 2400/15000
+  pe_core_bigG crop train15k: 2800/15000
+  pe_core_bigG crop train15k: 3200/15000
+  pe_core_bigG crop train15k: 3600/15000
+  pe_core_bigG crop train15k: 4000/15000
+  pe_core_bigG crop train15k: 4400/15000
+  pe_core_bigG crop train15k: 4800/15000
+  pe_core_bigG crop train15k: 5200/15000
+  pe_core_bigG crop train15k: 5600/15000
+  pe_core_bigG crop train15k: 6000/15000
+  pe_core_bigG crop train15k: 6400/15000
+  pe_core_bigG crop train15k: 6800/15000
+  pe_core_bigG crop train15k: 7200/15000
+  pe_core_bigG crop train15k: 7600/15000
+  pe_core_bigG crop train15k: 8000/15000
+  pe_core_bigG crop train15k: 8400/15000
+  pe_core_bigG crop train15k: 8800/15000
+  pe_core_bigG crop train15k: 9200/15000
+  pe_core_bigG crop train15k: 9600/15000
+  pe_core_bigG crop train15k: 10000/15000
+  pe_core_bigG crop train15k: 10400/15000
+  pe_core_bigG crop train15k: 10800/15000
+  pe_core_bigG crop train15k: 11200/15000
+  pe_core_bigG crop train15k: 11600/15000
+  pe_core_bigG crop train15k: 12000/15000
+  pe_core_bigG crop train15k: 12400/15000
+  pe_core_bigG crop train15k: 12800/15000
+  pe_core_bigG crop train15k: 13200/15000
+  pe_core_bigG crop train15k: 13600/15000
+  pe_core_bigG crop train15k: 14000/15000
+  pe_core_bigG crop train15k: 14400/15000
+  pe_core_bigG crop train15k: 14800/15000
+{'model': 'dinov3_l16', 'dim': 2048, 'l_size': True, 'C': 0.1, 'val_auc': 0.9978584325032095, 'threshold': -0.7142866134643404, 'test_auc': 0.9975697242439187, 'test_accuracy': 0.9827083333333333, 'test_precision': 0.9808510638297873, 'test_recall': 0.9799244213509684, 'test_f1': 0.9803875236294896, 'tn': 5285, 'fp': 81, 'fn': 85, 'tp': 4149, 'test_auc_c': 0.998142837801659, 'test_auc_f': 0.9973372826104842, 'test_auc_person_seen': 0.9972805884219593, 'test_auc_person_unseen': 0.997762959667553}
+{'model': 'clip_l14', 'dim': 768, 'l_size': True, 'C': 0.01, 'val_auc': 0.9966956918804972, 'threshold': -0.8801089197397227, 'test_auc': 0.9960473412347481, 'test_accuracy': 0.97625, 'test_precision': 0.9732986767485823, 'test_recall': 0.9728389230042513, 'test_f1': 0.9730687455705174, 'tn': 5253, 'fp': 113, 'fn': 115, 'tp': 4119, 'test_auc_c': 0.9978787795500423, 'test_auc_f': 0.9944169969819154, 'test_auc_person_seen': 0.9950264064554151, 'test_auc_person_unseen': 0.996185858871824}
+{'model': 'siglip2_so400m', 'dim': 1152, 'l_size': False, 'C': 0.01, 'val_auc': 0.996972585729432, 'threshold': -0.5178370207548063, 'test_auc': 0.9969522849917896, 'test_accuracy': 0.9777083333333333, 'test_precision': 0.9709465791940018, 'test_recall': 0.9787435049598489, 'test_f1': 0.9748294518936721, 'tn': 5242, 'fp': 124, 'fn': 90, 'tp': 4144, 'test_auc_c': 0.9963074599000975, 'test_auc_f': 0.9974801368756065, 'test_auc_person_seen': 0.9941894464844281, 'test_auc_person_unseen': 0.9977381879214989}
+{'model': 'pe_core_bigG', 'dim': 1280, 'l_size': False, 'C': 0.01, 'val_auc': 0.9995471557698735, 'threshold': -0.6385789334774008, 'test_auc': 0.9998483691029666, 'test_accuracy': 0.9928125, 'test_precision': 0.9880478087649402, 'test_recall': 0.9957487009919698, 'test_f1': 0.9918833078461358, 'tn': 5315, 'fp': 51, 'fn': 18, 'tp': 4216, 'test_auc_c': 0.9996516548430869, 'test_auc_f': 0.9999640173325741, 'test_auc_person_seen': 0.9996464028287773, 'test_auc_person_unseen': 0.9999230559234805}
+         model  dim  l_size    C  val_auc  test_auc  test_accuracy  test_precision  test_recall  test_f1   tn  fp  fn   tp  test_auc_c  test_auc_f  test_auc_person_seen  test_auc_person_unseen
+  pe_core_bigG 1280   False 0.01   0.9995    0.9998         0.9928          0.9880       0.9957   0.9919 5315  51  18 4216      0.9997      1.0000                0.9996                  0.9999
+    dinov3_l16 2048    True 0.10   0.9979    0.9976         0.9827          0.9809       0.9799   0.9804 5285  81  85 4149      0.9981      0.9973                0.9973                  0.9978
+siglip2_so400m 1152   False 0.01   0.9970    0.9970         0.9777          0.9709       0.9787   0.9748 5242 124  90 4144      0.9963      0.9975                0.9942                  0.9977
+      clip_l14  768    True 0.01   0.9967    0.9960         0.9762          0.9733       0.9728   0.9731 5253 113 115 4119      0.9979      0.9944                0.9950                  0.9962
+
+GenD backbone (best ViT-L-size on val): dinov3_l16

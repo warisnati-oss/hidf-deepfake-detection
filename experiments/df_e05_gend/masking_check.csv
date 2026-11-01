@@ -1,0 +1,4 @@
+exp,mode,test_auc
+df_e05_gend,original,0.9998
+df_e05_gend,face_blanked,0.5227
+df_e05_gend,background_blanked,0.9985

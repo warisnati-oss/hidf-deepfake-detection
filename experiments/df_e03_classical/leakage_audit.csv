@@ -1,0 +1,5 @@
+test,test_auc,test_auc_c,test_auc_f,count,share,nn_dist_p1,nn_dist_median
+A label shuffle (all 247 features),0.5123,,,,,,
+"B background only (HGB, noise + LBP + colour)",0.4995,0.4921,0.5076,,,,
+C near-duplicates val->train (dist <= median fake-vs-own-base 0.098),,,,24.0,0.0025,0.2913,0.5873
+C near-duplicates test->train (dist <= median fake-vs-own-base 0.098),,,,27.0,0.0028,0.2771,0.5881

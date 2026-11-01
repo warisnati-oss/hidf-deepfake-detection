@@ -1,0 +1,7 @@
+model,view,prompts,threshold,val_auc,test_auc,test_accuracy,test_precision,test_recall,test_f1
+clip_l14,full,forensic,-0.0074,0.9018,0.9081,0.8456,0.8572,0.7799,0.8167
+clip_l14,crop,forensic,-0.0081,0.9552,0.9528,0.9058,0.9343,0.846,0.888
+siglip2_so400m,full,forensic,0.0142,0.7203,0.7251,0.6888,0.6931,0.5281,0.5995
+siglip2_so400m,crop,forensic,0.016,0.8497,0.8529,0.7974,0.8092,0.7074,0.7549
+pe_core_bigG,full,forensic,-0.0072,0.8867,0.891,0.8089,0.7676,0.8127,0.7895
+pe_core_bigG,crop,forensic,-0.0084,0.902,0.9069,0.8238,0.7881,0.8212,0.8043

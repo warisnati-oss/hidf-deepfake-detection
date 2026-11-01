@@ -1,0 +1,52 @@
+W1027 15:24:55.718000 7174 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 18060.14it/s]
+df_e07_crop_gend: trainable 101,377 / 303,130,625 params (0.03%)
+  epoch 0 step 0/1571 loss -0.6630 (3 img/s)
+  epoch 0 step 200/1571 loss -0.6800 (15 img/s)
+  epoch 0 step 400/1571 loss -0.8821 (14 img/s)
+  epoch 0 step 600/1571 loss -1.0199 (14 img/s)
+  epoch 0 step 800/1571 loss -1.0856 (15 img/s)
+  epoch 0 step 1000/1571 loss -1.1601 (15 img/s)
+  epoch 0 step 1200/1571 loss -1.2862 (16 img/s)
+  epoch 0 step 1400/1571 loss -1.4023 (16 img/s)
+epoch 0: loss -1.1174 val_auc 0.9967 (55.0 min)
+  epoch 1 step 0/1571 loss -1.4971 (17 img/s)
+  epoch 1 step 200/1571 loss -1.5331 (18 img/s)
+  epoch 1 step 400/1571 loss -1.5783 (17 img/s)
+  epoch 1 step 600/1571 loss -1.6058 (18 img/s)
+  epoch 1 step 800/1571 loss -1.6211 (18 img/s)
+  epoch 1 step 1000/1571 loss -1.6426 (18 img/s)
+  epoch 1 step 1200/1571 loss -1.6576 (18 img/s)
+  epoch 1 step 1400/1571 loss -1.6712 (18 img/s)
+epoch 1: loss -1.6223 val_auc 0.9999 (50.8 min)
+  epoch 2 step 0/1571 loss -1.6479 (16 img/s)
+  epoch 2 step 200/1571 loss -1.6895 (18 img/s)
+  epoch 2 step 400/1571 loss -1.6911 (18 img/s)
+  epoch 2 step 600/1571 loss -1.6994 (17 img/s)
+  epoch 2 step 800/1571 loss -1.6956 (17 img/s)
+  epoch 2 step 1000/1571 loss -1.7074 (17 img/s)
+  epoch 2 step 1200/1571 loss -1.7141 (17 img/s)
+  epoch 2 step 1400/1571 loss -1.7144 (17 img/s)
+epoch 2: loss -1.7037 val_auc 0.9998 (51.6 min)
+  epoch 3 step 0/1571 loss -1.7558 (16 img/s)
+  epoch 3 step 200/1571 loss -1.7216 (18 img/s)
+  epoch 3 step 400/1571 loss -1.7211 (18 img/s)
+  epoch 3 step 600/1571 loss -1.7286 (18 img/s)
+  epoch 3 step 800/1571 loss -1.7236 (18 img/s)
+  epoch 3 step 1000/1571 loss -1.7290 (18 img/s)
+  epoch 3 step 1200/1571 loss -1.7359 (18 img/s)
+  epoch 3 step 1400/1571 loss -1.7378 (18 img/s)
+epoch 3: loss -1.7288 val_auc 0.9998 (51.0 min)
+early stop: no val AUC gain for 2 epochs
+{"exp": "df_e07_crop_gend", "model": "gend", "view": "crop", "size": 224, "augment": true, "best_epoch": 1, "val_auc": 0.9999, "threshold": 1.1828, "trainable_params": 101377, "test_auc": 0.9999, "test_accuracy": 0.9969, "test_precision": 0.9995, "test_recall": 0.9934, "test_f1": 0.9964, "tn": 5364, "fp": 2, "fn": 28, "tp": 4206, "test_auc_c": 0.9999, "test_auc_f": 0.9999, "test_auc_person_seen": 0.9999, "test_auc_person_unseen": 0.9999}
+robustness clean: auc 0.9999 acc 0.9969
+robustness jpeg_75: auc 0.9997 acc 0.9932
+robustness jpeg_50: auc 0.9987 acc 0.9867
+robustness jpeg_30: auc 0.9962 acc 0.9716
+robustness blur_1: auc 0.9995 acc 0.9955
+robustness blur_2: auc 0.9968 acc 0.9847
+robustness resize_0.5: auc 0.9991 acc 0.9949
+robustness resize_0.25: auc 0.9916 acc 0.9636
+robustness noise_5: auc 0.9996 acc 0.9929
+robustness noise_10: auc 0.9981 acc 0.9853
+RUN COMPLETE

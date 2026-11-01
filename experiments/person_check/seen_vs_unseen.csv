@@ -1,0 +1,5 @@
+model,auc_seen_person,auc_unseen_person,n_seen,n_unseen
+classical HGB,0.9956,0.9991,3264,6336
+CLIP L/14 crop,0.9379,0.9575,3264,6336
+PE bigG crop,0.9112,0.9458,3264,6336
+SigLIP 2 crop,0.865,0.8938,3264,6336

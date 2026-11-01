@@ -1,0 +1,3 @@
+{'exp': 'df_e07_crop_effnet', 'mode': 'original', 'test_auc': 0.9999007026694609}
+{'exp': 'df_e07_crop_effnet', 'mode': 'face_blanked', 'test_auc': 0.5113418370463904}
+{'exp': 'df_e07_crop_effnet', 'mode': 'background_blanked', 'test_auc': 0.9945266968091577}

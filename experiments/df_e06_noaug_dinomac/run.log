@@ -1,0 +1,84 @@
+W1028 15:35:18.142000 38768 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 15616.83it/s]
+df_e06_noaug_dinomac: trainable 12,658,693 / 315,788,293 params (4.01%)
+  epoch 0 step 0/3142 loss 1.3920 (1 img/s)
+  epoch 0 step 200/3142 loss 1.3993 (5 img/s)
+  epoch 0 step 400/3142 loss 1.3000 (5 img/s)
+  epoch 0 step 600/3142 loss 0.8674 (5 img/s)
+  epoch 0 step 800/3142 loss 0.7034 (5 img/s)
+  epoch 0 step 1000/3142 loss 0.6445 (5 img/s)
+  epoch 0 step 1200/3142 loss 0.5699 (6 img/s)
+  epoch 0 step 1400/3142 loss 0.4676 (6 img/s)
+  epoch 0 step 1600/3142 loss 0.3764 (6 img/s)
+  epoch 0 step 1800/3142 loss 0.3674 (6 img/s)
+  epoch 0 step 2000/3142 loss 0.3336 (6 img/s)
+  epoch 0 step 2200/3142 loss 0.3399 (6 img/s)
+  epoch 0 step 2400/3142 loss 0.3307 (6 img/s)
+  epoch 0 step 2600/3142 loss 0.3070 (6 img/s)
+  epoch 0 step 2800/3142 loss 0.3034 (6 img/s)
+  epoch 0 step 3000/3142 loss 0.3184 (6 img/s)
+epoch 0: loss 0.5624 val_auc 0.9993 (146.4 min)
+  epoch 1 step 0/3142 loss 0.2094 (7 img/s)
+  epoch 1 step 200/3142 loss 0.2867 (6 img/s)
+  epoch 1 step 400/3142 loss 0.2884 (6 img/s)
+  epoch 1 step 600/3142 loss 0.2963 (6 img/s)
+  epoch 1 step 800/3142 loss 0.2631 (6 img/s)
+  epoch 1 step 1000/3142 loss 0.2549 (6 img/s)
+  epoch 1 step 1200/3142 loss 0.2590 (6 img/s)
+  epoch 1 step 1400/3142 loss 0.3039 (6 img/s)
+  epoch 1 step 1600/3142 loss 0.2762 (6 img/s)
+  epoch 1 step 1800/3142 loss 0.2726 (6 img/s)
+  epoch 1 step 2000/3142 loss 0.2759 (6 img/s)
+  epoch 1 step 2200/3142 loss 0.2577 (6 img/s)
+  epoch 1 step 2400/3142 loss 0.2618 (6 img/s)
+  epoch 1 step 2600/3142 loss 0.2885 (6 img/s)
+  epoch 1 step 2800/3142 loss 0.2553 (6 img/s)
+  epoch 1 step 3000/3142 loss 0.2617 (6 img/s)
+epoch 1: loss 0.2730 val_auc 0.9994 (138.2 min)
+  epoch 2 step 0/3142 loss 0.1969 (6 img/s)
+  epoch 2 step 200/3142 loss 0.2483 (6 img/s)
+  epoch 2 step 400/3142 loss 0.2385 (6 img/s)
+  epoch 2 step 600/3142 loss 0.2544 (6 img/s)
+  epoch 2 step 800/3142 loss 0.2519 (6 img/s)
+  epoch 2 step 1000/3142 loss 0.2489 (6 img/s)
+  epoch 2 step 1200/3142 loss 0.2422 (6 img/s)
+  epoch 2 step 1400/3142 loss 0.2436 (6 img/s)
+  epoch 2 step 1600/3142 loss 0.2292 (6 img/s)
+  epoch 2 step 1800/3142 loss 0.2411 (6 img/s)
+  epoch 2 step 2000/3142 loss 0.2701 (6 img/s)
+  epoch 2 step 2200/3142 loss 0.2331 (6 img/s)
+  epoch 2 step 2400/3142 loss 0.2373 (6 img/s)
+  epoch 2 step 2600/3142 loss 0.2386 (6 img/s)
+  epoch 2 step 2800/3142 loss 0.2382 (6 img/s)
+  epoch 2 step 3000/3142 loss 0.2521 (6 img/s)
+epoch 2: loss 0.2440 val_auc 0.9994 (137.6 min)
+  epoch 3 step 0/3142 loss 0.1955 (4 img/s)
+  epoch 3 step 200/3142 loss 0.2252 (6 img/s)
+  epoch 3 step 400/3142 loss 0.2276 (6 img/s)
+  epoch 3 step 600/3142 loss 0.2527 (6 img/s)
+  epoch 3 step 800/3142 loss 0.2357 (6 img/s)
+  epoch 3 step 1000/3142 loss 0.2176 (6 img/s)
+  epoch 3 step 1200/3142 loss 0.2397 (6 img/s)
+  epoch 3 step 1400/3142 loss 0.2247 (6 img/s)
+  epoch 3 step 1600/3142 loss 0.2324 (6 img/s)
+  epoch 3 step 1800/3142 loss 0.2407 (6 img/s)
+  epoch 3 step 2000/3142 loss 0.2286 (6 img/s)
+  epoch 3 step 2200/3142 loss 0.2301 (6 img/s)
+  epoch 3 step 2400/3142 loss 0.2420 (6 img/s)
+  epoch 3 step 2600/3142 loss 0.2387 (6 img/s)
+  epoch 3 step 2800/3142 loss 0.2295 (6 img/s)
+  epoch 3 step 3000/3142 loss 0.2322 (6 img/s)
+epoch 3: loss 0.2326 val_auc 0.9993 (138.9 min)
+early stop: no val AUC gain for 2 epochs
+{"exp": "df_e06_noaug_dinomac", "model": "dinov3_lora", "view": "full", "size": 224, "augment": false, "best_epoch": 1, "val_auc": 0.9994, "threshold": -3.4887, "trainable_params": 12658693, "test_auc": 0.9999, "test_accuracy": 0.9958, "test_precision": 0.999, "test_recall": 0.9915, "test_f1": 0.9953, "tn": 5362, "fp": 4, "fn": 36, "tp": 4198, "test_auc_c": 1.0, "test_auc_f": 0.9998, "test_auc_person_seen": 0.9999, "test_auc_person_unseen": 0.9999}
+robustness clean: auc 0.9999 acc 0.9958
+robustness jpeg_75: auc 0.9998 acc 0.9939
+robustness jpeg_50: auc 0.9996 acc 0.9907
+robustness jpeg_30: auc 0.9990 acc 0.9774
+robustness blur_1: auc 0.9997 acc 0.9950
+robustness blur_2: auc 0.9975 acc 0.9489
+robustness resize_0.5: auc 0.9999 acc 0.9968
+robustness resize_0.25: auc 0.9955 acc 0.8120
+robustness noise_5: auc 0.9998 acc 0.9920
+robustness noise_10: auc 0.9994 acc 0.9833
+RUN COMPLETE

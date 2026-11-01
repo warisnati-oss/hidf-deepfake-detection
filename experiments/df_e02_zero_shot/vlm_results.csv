@@ -1,0 +1,2 @@
+model,view,prompts,threshold,val_auc,n_test,test_auc,test_accuracy,test_precision,test_recall,test_f1
+qwen2.5_vl_7b,full,forensic,-3.0156,0.5806,1000,0.599,0.545,0.4892,0.7211,0.583

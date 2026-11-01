@@ -1,0 +1,116 @@
+== clip_l14
+/Users/schrodingercat/Developer/projects/ai-project/deepfake/.venv/lib/python3.12/site-packages/open_clip/factory.py:450: UserWarning: QuickGELU mismatch between final model config (quick_gelu=False) and pretrained tag 'openai' (quick_gelu=True).
+  warnings.warn(
+{'model': 'clip_l14', 'view': 'full', 'prompts': 'forensic', 'threshold': -0.0074047211557626775, 'val_auc': 0.9018345018277485, 'test_auc': 0.908140990237347, 'test_accuracy': 0.845625, 'test_precision': 0.8572170301142263, 'test_recall': 0.7798771846953235, 'test_f1': 0.8167202572347267}
+{'model': 'clip_l14', 'view': 'crop', 'prompts': 'forensic', 'threshold': -0.008131399005651479, 'val_auc': 0.9551644172897074, 'test_auc': 0.9527503599968381, 'test_accuracy': 0.9058333333333334, 'test_precision': 0.9342723004694836, 'test_recall': 0.8460085025980161, 'test_f1': 0.8879524045612296}
+== siglip2_so400m
+{'model': 'siglip2_so400m', 'view': 'full', 'prompts': 'forensic', 'threshold': 0.014230263419449331, 'val_auc': 0.720347822984396, 'test_auc': 0.7251465735994806, 'test_accuracy': 0.68875, 'test_precision': 0.6931184128952262, 'test_recall': 0.5281058101086443, 'test_f1': 0.5994638069705094}
+{'model': 'siglip2_so400m', 'view': 'crop', 'prompts': 'forensic', 'threshold': 0.015971419773995875, 'val_auc': 0.8497054087903476, 'test_auc': 0.8528704058919233, 'test_accuracy': 0.7973958333333333, 'test_precision': 0.8092407457443934, 'test_recall': 0.7073689182805858, 'test_f1': 0.7548834278512917}
+== pe_core_bigG
+  pe_core_bigG full val: 0/9570
+  pe_core_bigG full val: 400/9570
+  pe_core_bigG full val: 800/9570
+  pe_core_bigG full val: 1200/9570
+  pe_core_bigG full val: 1600/9570
+  pe_core_bigG full val: 2000/9570
+  pe_core_bigG full val: 2400/9570
+  pe_core_bigG full val: 2800/9570
+  pe_core_bigG full val: 3200/9570
+  pe_core_bigG full val: 3600/9570
+  pe_core_bigG full val: 4000/9570
+  pe_core_bigG full val: 4400/9570
+  pe_core_bigG full val: 4800/9570
+  pe_core_bigG full val: 5200/9570
+  pe_core_bigG full val: 5600/9570
+  pe_core_bigG full val: 6000/9570
+  pe_core_bigG full val: 6400/9570
+  pe_core_bigG full val: 6800/9570
+  pe_core_bigG full val: 7200/9570
+  pe_core_bigG full val: 7600/9570
+  pe_core_bigG full val: 8000/9570
+  pe_core_bigG full val: 8400/9570
+  pe_core_bigG full val: 8800/9570
+  pe_core_bigG full val: 9200/9570
+  pe_core_bigG full test: 0/9627
+  pe_core_bigG full test: 400/9627
+  pe_core_bigG full test: 800/9627
+  pe_core_bigG full test: 1200/9627
+  pe_core_bigG full test: 1600/9627
+  pe_core_bigG full test: 2000/9627
+  pe_core_bigG full test: 2400/9627
+  pe_core_bigG full test: 2800/9627
+  pe_core_bigG full test: 3200/9627
+  pe_core_bigG full test: 3600/9627
+  pe_core_bigG full test: 4000/9627
+  pe_core_bigG full test: 4400/9627
+  pe_core_bigG full test: 4800/9627
+  pe_core_bigG full test: 5200/9627
+  pe_core_bigG full test: 5600/9627
+  pe_core_bigG full test: 6000/9627
+  pe_core_bigG full test: 6400/9627
+  pe_core_bigG full test: 6800/9627
+  pe_core_bigG full test: 7200/9627
+  pe_core_bigG full test: 7600/9627
+  pe_core_bigG full test: 8000/9627
+  pe_core_bigG full test: 8400/9627
+  pe_core_bigG full test: 8800/9627
+  pe_core_bigG full test: 9200/9627
+  pe_core_bigG full test: 9600/9627
+{'model': 'pe_core_bigG', 'view': 'full', 'prompts': 'forensic', 'threshold': -0.007176104187965388, 'val_auc': 0.8866689136116104, 'test_auc': 0.8910481167750691, 'test_accuracy': 0.8088541666666667, 'test_precision': 0.7675663618112871, 'test_recall': 0.812706660368446, 'test_f1': 0.7894917976368017}
+  pe_core_bigG crop val: 0/9570
+  pe_core_bigG crop val: 400/9570
+  pe_core_bigG crop val: 800/9570
+  pe_core_bigG crop val: 1200/9570
+  pe_core_bigG crop val: 1600/9570
+  pe_core_bigG crop val: 2000/9570
+  pe_core_bigG crop val: 2400/9570
+  pe_core_bigG crop val: 2800/9570
+  pe_core_bigG crop val: 3200/9570
+  pe_core_bigG crop val: 3600/9570
+  pe_core_bigG crop val: 4000/9570
+  pe_core_bigG crop val: 4400/9570
+  pe_core_bigG crop val: 4800/9570
+  pe_core_bigG crop val: 5200/9570
+  pe_core_bigG crop val: 5600/9570
+  pe_core_bigG crop val: 6000/9570
+  pe_core_bigG crop val: 6400/9570
+  pe_core_bigG crop val: 6800/9570
+  pe_core_bigG crop val: 7200/9570
+  pe_core_bigG crop val: 7600/9570
+  pe_core_bigG crop val: 8000/9570
+  pe_core_bigG crop val: 8400/9570
+  pe_core_bigG crop val: 8800/9570
+  pe_core_bigG crop val: 9200/9570
+  pe_core_bigG crop test: 0/9627
+  pe_core_bigG crop test: 400/9627
+  pe_core_bigG crop test: 800/9627
+  pe_core_bigG crop test: 1200/9627
+  pe_core_bigG crop test: 1600/9627
+  pe_core_bigG crop test: 2000/9627
+  pe_core_bigG crop test: 2400/9627
+  pe_core_bigG crop test: 2800/9627
+  pe_core_bigG crop test: 3200/9627
+  pe_core_bigG crop test: 3600/9627
+  pe_core_bigG crop test: 4000/9627
+  pe_core_bigG crop test: 4400/9627
+  pe_core_bigG crop test: 4800/9627
+  pe_core_bigG crop test: 5200/9627
+  pe_core_bigG crop test: 5600/9627
+  pe_core_bigG crop test: 6000/9627
+  pe_core_bigG crop test: 6400/9627
+  pe_core_bigG crop test: 6800/9627
+  pe_core_bigG crop test: 7200/9627
+  pe_core_bigG crop test: 7600/9627
+  pe_core_bigG crop test: 8000/9627
+  pe_core_bigG crop test: 8400/9627
+  pe_core_bigG crop test: 8800/9627
+  pe_core_bigG crop test: 9200/9627
+  pe_core_bigG crop test: 9600/9627
+{'model': 'pe_core_bigG', 'view': 'crop', 'prompts': 'forensic', 'threshold': -0.00838401317596434, 'val_auc': 0.9020493570403819, 'test_auc': 0.906909434848539, 'test_accuracy': 0.82375, 'test_precision': 0.7880779691749773, 'test_recall': 0.8212092583845064, 'test_f1': 0.8043025676613463}
+         model view  prompts  threshold  val_auc  test_auc  test_accuracy  test_precision  test_recall  test_f1
+      clip_l14 full forensic    -0.0074   0.9018    0.9081         0.8456          0.8572       0.7799   0.8167
+      clip_l14 crop forensic    -0.0081   0.9552    0.9528         0.9058          0.9343       0.8460   0.8880
+siglip2_so400m full forensic     0.0142   0.7203    0.7251         0.6888          0.6931       0.5281   0.5995
+siglip2_so400m crop forensic     0.0160   0.8497    0.8529         0.7974          0.8092       0.7074   0.7549
+  pe_core_bigG full forensic    -0.0072   0.8867    0.8910         0.8089          0.7676       0.8127   0.7895
+  pe_core_bigG crop forensic    -0.0084   0.9020    0.9069         0.8238          0.7881       0.8212   0.8043

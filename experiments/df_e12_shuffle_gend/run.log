@@ -1,0 +1,14 @@
+W1101 10:51:59.872000 35799 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 13846.77it/s]
+df_e12_shuffle_gend: trainable 101,377 / 303,130,625 params (0.03%)
+  epoch 0 step 0/1571 loss -0.6986 (3 img/s)
+  epoch 0 step 200/1571 loss -0.7232 (17 img/s)
+  epoch 0 step 400/1571 loss -0.9008 (17 img/s)
+  epoch 0 step 600/1571 loss -1.0229 (17 img/s)
+  epoch 0 step 800/1571 loss -1.0666 (17 img/s)
+  epoch 0 step 1000/1571 loss -1.0813 (17 img/s)
+  epoch 0 step 1200/1571 loss -1.0882 (17 img/s)
+  epoch 0 step 1400/1571 loss -1.0913 (17 img/s)
+epoch 0: loss -1.0070 val_auc 0.4893 (51.2 min)
+{"exp": "df_e12_shuffle_gend", "model": "gend", "view": "full", "size": 224, "augment": true, "best_epoch": 0, "val_auc": 0.4893, "threshold": -0.043, "trainable_params": 101377, "test_auc": 0.4863, "test_accuracy": 0.5576, "test_precision": 0.4463, "test_recall": 0.0128, "test_f1": 0.0248, "tn": 5299, "fp": 67, "fn": 4180, "tp": 54, "test_auc_c": 0.4782, "test_auc_f": 0.4933, "test_auc_person_seen": 0.4525, "test_auc_person_unseen": 0.5008}
+RUN COMPLETE

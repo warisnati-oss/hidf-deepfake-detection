@@ -1,0 +1,24 @@
+W1025 20:35:50.712000 31122 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 1453.12it/s]
+  val direct: 0/500
+  val direct: 100/500
+  val direct: 200/500
+  val direct: 300/500
+  val direct: 400/500
+  val forensic: 0/500
+  val forensic: 100/500
+  val forensic: 200/500
+  val forensic: 300/500
+  val forensic: 400/500
+val AUC per prompt: {'direct': 0.5537, 'forensic': 0.5806}
+  test forensic: 0/1000
+  test forensic: 100/1000
+  test forensic: 200/1000
+  test forensic: 300/1000
+  test forensic: 400/1000
+  test forensic: 500/1000
+  test forensic: 600/1000
+  test forensic: 700/1000
+  test forensic: 800/1000
+  test forensic: 900/1000
+{'model': 'qwen2.5_vl_7b', 'view': 'full', 'prompts': 'forensic', 'threshold': -3.015625, 'val_auc': 0.5805640701276376, 'n_test': 1000, 'test_auc': 0.5990146804100291, 'test_accuracy': 0.545, 'test_precision': 0.48923076923076925, 'test_recall': 0.7210884353741497, 'test_f1': 0.5829514207149404}

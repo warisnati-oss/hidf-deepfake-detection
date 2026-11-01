@@ -1,0 +1,5 @@
+model,params,val_auc,threshold,test_auc,test_accuracy,test_precision,test_recall,test_f1,test_auc_c,test_auc_f
+hgb,"{'learning_rate': 0.05, 'max_leaf_nodes': 31}",0.9976,0.7657,0.9984,0.9805,0.9858,0.9698,0.9777,0.9968,0.9994
+logreg,{'C': 10},0.9952,0.6463,0.9962,0.9748,0.984,0.9584,0.971,0.9953,0.9973
+svm_rbf,{'C': 10},0.9949,0.0534,0.9962,0.9722,0.9673,0.9698,0.9685,0.9933,0.9983
+rf,"{'max_depth': None, 'min_samples_leaf': 1}",0.9929,0.522,0.9945,0.9666,0.9611,0.9632,0.9621,0.9895,0.9975

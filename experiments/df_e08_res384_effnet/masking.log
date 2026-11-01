@@ -1,0 +1,11 @@
+{'exp': 'df_e08_res384_effnet', 'mode': 'original', 'test_auc': 0.9999923414292935}
+python(61463) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61466) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61469) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61470) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+{'exp': 'df_e08_res384_effnet', 'mode': 'face_blanked', 'test_auc': 0.5202948822613593}
+python(61556) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61557) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61560) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(61563) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+{'exp': 'df_e08_res384_effnet', 'mode': 'background_blanked', 'test_auc': 0.9994407482793304}

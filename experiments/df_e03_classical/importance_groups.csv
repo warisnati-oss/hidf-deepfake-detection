@@ -1,0 +1,7 @@
+group,auc_drop
+lbp texture,0.3363
+noise (face vs outside),0.0559
+seam,0.0011
+noise (whole image),0.0008
+colour,0.0007
+fft,0.0003

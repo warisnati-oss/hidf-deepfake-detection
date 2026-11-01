@@ -1,0 +1,196 @@
+W1029 10:14:55.511000 61347 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 15440.21it/s]
+df_e08_res384_gend: trainable 101,377 / 303,130,625 params (0.03%)
+  epoch 0 step 0/3142 loss -0.6985 (1 img/s)
+  epoch 0 step 200/3142 loss -0.6766 (2 img/s)
+  epoch 0 step 400/3142 loss -0.8109 (3 img/s)
+  epoch 0 step 600/3142 loss -0.9316 (3 img/s)
+  epoch 0 step 800/3142 loss -1.0121 (3 img/s)
+  epoch 0 step 1000/3142 loss -1.0568 (3 img/s)
+  epoch 0 step 1200/3142 loss -1.0829 (4 img/s)
+  epoch 0 step 1400/3142 loss -1.1084 (4 img/s)
+  epoch 0 step 1600/3142 loss -1.1499 (4 img/s)
+  epoch 0 step 1800/3142 loss -1.2321 (4 img/s)
+  epoch 0 step 2000/3142 loss -1.3287 (4 img/s)
+  epoch 0 step 2200/3142 loss -1.4072 (4 img/s)
+  epoch 0 step 2400/3142 loss -1.4689 (4 img/s)
+  epoch 0 step 2600/3142 loss -1.5161 (4 img/s)
+  epoch 0 step 2800/3142 loss -1.5624 (4 img/s)
+  epoch 0 step 3000/3142 loss -1.5781 (4 img/s)
+python(66383) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(66384) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(66385) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(66386) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(66387) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(66388) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+epoch 0: loss -1.2132 val_auc 0.9987 (221.3 min)
+  epoch 1 step 0/3142 loss -1.6526 (4 img/s)
+  epoch 1 step 200/3142 loss -1.6224 (4 img/s)
+  epoch 1 step 400/3142 loss -1.6373 (4 img/s)
+  epoch 1 step 600/3142 loss -1.6544 (4 img/s)
+  epoch 1 step 800/3142 loss -1.6714 (4 img/s)
+  epoch 1 step 1000/3142 loss -1.6720 (4 img/s)
+  epoch 1 step 1200/3142 loss -1.6809 (4 img/s)
+  epoch 1 step 1400/3142 loss -1.6861 (4 img/s)
+  epoch 1 step 1600/3142 loss -1.7017 (4 img/s)
+  epoch 1 step 1800/3142 loss -1.7075 (4 img/s)
+  epoch 1 step 2000/3142 loss -1.7069 (4 img/s)
+  epoch 1 step 2200/3142 loss -1.7134 (4 img/s)
+  epoch 1 step 2400/3142 loss -1.7181 (4 img/s)
+  epoch 1 step 2600/3142 loss -1.7257 (4 img/s)
+  epoch 1 step 2800/3142 loss -1.7295 (4 img/s)
+  epoch 1 step 3000/3142 loss -1.7351 (4 img/s)
+python(71034) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(71035) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(71036) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(71037) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(71040) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(71041) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+epoch 1: loss -1.6923 val_auc 0.9996 (204.5 min)
+  epoch 2 step 0/3142 loss -1.7539 (2 img/s)
+  epoch 2 step 200/3142 loss -1.7299 (4 img/s)
+  epoch 2 step 400/3142 loss -1.7434 (4 img/s)
+  epoch 2 step 600/3142 loss -1.7444 (4 img/s)
+  epoch 2 step 800/3142 loss -1.7423 (4 img/s)
+  epoch 2 step 1000/3142 loss -1.7448 (4 img/s)
+  epoch 2 step 1200/3142 loss -1.7466 (4 img/s)
+  epoch 2 step 1400/3142 loss -1.7507 (4 img/s)
+  epoch 2 step 1600/3142 loss -1.7424 (4 img/s)
+  epoch 2 step 1800/3142 loss -1.7451 (4 img/s)
+  epoch 2 step 2000/3142 loss -1.7522 (4 img/s)
+  epoch 2 step 2200/3142 loss -1.7544 (4 img/s)
+  epoch 2 step 2400/3142 loss -1.7537 (4 img/s)
+  epoch 2 step 2600/3142 loss -1.7590 (4 img/s)
+  epoch 2 step 2800/3142 loss -1.7568 (4 img/s)
+  epoch 2 step 3000/3142 loss -1.7609 (4 img/s)
+python(77333) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(77336) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(77339) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(77341) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(77343) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(77345) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+epoch 2: loss -1.7487 val_auc 0.9997 (206.1 min)
+  epoch 3 step 0/3142 loss -1.7773 (2 img/s)
+  epoch 3 step 200/3142 loss -1.7635 (4 img/s)
+  epoch 3 step 400/3142 loss -1.7653 (4 img/s)
+  epoch 3 step 600/3142 loss -1.7631 (4 img/s)
+  epoch 3 step 800/3142 loss -1.7622 (4 img/s)
+  epoch 3 step 1000/3142 loss -1.7662 (4 img/s)
+  epoch 3 step 1200/3142 loss -1.7672 (4 img/s)
+  epoch 3 step 1400/3142 loss -1.7650 (4 img/s)
+  epoch 3 step 1600/3142 loss -1.7688 (4 img/s)
+  epoch 3 step 1800/3142 loss -1.7677 (4 img/s)
+  epoch 3 step 2000/3142 loss -1.7662 (4 img/s)
+  epoch 3 step 2200/3142 loss -1.7685 (4 img/s)
+  epoch 3 step 2400/3142 loss -1.7695 (4 img/s)
+  epoch 3 step 2600/3142 loss -1.7680 (4 img/s)
+  epoch 3 step 2800/3142 loss -1.7706 (4 img/s)
+  epoch 3 step 3000/3142 loss -1.7670 (4 img/s)
+python(85190) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(85191) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(85192) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(85193) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(85194) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(85195) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+epoch 3: loss -1.7668 val_auc 0.9997 (201.4 min)
+  epoch 4 step 0/3142 loss -1.7732 (3 img/s)
+  epoch 4 step 200/3142 loss -1.7676 (4 img/s)
+  epoch 4 step 400/3142 loss -1.7666 (4 img/s)
+  epoch 4 step 600/3142 loss -1.7692 (4 img/s)
+  epoch 4 step 800/3142 loss -1.7708 (4 img/s)
+  epoch 4 step 1000/3142 loss -1.7743 (4 img/s)
+  epoch 4 step 1200/3142 loss -1.7685 (4 img/s)
+  epoch 4 step 1400/3142 loss -1.7734 (4 img/s)
+  epoch 4 step 1600/3142 loss -1.7707 (4 img/s)
+  epoch 4 step 1800/3142 loss -1.7714 (4 img/s)
+  epoch 4 step 2000/3142 loss -1.7733 (4 img/s)
+  epoch 4 step 2200/3142 loss -1.7686 (4 img/s)
+  epoch 4 step 2400/3142 loss -1.7708 (4 img/s)
+  epoch 4 step 2600/3142 loss -1.7722 (4 img/s)
+  epoch 4 step 2800/3142 loss -1.7690 (4 img/s)
+  epoch 4 step 3000/3142 loss -1.7728 (4 img/s)
+python(93763) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(93764) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(93765) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(93769) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(93773) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(93777) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+epoch 4: loss -1.7707 val_auc 0.9997 (200.6 min)
+python(94097) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94098) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94101) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94104) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94105) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94106) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94297) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94298) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94299) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94300) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94303) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94304) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+{"exp": "df_e08_res384_gend", "model": "gend", "view": "full", "size": 384, "augment": true, "best_epoch": 3, "val_auc": 0.9997, "threshold": 2.8125, "trainable_params": 101377, "test_auc": 0.9997, "test_accuracy": 0.998, "test_precision": 1.0, "test_recall": 0.9955, "test_f1": 0.9978, "tn": 5366, "fp": 0, "fn": 19, "tp": 4215, "test_auc_c": 0.9999, "test_auc_f": 0.9996, "test_auc_person_seen": 1.0, "test_auc_person_unseen": 0.9997}
+robustness clean: auc 0.9997 acc 0.9980
+python(94479) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94482) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94483) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94484) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94487) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94488) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness jpeg_75: auc 0.9997 acc 0.9957
+python(94685) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94686) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94687) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94699) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94700) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(94703) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness jpeg_50: auc 0.9995 acc 0.9930
+python(95016) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95017) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95018) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95019) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95020) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95023) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness jpeg_30: auc 0.9986 acc 0.9857
+python(95253) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95254) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95255) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95256) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95257) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95261) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness blur_1: auc 0.9998 acc 0.9974
+python(95568) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95569) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95570) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95571) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95574) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95575) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness blur_2: auc 0.9965 acc 0.9828
+python(95833) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95834) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95835) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95836) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95837) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(95838) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness resize_0.5: auc 0.9996 acc 0.9960
+python(96116) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96117) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96118) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96119) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96120) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96121) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness resize_0.25: auc 0.9863 acc 0.9497
+python(96383) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96384) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96385) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96386) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96387) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96397) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness noise_5: auc 0.9998 acc 0.9960
+python(96722) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96723) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96724) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96725) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96726) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python(96727) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+robustness noise_10: auc 0.9985 acc 0.9899
+RUN COMPLETE

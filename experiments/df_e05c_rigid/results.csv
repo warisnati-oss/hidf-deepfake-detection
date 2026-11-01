@@ -1,0 +1,2 @@
+model,sigma,val_auc,threshold,test_auc,test_accuracy,test_precision,test_recall,test_f1,tn,fp,fn,tp,test_auc_c,test_auc_f,test_auc_person_seen,test_auc_person_unseen
+rigid_dinov3,0.02,0.6009,0.0048,0.6,0.5501,0.4939,0.8073,0.6128,1863,3503,816,3418,0.5754,0.6234,0.5878,0.6139

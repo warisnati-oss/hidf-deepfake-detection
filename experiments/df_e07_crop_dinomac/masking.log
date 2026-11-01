@@ -1,0 +1,5 @@
+W1028 08:35:27.520000 29291 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 15019.47it/s]
+{'exp': 'df_e07_crop_dinomac', 'mode': 'original', 'test_auc': 0.999996478818066}
+{'exp': 'df_e07_crop_dinomac', 'mode': 'face_blanked', 'test_auc': 0.5274752324464239}
+{'exp': 'df_e07_crop_dinomac', 'mode': 'background_blanked', 'test_auc': 0.9998875422519825}

@@ -1,0 +1,9 @@
+,0
+cut_off (median fake-vs-own-base sim),0.9568642377853394
+fake-vs-own-base sim p5 / p95,0.867 / 0.985
+val/test max-sim to train median / p99,0.738 / 0.948
+old near-dups found again,45 / 51
+candidates val,66
+candidates test,68
+new candidates (not flagged before) test,42
+of which matched via flip,7

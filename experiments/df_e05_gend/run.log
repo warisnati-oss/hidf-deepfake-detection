@@ -1,0 +1,60 @@
+W1026 13:15:15.381000 36845 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 17728.31it/s]
+df_e05_gend: trainable 101,377 / 303,130,625 params (0.03%)
+  epoch 0 step 0/1571 loss -0.6939 (3 img/s)
+  epoch 0 step 200/1571 loss -0.7234 (17 img/s)
+  epoch 0 step 400/1571 loss -0.9018 (18 img/s)
+  epoch 0 step 600/1571 loss -1.0264 (18 img/s)
+  epoch 0 step 800/1571 loss -1.0738 (18 img/s)
+  epoch 0 step 1000/1571 loss -1.1011 (18 img/s)
+  epoch 0 step 1200/1571 loss -1.1716 (17 img/s)
+  epoch 0 step 1400/1571 loss -1.3109 (17 img/s)
+epoch 0: loss -1.0845 val_auc 0.9964 (53.4 min)
+  epoch 1 step 0/1571 loss -1.5105 (17 img/s)
+  epoch 1 step 200/1571 loss -1.4909 (18 img/s)
+  epoch 1 step 400/1571 loss -1.5460 (18 img/s)
+  epoch 1 step 600/1571 loss -1.5724 (18 img/s)
+  epoch 1 step 800/1571 loss -1.5939 (18 img/s)
+  epoch 1 step 1000/1571 loss -1.6165 (18 img/s)
+  epoch 1 step 1200/1571 loss -1.6308 (18 img/s)
+  epoch 1 step 1400/1571 loss -1.6464 (18 img/s)
+epoch 1: loss -1.5922 val_auc 0.9992 (50.4 min)
+  epoch 2 step 0/1571 loss -1.6932 (16 img/s)
+  epoch 2 step 200/1571 loss -1.6613 (18 img/s)
+  epoch 2 step 400/1571 loss -1.6677 (18 img/s)
+  epoch 2 step 600/1571 loss -1.6821 (18 img/s)
+  epoch 2 step 800/1571 loss -1.6906 (18 img/s)
+  epoch 2 step 1000/1571 loss -1.6917 (18 img/s)
+  epoch 2 step 1200/1571 loss -1.6952 (18 img/s)
+  epoch 2 step 1400/1571 loss -1.6989 (18 img/s)
+epoch 2: loss -1.6855 val_auc 0.9994 (50.2 min)
+  epoch 3 step 0/1571 loss -1.7487 (15 img/s)
+  epoch 3 step 200/1571 loss -1.7033 (18 img/s)
+  epoch 3 step 400/1571 loss -1.7073 (18 img/s)
+  epoch 3 step 600/1571 loss -1.7129 (18 img/s)
+  epoch 3 step 800/1571 loss -1.7121 (18 img/s)
+  epoch 3 step 1000/1571 loss -1.7181 (18 img/s)
+  epoch 3 step 1200/1571 loss -1.7200 (18 img/s)
+  epoch 3 step 1400/1571 loss -1.7207 (18 img/s)
+epoch 3: loss -1.7134 val_auc 0.9997 (50.8 min)
+  epoch 4 step 0/1571 loss -1.7573 (15 img/s)
+  epoch 4 step 200/1571 loss -1.7220 (18 img/s)
+  epoch 4 step 400/1571 loss -1.7234 (18 img/s)
+  epoch 4 step 600/1571 loss -1.7195 (18 img/s)
+  epoch 4 step 800/1571 loss -1.7258 (18 img/s)
+  epoch 4 step 1000/1571 loss -1.7261 (18 img/s)
+  epoch 4 step 1200/1571 loss -1.7204 (18 img/s)
+  epoch 4 step 1400/1571 loss -1.7250 (18 img/s)
+epoch 4: loss -1.7231 val_auc 0.9998 (51.0 min)
+{"exp": "df_e05_gend", "model": "gend", "view": "full", "size": 224, "augment": true, "best_epoch": 4, "val_auc": 0.9998, "threshold": 0.6484, "trainable_params": 101377, "test_auc": 0.9998, "test_accuracy": 0.9967, "test_precision": 0.9993, "test_recall": 0.9932, "test_f1": 0.9962, "tn": 5363, "fp": 3, "fn": 29, "tp": 4205, "test_auc_c": 1.0, "test_auc_f": 0.9996, "test_auc_person_seen": 1.0, "test_auc_person_unseen": 0.9997}
+robustness clean: auc 0.9998 acc 0.9967
+robustness jpeg_75: auc 0.9993 acc 0.9924
+robustness jpeg_50: auc 0.9982 acc 0.9853
+robustness jpeg_30: auc 0.9953 acc 0.9656
+robustness blur_1: auc 0.9994 acc 0.9951
+robustness blur_2: auc 0.9977 acc 0.9868
+robustness resize_0.5: auc 0.9995 acc 0.9941
+robustness resize_0.25: auc 0.9954 acc 0.9751
+robustness noise_5: auc 0.9993 acc 0.9933
+robustness noise_10: auc 0.9971 acc 0.9845
+RUN COMPLETE

@@ -1,0 +1,3 @@
+{'exp': 'df_e06_noaug_effnet', 'mode': 'original', 'test_auc': 0.9996375603420546}
+{'exp': 'df_e06_noaug_effnet', 'mode': 'face_blanked', 'test_auc': 0.5177250576637557}
+{'exp': 'df_e06_noaug_effnet', 'mode': 'background_blanked', 'test_auc': 0.9976768782116481}

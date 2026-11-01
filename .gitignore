@@ -1,0 +1,28 @@
+# Large or private files stay local: the HiDF dataset (75 GB), the image cache (14 GB),
+# trained weights and embeddings (12 GB), downloaded model files.
+dataset/
+models/
+.venv/
+__pycache__/
+.DS_Store
+*.pdf
+
+# data/: keep only the small split / cleaning tables
+data/*
+!data/index.csv
+!data/cleaning_log.csv
+!data/id_aliases.csv
+!data/p3_benchmark_summary.csv
+
+# experiments/: keep configs, logs and result tables; drop weights, embeddings, features
+experiments/**/*.pt
+experiments/**/*.joblib
+experiments/**/*.npy
+experiments/**/*.npz
+experiments/**/*.parquet
+experiments/**/*.png
+experiments/**/*.jpg
+
+# secrets
+.env
+*.token

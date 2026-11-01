@@ -1,0 +1,9 @@
+variant,n_features,val_auc,test_auc
+all features,247,0.9976,0.9984
+global only (no P3 mask),144,0.8135,0.8156
+without fft,119,0.9975,0.9982
+without noise (whole image),231,0.9976,0.9982
+without noise (face vs outside),211,0.9956,0.996
+without lbp texture,219,0.9958,0.9973
+without colour,217,0.9974,0.9982
+without seam,238,0.9975,0.9982

@@ -1,0 +1,48 @@
+2026-10-26 13:15:12 start df_e05_gend --model gend --backbone dinov3_l16 --epochs 5 --batch 32
+2026-10-26 18:07:09 end df_e05_gend exit=0
+2026-10-26 18:07:09 start df_e05b_dinov3_lora --model dinov3_lora --size-range 224 320 --epochs 5 --batch 16
+2026-10-26 18:07:42 end df_e05b_dinov3_lora exit=0
+2026-10-26 18:07:42 start df_e07_crop_effnet --model effnet_b4 --view crop --epochs 8 --batch 32
+2026-10-26 18:09:03 queue restarted (fixes: M3 resize mode on MPS, exit-code capture); df_e05b_dinov3_lora failed at step 0 and is re-queued
+2026-10-26 18:37:04 skip df_e05_gend (already done)
+2026-10-26 18:37:04 start df_e07_crop_effnet --model effnet_b4 --view crop --epochs 8 --batch 32
+2026-10-26 18:59:19 end df_e07_crop_effnet exit=1
+2026-10-26 18:59:19 start df_e05b_dinov3_lora --model dinov3_lora --size-range 224 320 --epochs 5 --batch 16
+2026-10-26 19:00:30 note: df_e07_crop_effnet failed at first val (non-square crop batch); eval_transform fixed; will re-run when this queue finishes (restart run_queue.sh, finished runs are skipped)
+2026-10-27 09:53:25 M3 df_e05b_dinov3_lora stopped by me: loss NaN from ~step 700 and no learning before; killed process stuck in exit state (?E) holding the GPU at 100 %; STOP_QUEUE set until resolved
+2026-10-27 11:04:57 queue restarted after Mac restart (M3 fixed: fp32 losses, NaN guard, warm-up 0.3)
+2026-10-27 11:04:58 skip df_e05_gend (already done)
+2026-10-27 11:04:58 start df_e07_crop_effnet --model effnet_b4 --view crop --epochs 8 --batch 32
+2026-10-27 14:38:33 end df_e07_crop_effnet exit=0
+2026-10-27 14:38:33 start df_e05b_dinov3_lora --model dinov3_lora --warmup 0.3 --size-range 224 320 --epochs 5 --batch 16
+2026-10-27 15:24:52 end df_e05b_dinov3_lora exit=1
+2026-10-27 15:24:52 start df_e07_crop_gend --model gend --backbone dinov3_l16 --view crop --epochs 5 --batch 32
+2026-10-27 19:29:24 end df_e07_crop_gend exit=0
+2026-10-27 19:29:24 start df_e07_crop_dinomac --model dinov3_lora --warmup 0.3 --view crop --size-range 224 320 --epochs 5 --batch 16
+2026-10-28 08:33:54 end df_e07_crop_dinomac exit=0
+2026-10-28 08:33:54 start df_e06_noaug_effnet --model effnet_b4 --no-augment --epochs 8 --batch 32
+2026-10-28 11:35:50 end df_e06_noaug_effnet exit=0
+2026-10-28 11:35:50 start df_e06_noaug_gend --model gend --backbone dinov3_l16 --no-augment --epochs 5 --batch 32
+2026-10-28 15:35:15 end df_e06_noaug_gend exit=0
+2026-10-28 15:35:15 start df_e06_noaug_dinomac --model dinov3_lora --warmup 0.3 --no-augment --size-range 224 320 --epochs 5 --batch 16
+2026-10-29 02:12:35 end df_e06_noaug_dinomac exit=0
+2026-10-29 02:12:35 start df_e08_res384_effnet --model effnet_b4 --size 384 --epochs 8 --batch 16
+2026-10-29 10:14:52 end df_e08_res384_effnet exit=0
+2026-10-29 10:14:52 start df_e08_res384_gend --model gend --backbone dinov3_l16 --size 384 --epochs 5 --batch 16
+2026-10-30 05:00:29 end df_e08_res384_gend exit=0
+2026-10-30 05:00:29 start df_e08_res_dinomac --model dinov3_lora --warmup 0.3 --size 384 --size-range 320 448 --epochs 5 --batch 8
+2026-10-31 11:45:58 end df_e08_res_dinomac exit=143
+2026-10-31 11:45:58 queue finished
+2026-10-31 11:46:18 skip df_e05_gend (already done)
+2026-10-31 11:46:18 skip df_e07_crop_effnet (already done)
+2026-10-31 11:46:18 start df_e05b_dinov3_lora --model dinov3_lora --warmup 0.3 --size-range 224 320 --epochs 5 --batch 16
+2026-11-01 03:55:50 end df_e05b_dinov3_lora exit=0
+2026-11-01 03:55:50 skip df_e07_crop_gend (already done)
+2026-11-01 03:55:50 skip df_e07_crop_dinomac (already done)
+2026-11-01 03:55:50 skip df_e06_noaug_effnet (already done)
+2026-11-01 03:55:50 skip df_e06_noaug_gend (already done)
+2026-11-01 03:55:50 skip df_e06_noaug_dinomac (already done)
+2026-11-01 03:55:50 skip df_e08_res384_effnet (already done)
+2026-11-01 03:55:50 skip df_e08_res384_gend (already done)
+2026-11-01 03:55:50 skip df_e08_res_dinomac (already done)
+2026-11-01 03:55:50 queue finished

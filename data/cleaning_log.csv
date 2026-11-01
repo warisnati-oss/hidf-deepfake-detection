@@ -1,0 +1,9 @@
+rule,description,rows
+raw,all files,69831
+R1,empty file,3
+R2,real .jpeg = copy of a fake,235
+R3,fake with no visible swap,50
+R4,exact duplicate file,67
+R5,fake base id corrected,458
+clean,real,38281
+clean,fake,31195

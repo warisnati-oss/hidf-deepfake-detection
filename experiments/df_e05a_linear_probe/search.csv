@@ -1,0 +1,17 @@
+model,C,val_auc
+dinov3_l16,0.01,0.9977
+dinov3_l16,0.1,0.9979
+dinov3_l16,1.0,0.9974
+dinov3_l16,10.0,0.9973
+clip_l14,0.01,0.9967
+clip_l14,0.1,0.9966
+clip_l14,1.0,0.9955
+clip_l14,10.0,0.9943
+siglip2_so400m,0.01,0.997
+siglip2_so400m,0.1,0.9969
+siglip2_so400m,1.0,0.9958
+siglip2_so400m,10.0,0.9948
+pe_core_bigG,0.01,0.9995
+pe_core_bigG,0.1,0.9995
+pe_core_bigG,1.0,0.9994
+pe_core_bigG,10.0,0.9993

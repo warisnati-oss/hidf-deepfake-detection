@@ -1,0 +1,254 @@
+W1027 14:38:36.269000 5902 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/415 [00:00<?, ?it/s]Loading weights: 100%|██████████| 415/415 [00:00<00:00, 15224.27it/s]
+df_e05b_dinov3_lora: trainable 12,658,693 / 315,788,293 params (4.01%)
+  epoch 0 step 0/3142 loss 1.3882 (2 img/s)
+  epoch 0 step 200/3142 loss 1.4072 (5 img/s)
+  epoch 0 step 400/3142 loss 1.3859 (6 img/s)
+  epoch 0 step 600/3142 loss 1.0874 (7 img/s)
+  epoch 0 step 800/3142 loss 0.8641 (7 img/s)
+  epoch 0 step 1000/3142 loss 1.0823 (7 img/s)
+  epoch 0 step 1200/3142 loss 0.9326 (8 img/s)
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x7837937b80>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x7837937b80>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x7837937800>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783b182a00>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3ad80>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3ad80>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3ad80>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Ignored (for causing prior/excessive GPU errors) (00000004:kIOGPUCommandBufferCallbackErrorSubmissionsIgnored)
+	<AGXG18GFamilyCommandBuffer: 0x783ad3b480>
+    label = <none> 
+    device = <AGXG18GDevice: 0x1023555b0>
+        name = Apple M6 
+    commandQueue = <AGXG18GFamilyCommandQueue: 0x783d9e0000>
+        label = <none> 
+        device = <AGXG18GDevice: 0x1023555b0>
+            name = Apple M6 
+    retainedReferences = 1
+Traceback (most recent call last):
+  File "/Users/schrodingercat/Developer/projects/ai-project/deepfake/src/train.py", line 325, in <module>
+    main()
+  File "/Users/schrodingercat/Developer/projects/ai-project/deepfake/src/train.py", line 275, in main
+    raise RuntimeError(f"more than 20 non-finite steps in epoch {epoch} (last at step {k})")
+RuntimeError: more than 20 non-finite steps in epoch 0 (last at step 1340)

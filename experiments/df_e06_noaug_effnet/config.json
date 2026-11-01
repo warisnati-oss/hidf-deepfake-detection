@@ -1,0 +1,21 @@
+{
+  "exp": "df_e06_noaug_effnet",
+  "model": "effnet_b4",
+  "backbone": "dinov3_l16",
+  "view": "full",
+  "size": 224,
+  "size_range": null,
+  "no_augment": true,
+  "epochs": 8,
+  "patience": 2,
+  "no_robustness": false,
+  "batch": 32,
+  "lr": 0.0002,
+  "weight_decay": 0.01,
+  "warmup": 1.0,
+  "train_limit": null,
+  "eval_limit": null,
+  "workers": 6,
+  "seed": 0,
+  "precision": "bf16"
+}

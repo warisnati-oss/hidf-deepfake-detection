@@ -1,0 +1,25 @@
+{
+  "exp": "df_e08_res_dinomac",
+  "model": "dinov3_lora",
+  "backbone": "dinov3_l16",
+  "view": "full",
+  "size": 384,
+  "size_range": [
+    320,
+    448
+  ],
+  "no_augment": false,
+  "epochs": 5,
+  "patience": 2,
+  "no_robustness": false,
+  "batch": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup": 0.3,
+  "train_limit": null,
+  "eval_limit": null,
+  "workers": 6,
+  "seed": 0,
+  "eval_only": true,
+  "precision": "fp32"
+}

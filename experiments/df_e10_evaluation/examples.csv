@@ -1,0 +1,7 @@
+kind,cache_path,label,base_id,donor_id,base_race,base_gender,base_age,donor_race,donor_gender,Classical,Classical_ok,M1,M1_ok,M2,M2_ok,M3,M3_ok
+success,cache512/fake/f02635_f25548.jpg,fake,f02635,f25548,White,Male,Adult,White,Male,0.0018240414161966524,False,22.5,True,4.03125,True,8.832751,True
+success,cache512/fake/c03280_f41315.jpg,fake,c03280,f41315,Black,Male,Adult,White,Male,0.0025630851639881803,False,19.5,True,4.6875,True,11.0686865,True
+success,cache512/real/c24149.jpg,real,c24149,,Latino,Female,Adult,,,0.9995422007638213,False,-17.125,True,-3.828125,True,-8.434455,True
+failure,cache512/fake/f00936_f20146.jpg,fake,f00936,f20146,Asian,Male,Adult,Asian,Male,0.6490249687427219,False,-1.8984375,False,-2.265625,False,-4.8871937,False
+failure,cache512/fake/f02045_f22420.jpg,fake,f02045,f22420,White,Female,Elderly,White,Female,0.2522627946160918,False,-6.9375,False,-2.171875,False,-2.0780265,False
+failure,cache512/fake/f24161_f22403.jpg,fake,f24161,f22403,White,Male,Adult,White,Female,0.0007122086232506622,False,-19.5,False,-1.109375,False,2.429879,False

@@ -1,0 +1,25 @@
+{
+  "exp": "df_e05b_dinov3_lora",
+  "model": "dinov3_lora",
+  "backbone": "dinov3_l16",
+  "view": "full",
+  "size": 224,
+  "size_range": [
+    224,
+    320
+  ],
+  "no_augment": false,
+  "epochs": 5,
+  "patience": 2,
+  "no_robustness": false,
+  "batch": 16,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup": 0.3,
+  "train_limit": null,
+  "eval_limit": null,
+  "workers": 6,
+  "seed": 0,
+  "eval_only": false,
+  "precision": "fp32"
+}

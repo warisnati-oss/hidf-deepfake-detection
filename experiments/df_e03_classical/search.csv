@@ -1,0 +1,15 @@
+model,C,val_auc,max_depth,min_samples_leaf,learning_rate,max_leaf_nodes
+logreg,0.01,0.9923,,,,
+logreg,0.1,0.9943,,,,
+logreg,1,0.9952,,,,
+logreg,10,0.9952,,,,
+svm_rbf,1,0.9921,,,,
+svm_rbf,10,0.9949,,,,
+rf,,0.9929,None,1,,
+rf,,0.9923,None,5,,
+rf,,0.9926,20,1,,
+rf,,0.9922,20,5,,
+hgb,,0.9976,,,0.05,31
+hgb,,0.9974,,,0.05,63
+hgb,,0.9975,,,0.1,31
+hgb,,0.9973,,,0.1,63

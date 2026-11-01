@@ -1,0 +1,239 @@
+{'condition': 'clean', 'face_found': 1.0, 'test_auc': 0.9984, 'test_accuracy': 0.9805, 'test_recall': 0.9698, 'test_f1': 0.9777}
+I0000 00:00:1792949868.155521 10990316 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792949868.155540 10990314 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792949868.155520 10990317 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792949868.155545 10990313 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792949868.155542 10990315 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792949868.157502 10990314 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792949868.157508 10990313 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792949868.157535 10990317 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792949868.157503 10990316 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792949868.157537 10990315 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: INFO: INFO: INFO: INFO: Created TensorFlow Lite XNNPACK delegate for CPU.Created TensorFlow Lite XNNPACK delegate for CPU.Created TensorFlow Lite XNNPACK delegate for CPU.
+Created TensorFlow Lite XNNPACK delegate for CPU.
+
+Created TensorFlow Lite XNNPACK delegate for CPU.
+
+W0000 00:00:1792949868.169348 10990333 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.169354 10990334 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.169364 10990335 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.169348 10990337 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.169365 10990331 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.178235 10990331 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.178238 10990326 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.178674 10990333 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.178678 10990334 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792949868.178828 10990349 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'jpeg_75', 'face_found': 0.9998, 'test_auc': 0.9811, 'test_accuracy': 0.9106, 'test_recall': 0.9709, 'test_f1': 0.9055}
+I0000 00:00:1792950103.027772 10993121 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950103.027772 10993120 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950103.027890 10993122 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950103.027895 10993123 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950103.027969 10993124 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950103.028223 10993121 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950103.028229 10993124 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950103.028223 10993120 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950103.028223 10993122 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950103.028224 10993123 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950103.030175 10993151 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.030243 10993132 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.030324 10993164 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.030389 10993146 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.030439 10993155 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.034877 10993136 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.034884 10993177 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.035265 10993161 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.035336 10993158 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950103.035408 10993140 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'jpeg_50', 'face_found': 0.9998, 'test_auc': 0.9495, 'test_accuracy': 0.8565, 'test_recall': 0.9674, 'test_f1': 0.856}
+I0000 00:00:1792950337.616809 11000448 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950337.616810 11000449 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950337.616988 11000450 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950337.617173 11000448 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950337.617185 11000449 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950337.617255 11000450 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792950337.617613 11000454 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950337.617862 11000454 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792950337.617966 11000456 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950337.618209 11000456 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950337.619377 11000460 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.619494 11000475 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.619604 11000483 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.619637 11000494 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950337.620570 11000507 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.623816 11000483 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.623938 11000498 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.624595 11000477 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.624599 11000460 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950337.625474 11000511 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'jpeg_30', 'face_found': 0.9999, 'test_auc': 0.926, 'test_accuracy': 0.845, 'test_recall': 0.9176, 'test_f1': 0.8393}
+I0000 00:00:1792950566.004060 11002634 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950566.004347 11002635 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950566.004406 11002634 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950566.004558 11002635 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792950566.004598 11002638 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950566.004804 11002638 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792950566.004834 11002639 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950566.005071 11002639 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950566.006419 11002648 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950566.006657 11002659 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.006657 11002671 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.007110 11002678 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+I0000 00:00:1792950566.007159 11002690 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950566.007420 11002690 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950566.009532 11002692 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.011110 11002654 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.011563 11002666 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.011835 11002642 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.012408 11002679 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950566.014871 11002697 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'blur_1', 'face_found': 0.9998, 'test_auc': 0.6986, 'test_accuracy': 0.4927, 'test_recall': 0.9839, 'test_f1': 0.6311}
+I0000 00:00:1792950793.434681 11004564 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950793.434681 11004565 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950793.434940 11004566 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950793.435038 11004569 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792950793.435113 11004570 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792950793.435278 11004565 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950793.435280 11004564 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950793.435279 11004566 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950793.435293 11004569 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792950793.435335 11004570 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792950793.437136 11004575 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.437152 11004591 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.437520 11004598 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.437569 11004621 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.437599 11004601 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.441289 11004583 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.441651 11004593 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.442566 11004627 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.442966 11004602 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792950793.443161 11004615 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'blur_2', 'face_found': 0.9999, 'test_auc': 0.5488, 'test_accuracy': 0.5177, 'test_recall': 0.7414, 'test_f1': 0.5755}
+I0000 00:00:1792951022.617093 11006211 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951022.617662 11006211 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792951022.617678 11006213 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951022.617898 11006213 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792951022.618638 11006215 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951022.618653 11006216 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951022.618868 11006215 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951022.618881 11006216 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951022.619658 11006232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.619744 11006224 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+I0000 00:00:1792951022.620089 11006243 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951022.620399 11006243 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951022.620810 11006249 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.621224 11006256 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951022.622833 11006270 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.623947 11006232 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.624727 11006226 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.624846 11006245 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.626040 11006258 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951022.627718 11006272 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'resize_0.5', 'face_found': 0.9997, 'test_auc': 0.9033, 'test_accuracy': 0.7602, 'test_recall': 0.9365, 'test_f1': 0.775}
+I0000 00:00:1792951254.153374 11007763 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951254.153520 11007764 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951254.153568 11007766 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951254.153569 11007765 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951254.153914 11007763 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951254.153983 11007764 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951254.153985 11007766 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951254.153998 11007765 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+I0000 00:00:1792951254.154310 11007771 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951254.154545 11007771 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+
+W0000 00:00:1792951254.155930 11007776 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951254.156333 11007788 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.156289 11007795 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.156313 11007787 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.156725 11007822 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.162217 11007825 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.163347 11007774 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.163972 11007797 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.164126 11007789 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951254.164180 11007793 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+{'condition': 'resize_0.25', 'face_found': 1.0, 'test_auc': 0.4545, 'test_accuracy': 0.4584, 'test_recall': 0.9112, 'test_f1': 0.5974}
+I0000 00:00:1792951481.730160 11009149 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951481.730420 11009150 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951481.730977 11009153 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951481.731264 11009155 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951481.731297 11009156 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951481.732687 11009150 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951481.732689 11009153 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951481.732704 11009149 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951481.732711 11009156 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951481.732730 11009155 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951481.734676 11009160 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.734825 11009163 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.734905 11009184 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.735048 11009188 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.735078 11009190 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.739103 11009168 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.739392 11009165 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.740154 11009186 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.740310 11009191 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951481.740310 11009199 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+/Users/schrodingercat/Developer/projects/ai-project/deepfake/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1879: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+{'condition': 'noise_5', 'face_found': 0.9998, 'test_auc': 0.6239, 'test_accuracy': 0.559, 'test_recall': 0.0, 'test_f1': 0.0}
+I0000 00:00:1792951726.553019 11010767 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951726.553019 11010766 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951726.553056 11010768 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951726.553487 11010772 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+I0000 00:00:1792951726.554443 11010774 init-domain.cc:134] Fiber init: default domain = pthread, concurrency = 13, prefix = pthread-default
+W0000 00:00:1792951726.555598 11010768 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951726.555607 11010774 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951726.555602 11010767 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951726.555619 11010772 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+W0000 00:00:1792951726.555648 11010766 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1792951726.557739 11010789 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.557796 11010801 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.557822 11010779 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.558001 11010804 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.558337 11010823 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.562650 11010800 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.562823 11010806 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.563044 11010779 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.563195 11010786 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1792951726.564013 11010808 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+/Users/schrodingercat/Developer/projects/ai-project/deepfake/.venv/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1879: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", result.shape[0])
+{'condition': 'noise_10', 'face_found': 0.9998, 'test_auc': 0.5177, 'test_accuracy': 0.559, 'test_recall': 0.0, 'test_f1': 0.0}
